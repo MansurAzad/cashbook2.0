@@ -7,8 +7,10 @@
   "background_color": "#F3F4F6",
   "theme_color": "#10B981",
   "orientation": "portrait-primary",
-  "id": "budget-tracker-360",
+  "scope": "./",
+  "id": "dbh-cash-v2",
   "categories": ["finance", "productivity", "utilities"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "logo.svg",
@@ -19,6 +21,12 @@
     {
       "src": "logo.svg",
       "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.svg",
+      "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "maskable"
     }

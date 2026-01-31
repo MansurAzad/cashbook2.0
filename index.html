@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, height=device-height">
     <title>DBH CASH - স্মার্ট আর্থিক ব্যবস্থাপনা</title>
     <meta name="description" content="DBH CASH - আপনার সম্পূর্ণ আর্থিক ব্যবস্থাপনার সমাধান। আয়-ব্যয় ট্র্যাকিং, স্মার্ট বাজেট পরিকল্পনা এবং আর্থিক লক্ষ্য অর্জনে সহায়তা করে।">
     <meta name="keywords" content="budget, expense tracker, bengali, finance, react, pwa, money manager, savings, DBH CASH">
@@ -41,37 +41,113 @@
     <script>
         // Save Chart constructor to prevent conflicts
         const ChartJS = window.Chart;
+        
+        // ==================== OFFLINE/ONLINE STATUS ====================
+        let isOnline = navigator.onLine;
+        
+        // Check online status
+        window.addEventListener('online', () => {
+            isOnline = true;
+            console.log('✅ মোবাইল অনলাইন হয়েছে');
+            window.dispatchEvent(new CustomEvent('app-online', { detail: { timestamp: Date.now() } }));
+            showOnlineNotification();
+        });
+        
+        window.addEventListener('offline', () => {
+            isOnline = false;
+            console.log('❌ মোবাইল অফলাইন হয়েছে');
+            window.dispatchEvent(new CustomEvent('app-offline', { detail: { timestamp: Date.now() } }));
+            showOfflineNotification();
+        });
+        
+        // Show online notification
+        function showOnlineNotification() {
+            if (document.querySelector('.offline-banner')) {
+                document.querySelector('.offline-banner').remove();
+            }
+            const banner = document.createElement('div');
+            banner.className = 'online-banner fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 z-50 animate-slide-down';
+            banner.textContent = '✅ সংযোগ পুনরুদ্ধার হয়েছে';
+            document.body.appendChild(banner);
+            setTimeout(() => banner.remove(), 3000);
+        }
+        
+        function showOfflineNotification() {
+            if (document.querySelector('.online-banner')) {
+                document.querySelector('.online-banner').remove();
+            }
+            const banner = document.createElement('div');
+            banner.className = 'offline-banner fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 z-50';
+            banner.innerHTML = '❌ অফলাইন - ডেটা লোকালি সংরক্ষিত হচ্ছে';
+            document.body.appendChild(banner);
+        }
 
-        // Register Service Worker
+        // Register Service Worker with Advanced Features
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
+                navigator.serviceWorker.register('./sw-advanced.js')
                     .then(registration => {
-                        console.log('SW registered: ', registration);
+                        console.log('✅ উন্নত SW নিবন্ধিত:', registration);
                         
-                        // Check for updates
+                        // Check for updates periodically
+                        setInterval(() => {
+                            registration.update().catch(err => console.log('Update check failed:', err));
+                        }, 60000); // Check every minute
+                        
+                        // Listen for controller change
                         registration.onupdatefound = () => {
                             const installingWorker = registration.installing;
                             installingWorker.onstatechange = () => {
                                 if (installingWorker.state === 'installed') {
                                     if (navigator.serviceWorker.controller) {
-                                        // New update available
-                                        console.log('New content is available; please refresh.');
-                                        if(window.confirm('নতুন আপডেট এসেছে! রিফ্রেশ করতে চান?')) {
+                                        console.log('✅ নতুন আপডেট এসেছে');
+                                        if(window.confirm('✨ নতুন সংস্করণ উপলব্ধ! রিফ্রেশ করতে চান?')) {
+                                            installingWorker.postMessage({ type: 'SKIP_WAITING' });
                                             window.location.reload();
                                         }
-                                    } else {
-                                        console.log('Content is cached for offline use.');
                                     }
                                 }
                             };
                         };
                     })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
+                    .catch(err => {
+                        console.error('❌ SW নিবন্ধন ব্যর্থ:', err);
                     });
+                
+                // Listen for messages from SW
+                navigator.serviceWorker.addEventListener('message', event => {
+                    const { type, data } = event.data;
+                    
+                    if (type === 'SYNC_OFFLINE') {
+                        console.log('⏳ অফলাইন - পরে সিঙ্ক হবে:', data);
+                        window.dispatchEvent(new CustomEvent('sync-offline', { detail: data }));
+                    }
+                    
+                    if (type === 'SYNC_SUCCESS') {
+                        console.log('✅ সিঙ্ক সফল:', data);
+                        window.dispatchEvent(new CustomEvent('sync-success', { detail: data }));
+                    }
+                    
+                    if (type === 'SYNC_COMPLETE') {
+                        console.log('✅ সিঙ্ক সম্পন্ন:', data);
+                        window.dispatchEvent(new CustomEvent('sync-complete', { detail: data }));
+                    }
+                });
             });
         }
+        
+        // Auto-sync when online
+        window.addEventListener('app-online', () => {
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage({
+                    type: 'SYNC_DATA',
+                    payload: {
+                        timestamp: Date.now(),
+                        event: 'online-reconnect'
+                    }
+                });
+            }
+        });
     </script>
 
     <style type="text/tailwindcss">
@@ -85,16 +161,95 @@
     }
 
     @layer base {
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            overflow: hidden;
+        }
+        
         body {
             font-family: 'Hind Siliguri', sans-serif;
             background-color: var(--bg-color);
             color: #1F2937;
-            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
-            overscroll-behavior-y: none; /* Prevent pull-to-refresh on body */
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+            padding-top: env(safe-area-inset-top);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            padding-bottom: env(safe-area-inset-bottom);
         }
+        
+        #root {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
         /* Safe Area for iPhone X+ */
         .pb-safe-area {
             padding-bottom: env(safe-area-inset-bottom);
+        }
+        .pt-safe-area {
+            padding-top: env(safe-area-inset-top);
+        }
+        .pl-safe-area {
+            padding-left: env(safe-area-inset-left);
+        }
+        .pr-safe-area {
+            padding-right: env(safe-area-inset-right);
+        }
+        
+        /* Mobile responsive fixes */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: calc(env(safe-area-inset-top) + 60px);
+                width: 100%;
+                max-width: 85vw;
+                height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 60px - 60px);
+                z-index: 30;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding-left: 0;
+            }
+            
+            .header-wrapper {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                padding-top: env(safe-area-inset-top);
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+                z-index: 40;
+                height: 60px;
+                overflow: hidden;
+            }
+            
+            .content-area {
+                padding-top: calc(60px + env(safe-area-inset-top));
+                padding-bottom: calc(60px + env(safe-area-inset-bottom));
+            }
         }
         
         /* Custom Scrollbar for Sidebar */
@@ -145,6 +300,9 @@
         .animate-fade-in-up {
             animation: fadeInUp 0.3s ease-out;
         }
+        .animate-slide-down {
+            animation: slideDown 0.3s ease-out;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -152,6 +310,10 @@
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
     }
     </style>
