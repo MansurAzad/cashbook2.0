@@ -1,0 +1,66 @@
+{
+  "name": "জমা-খরচ ৩৬০ - ব্যক্তিগত অর্থ ব্যবস্থাপনা",
+  "short_name": "জমা-খরচ",
+  "description": "আপনার ব্যক্তিগত অর্থ ব্যবস্থাপনার সেরা সঙ্গী। আয়-ব্যয় ট্র্যাকিং, বাজেট, রিপোর্ট এবং ইনভেস্টমেন্ট ম্যানেজমেন্ট।",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F3F4F6",
+  "theme_color": "#10B981",
+  "orientation": "portrait-primary",
+  "id": "budget-tracker-360",
+  "categories": ["finance", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/icons/wallet.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/icons/wallet.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "নতুন লেনদেন",
+      "short_name": "লেনদেন",
+      "url": "./index.html?action=add_transaction",
+      "icons": [{ "src": "https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/icons/plus-circle.svg", "sizes": "192x192", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "ড্যাশবোর্ড দেখুন",
+      "short_name": "ড্যাশবোর্ড",
+      "url": "./index.html",
+      "icons": [{ "src": "https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/icons/layout-dashboard.svg", "sizes": "192x192", "type": "image/svg+xml" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80",
+      "sizes": "400x800",
+      "type": "image/jpg",
+      "form_factor": "narrow",
+      "label": "মোবাইল ড্যাশবোর্ড ভিউ"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1200&q=80",
+      "sizes": "1200x800",
+      "type": "image/jpg",
+      "form_factor": "wide",
+      "label": "ডেস্কটপ ওভারভিউ"
+    }
+  ],
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"]
+}

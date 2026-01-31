@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>জমা-খরচ ৩৬০ - ব্যক্তিগত অর্থ ব্যবস্থাপনা</title>
+    <meta name="description" content="একটি সম্পূর্ণ জমা-খরচ ট্র্যাকিং সিস্টেম। আয়-ব্যয় হিসাব, বাজেট প্ল্যানিং এবং ফাইন্যান্সিয়াল গোল সেট করার সেরা অ্যাপ।">
+    <meta name="keywords" content="budget, expense tracker, bengali, finance, react, pwa, money manager, savings">
+    <meta name="theme-color" content="#10B981">
+    
+    <!-- PWA / Apple Touch Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="জমা-খরচ">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="জমা-খরচ ৩৬০">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/icons/wallet.svg">
+    <link rel="icon" type="image/svg+xml" href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/icons/wallet.svg">
+
+    <!-- React -->
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+
+    <!-- Google Fonts for Bengali -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+
+    <script>
+        // Save Chart constructor to prevent conflicts
+        const ChartJS = window.Chart;
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                        
+                        // Check for updates
+                        registration.onupdatefound = () => {
+                            const installingWorker = registration.installing;
+                            installingWorker.onstatechange = () => {
+                                if (installingWorker.state === 'installed') {
+                                    if (navigator.serviceWorker.controller) {
+                                        // New update available
+                                        console.log('New content is available; please refresh.');
+                                        if(window.confirm('নতুন আপডেট এসেছে! রিফ্রেশ করতে চান?')) {
+                                            window.location.reload();
+                                        }
+                                    } else {
+                                        console.log('Content is cached for offline use.');
+                                    }
+                                }
+                            };
+                        };
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+    @layer theme {
+        :root {
+            --primary-color: #10B981; /* Emerald 500 */
+            --primary-hover: #059669; /* Emerald 600 */
+            --bg-color: #F3F4F6;
+            --sidebar-width: 260px;
+        }
+    }
+
+    @layer base {
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-color);
+            color: #1F2937;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+            overscroll-behavior-y: none; /* Prevent pull-to-refresh on body */
+        }
+        /* Safe Area for iPhone X+ */
+        .pb-safe-area {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        
+        /* Custom Scrollbar for Sidebar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #E5E7EB;
+            border-radius: 20px;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white; }
+            .card { box-shadow: none; border: 1px solid #eee; }
+        }
+    }
+
+    @layer components {
+        .btn {
+            @apply px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed select-none;
+        }
+        .btn-primary {
+            @apply bg-[var(--primary-color)] text-white hover:bg-[var(--primary-hover)];
+        }
+        .btn-ghost {
+            @apply hover:bg-gray-100 text-gray-700;
+        }
+        .card {
+            @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
+        }
+        .input-field {
+            @apply w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all;
+        }
+        .sidebar-item {
+            @apply flex items-center gap-3 px-4 py-3 text-gray-600 rounded-lg hover:bg-emerald-50 transition-colors cursor-pointer mb-1 select-none;
+        }
+        .sidebar-item.active {
+            @apply bg-emerald-100 text-emerald-700 font-semibold;
+        }
+        /* Custom Animations */
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <!-- App Scripts -->
+    <script type="text/babel" src="utils/dataManager.js"></script>
+    <script type="text/babel" src="utils/gestureHooks.js"></script>
+    <script type="text/babel" src="components/UIComponents.js"></script>
+    <script type="text/babel" src="components/GestureUI.js"></script>
+    <script type="text/babel" src="components/Sidebar.js"></script>
+    <script type="text/babel" src="components/Header.js"></script>
+    <script type="text/babel" src="components/BottomNav.js"></script>
+    <script type="text/babel" src="components/Dashboard.js"></script>
+    <script type="text/babel" src="components/Transactions.js"></script>
+    <script type="text/babel" src="components/CalendarView.js"></script>
+    <script type="text/babel" src="components/Budget.js"></script>
+    <script type="text/babel" src="components/Goals.js"></script>
+    <script type="text/babel" src="components/Bills.js"></script>
+    <script type="text/babel" src="components/Investments.js"></script>
+    <script type="text/babel" src="components/Accounts.js"></script>
+    <script type="text/babel" src="components/Loans.js"></script>
+    <script type="text/babel" src="components/Tools.js"></script>
+    <script type="text/babel" src="components/Settings.js"></script>
+    <script type="text/babel" src="components/Reports.js"></script>
+    <script type="text/babel" src="app.js"></script>
+</body>
+</html>

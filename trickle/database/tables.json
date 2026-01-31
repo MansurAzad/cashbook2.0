@@ -1,0 +1,281 @@
+[
+  {
+    "name": "user",
+    "fields": [
+      {
+        "name": "username",
+        "type": "text",
+        "description": "User's display name",
+        "options": null
+      },
+      {
+        "name": "email",
+        "type": "text",
+        "description": "User's email address",
+        "options": null
+      }
+    ]
+  },
+  {
+    "name": "category",
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "description": "Category name",
+        "options": null
+      },
+      {
+        "name": "type",
+        "type": "text",
+        "description": "income or expense",
+        "options": null
+      },
+      {
+        "name": "icon",
+        "type": "text",
+        "description": "Lucide icon name",
+        "options": null
+      },
+      {
+        "name": "color",
+        "type": "text",
+        "description": "Color code",
+        "options": null
+      }
+    ]
+  },
+  {
+    "name": "transaction",
+    "fields": [
+      {
+        "name": "amount",
+        "type": "number",
+        "description": "Transaction amount",
+        "options": null
+      },
+      {
+        "name": "type",
+        "type": "text",
+        "description": "income or expense",
+        "options": null
+      },
+      {
+        "name": "category",
+        "type": "text",
+        "description": "Category name",
+        "options": null
+      },
+      {
+        "name": "date",
+        "type": "text",
+        "description": "Date string YYYY-MM-DD",
+        "options": null
+      },
+      {
+        "name": "note",
+        "type": "text",
+        "description": "Optional note",
+        "options": null
+      },
+      {
+        "name": "account_id",
+        "type": "text",
+        "description": "Linked Account ID",
+        "options": null
+      },
+      {
+        "name": "account_name",
+        "type": "text",
+        "description": "Linked Account Name",
+        "options": null
+      }
+    ]
+  },
+  {
+    "name": "budget",
+    "fields": [
+      {
+        "name": "category",
+        "type": "text",
+        "description": "Category name or 'TOTAL' for overall budget",
+        "options": null
+      },
+      {
+        "name": "amount",
+        "type": "number",
+        "description": "Budget limit amount",
+        "options": null
+      },
+      {
+        "name": "month",
+        "type": "text",
+        "description": "Month identifier YYYY-MM",
+        "options": null
+      }
+    ]
+  },
+  {
+    "name": "goal",
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "description": "Goal name (e.g. New Laptop)",
+        "options": null
+      },
+      {
+        "name": "target_amount",
+        "type": "number",
+        "description": "Target savings amount",
+        "options": null
+      },
+      {
+        "name": "saved_amount",
+        "type": "number",
+        "description": "Currently saved amount",
+        "options": null
+      },
+      {
+        "name": "deadline",
+        "type": "text",
+        "description": "Target date YYYY-MM-DD",
+        "options": null
+      },
+      {
+        "name": "icon",
+        "type": "text",
+        "description": "Icon name",
+        "options": null
+      }
+    ]
+  },
+  {
+    "name": "bill",
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "description": "Bill name (e.g. Internet)",
+        "options": null
+      },
+      {
+        "name": "amount",
+        "type": "number",
+        "description": "Bill amount",
+        "options": null
+      },
+      {
+        "name": "due_date",
+        "type": "text",
+        "description": "Due date YYYY-MM-DD",
+        "options": null
+      },
+      {
+        "name": "is_paid",
+        "type": "bool",
+        "description": "Payment status",
+        "options": null
+      },
+      {
+        "name": "recurring",
+        "type": "text",
+        "description": "monthly, yearly, or none",
+        "options": null
+      }
+    ]
+  },
+  {
+    "name": "investment",
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "description": "Investment name",
+        "options": null
+      },
+      {
+        "name": "type",
+        "type": "text",
+        "description": "Type (Stock, FDR, Gold etc)",
+        "options": null
+      },
+      {
+        "name": "invested_amount",
+        "type": "number",
+        "description": "Initial invested amount",
+        "options": null
+      },
+      {
+        "name": "current_value",
+        "type": "number",
+        "description": "Current market value",
+        "options": null
+      }
+    ]
+  },
+  {
+    "name": "loan",
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "description": "Person name",
+        "options": null
+      },
+      {
+        "name": "amount",
+        "type": "number",
+        "description": "Loan amount",
+        "options": null
+      },
+      {
+        "name": "type",
+        "type": "text",
+        "description": "given or taken",
+        "options": null
+      },
+      {
+        "name": "due_date",
+        "type": "text",
+        "description": "Due date YYYY-MM-DD",
+        "options": null
+      },
+      {
+        "name": "status",
+        "type": "text",
+        "description": "paid or unpaid",
+        "options": null
+      }
+    ]
+  },
+  {
+    "name": "account",
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "description": "Account name (e.g. bKash, Cash)",
+        "options": null
+      },
+      {
+        "name": "type",
+        "type": "text",
+        "description": "cash, bank, mobile",
+        "options": null
+      },
+      {
+        "name": "balance",
+        "type": "number",
+        "description": "Current balance",
+        "options": null
+      },
+      {
+        "name": "icon",
+        "type": "text",
+        "description": "Icon name",
+        "options": null
+      }
+    ]
+  }
+]

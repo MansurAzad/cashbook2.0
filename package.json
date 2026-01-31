@@ -1,0 +1,40 @@
+{
+  "name": "jamakhoroch-360",
+  "version": "2.0.0",
+  "description": "জমা-খরচ ৩৬০ - একটি সম্পূর্ণ ব্যক্তিগত অর্থ ব্যবস্থাপনা PWA অ্যাপ্লিকেশন",
+  "main": "app.js",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "live-server",
+    "dev": "http-server -p 8080 -c-1",
+    "build": "echo 'No build step needed for this PWA'",
+    "test": "echo 'No tests configured yet'"
+  },
+  "keywords": [
+    "budget",
+    "expense-tracker",
+    "bengali",
+    "finance",
+    "pwa",
+    "money-manager",
+    "savings",
+    "personal-finance"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/jamakhoroch-360"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/jamakhoroch-360/issues"
+  },
+  "homepage": "https://github.com/yourusername/jamakhoroch-360#readme"
+}
