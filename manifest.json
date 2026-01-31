@@ -1,7 +1,7 @@
 {
-  "name": "জমা-খরচ ৩৬০ - ব্যক্তিগত অর্থ ব্যবস্থাপনা",
-  "short_name": "জমা-খরচ",
-  "description": "আপনার ব্যক্তিগত অর্থ ব্যবস্থাপনার সেরা সঙ্গী। আয়-ব্যয় ট্র্যাকিং, বাজেট, রিপোর্ট এবং ইনভেস্টমেন্ট ম্যানেজমেন্ট।",
+  "name": "DBH CASH - স্মার্ট আর্থিক ব্যবস্থাপনা",
+  "short_name": "DBH CASH",
+  "description": "DBH CASH - আপনার সম্পূর্ণ আর্থিক ব্যবস্থাপনার সমাধান। আয়-ব্যয় ট্র্যাকিং, স্মার্ট বাজেট, রিপোর্ট এবং ইনভেস্টমেন্ট ম্যানেজমেন্ট।",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F3F4F6",
@@ -11,13 +11,13 @@
   "categories": ["finance", "productivity", "utilities"],
   "icons": [
     {
-      "src": "https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/icons/wallet.svg",
+      "src": "logo.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/icons/wallet.svg",
+      "src": "logo.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "maskable"
