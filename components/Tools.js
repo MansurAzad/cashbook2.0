@@ -1,10 +1,29 @@
 function Tools() {
-    const [activeTool, setActiveTool] = React.useState('menu'); // menu, emi, shopping, challenge
+    const [activeTool, setActiveTool] = React.useState('menu'); // menu, emi, shopping, challenge, advanced, predictive, recurring, mobile, budget
+    const [data, setData] = React.useState(JSON.parse(localStorage.getItem('bk_app_data')) || {
+        transactions: [],
+        budgets: {},
+        bills: [],
+        goals: [],
+        accounts: [],
+        loans: [],
+        investments: [],
+        recurringTransactions: [],
+        mobilePayments: [],
+        budgetPlans: []
+    });
 
     const tools = [
         { id: 'emi', label: 'EMI ক্যালকুলেটর', icon: 'icon-calculator', color: 'bg-blue-500' },
         { id: 'shopping', label: 'শপিং লিস্ট', icon: 'icon-shopping-cart', color: 'bg-emerald-500' },
-        { id: 'challenge', label: '৫২ সপ্তাহের সঞ্চয়', icon: 'icon-trophy', color: 'bg-purple-500' },
+        { id: 'challenge', label: '৫২ সপ্তাহের সঞ্চয়', icon: 'icon-trophy', color: 'bg-purple-500' },
+        { id: 'advanced', label: 'উন্নত সরঞ্জাম', icon: '🛠️', color: 'bg-orange-500' },
+        { id: 'predictive', label: 'পূর্বাভাস', icon: '📊', color: 'bg-indigo-500' },
+        { id: 'recurring', label: 'পুনরাবৃত্ত', icon: '🔄', color: 'bg-pink-500' },
+        { id: 'mobile', label: 'ডিজিটাল পেমেন্ট', icon: '💳', color: 'bg-cyan-500' },
+        { id: 'budget', label: 'বাজেট পরিকল্পনা', icon: '🎯', color: 'bg-lime-500' },
+        { id: 'billing', label: 'বিল ম্যানেজমেন্ট', icon: '📋', color: 'bg-red-500' },
+        { id: 'networth', label: 'নেট ওয়ার্থ', icon: '💰', color: 'bg-yellow-500' },
     ];
 
     if (activeTool === 'menu') {
@@ -40,6 +59,13 @@ function Tools() {
             {activeTool === 'emi' && <EMICalculator />}
             {activeTool === 'shopping' && <ShoppingList />}
             {activeTool === 'challenge' && <SavingsChallenge />}
+            {activeTool === 'advanced' && <AdvancedTools data={data} setData={setData} />}
+            {activeTool === 'predictive' && <PredictiveAnalytics transactions={data.transactions || []} budgets={data.budgets || {}} />}
+            {activeTool === 'recurring' && <RecurringTransactionManager data={data} setData={setData} />}
+            {activeTool === 'mobile' && <MobilePaymentIntegration data={data} setData={setData} />}
+            {activeTool === 'budget' && <SmartBudgetPlanning data={data} setData={setData} />}
+            {activeTool === 'billing' && <SmartBillingSystem data={data} setData={setData} />}
+            {activeTool === 'networth' && <NetWorthTracker data={data} setData={setData} />}
         </div>
     );
 }
