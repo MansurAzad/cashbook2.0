@@ -38,7 +38,10 @@ const AdvancedAnalyticsPanel = ({ transactions, budgets, bills, investments }) =
 
   // বাজেট সতর্কতা
   const budgetAlerts = React.useMemo(() => {
-    return budgets.map(budget => {
+    // budgets হতে পারে object বা array - উভয়ই handle করুন
+    const budgetsArray = Array.isArray(budgets) ? budgets : Object.values(budgets || {});
+    
+    return budgetsArray.map(budget => {
       const spent = monthComparison.current
         .filter(t => t.type === 'expense' && t.category === budget.category)
         .reduce((sum, t) => sum + t.amount, 0);

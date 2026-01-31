@@ -522,7 +522,7 @@ function App() {
                         {view === 'transactions' && <Transactions data={data} onAdd={(d)=>handleTransaction('add',d)} onUpdate={(id,d)=>handleTransaction('update',{id,...d})} onDelete={(id)=>confirmAction('লেনদেন মুছুন', 'এটি মুছে ফেলতে চান?', ()=>handleTransaction('delete',id))} loading={false} currencySymbol={getCurrencySymbol()} initialParams={viewParams} />}
                         {view === 'accounts' && <Accounts data={data} onAdd={(d)=>handleAccount('add',null,d)} onUpdate={(id,d)=>handleAccount('update',id,d)} onDelete={(id)=>confirmAction('অ্যাকাউন্ট মুছুন', 'নিশ্চিত?', ()=>handleAccount('delete',id))} />}
                         {view === 'loans' && <Loans data={data} onAdd={(d)=>handleLoan('add',null,d)} onUpdate={(id,d)=>handleLoan('update',id,d)} onDelete={(id)=>confirmAction('ঋণ মুছুন', 'নিশ্চিত?', ()=>handleLoan('delete',id))} />}
-                        {view === 'tools' && <Tools />}
+                        {view === 'tools' && <Tools data={data} setData={setData} />}
                         {view === 'calendar' && <CalendarView data={data} />}
                         {view === 'goals' && <Goals data={data} onAdd={(d)=>handleGoal('add',null,d)} onUpdate={(id,d)=>handleGoal('update',id,d)} onDelete={(id)=>confirmAction('গোল মুছুন', 'নিশ্চিত?', ()=>handleGoal('delete',id))} />}
                         {view === 'bills' && <Bills data={data} onAdd={(d)=>handleBill('add',null,d)} onUpdate={(id,d)=>handleBill('update',id,d)} onDelete={(id)=>confirmAction('বিল মুছুন', 'নিশ্চিত?', ()=>handleBill('delete',id))} confirmAction={confirmAction} />}
