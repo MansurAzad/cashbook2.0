@@ -57,27 +57,27 @@ function Bills({ data, onAdd, onUpdate, onDelete, confirmAction }) {
 
     return (
         <div className="space-y-6 animate-fade-in" data-name="bills">
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
-                <div className="card bg-orange-50 border-orange-100">
-                    <p className="text-orange-600 text-sm font-semibold mb-1">বাকি বিল</p>
-                    <h3 className="text-2xl font-bold text-orange-700">{formatCurrency(pendingBills)}</h3>
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+                <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all">
+                    <p className="text-orange-600 text-xs font-black mb-2 uppercase tracking-wider">বাকি বিল</p>
+                    <h3 className="text-4xl font-black text-orange-700">{formatCurrency(pendingBills)}</h3>
                 </div>
-                <div className="card bg-emerald-50 border-emerald-100">
-                    <p className="text-emerald-600 text-sm font-semibold mb-1">পরিশোধিত</p>
-                    <h3 className="text-2xl font-bold text-emerald-700">{formatCurrency(paidBills)}</h3>
+                <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all">
+                    <p className="text-emerald-600 text-xs font-black mb-2 uppercase tracking-wider">পরিশোধিত</p>
+                    <h3 className="text-4xl font-black text-emerald-700">{formatCurrency(paidBills)}</h3>
                 </div>
-                <div className="card bg-blue-50 border-blue-100">
-                    <p className="text-blue-600 text-sm font-semibold mb-1">মোট বিল</p>
-                    <h3 className="text-2xl font-bold text-blue-700">{formatCurrency(totalBills)}</h3>
+                <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all">
+                    <p className="text-blue-600 text-xs font-black mb-2 uppercase tracking-wider">মোট বিল</p>
+                    <h3 className="text-4xl font-black text-blue-700">{formatCurrency(totalBills)}</h3>
                 </div>
             </div>
 
-            <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                    <div className="icon-receipt text-orange-500"></div>
+            <div className="flex justify-between items-center mb-2">
+                <h2 className="text-3xl font-black text-gray-900 flex items-center gap-3">
+                    <div className="icon-receipt text-orange-500 text-3xl"></div>
                     বিল ট্র্যাকার
                 </h2>
-                <button onClick={() => setIsAdding(true)} className="btn btn-primary bg-orange-500 hover:bg-orange-600">
+                <button onClick={() => setIsAdding(true)} className="btn btn-primary bg-orange-500 hover:bg-orange-600 rounded-2xl py-3 px-8 font-bold text-base">
                     <div className="icon-plus"></div> বিল যুক্ত করুন
                 </button>
             </div>

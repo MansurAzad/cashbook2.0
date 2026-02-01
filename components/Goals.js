@@ -67,33 +67,33 @@ function Goals({ data, onAdd, onUpdate, onDelete }) {
 
     return (
         <div className="space-y-6 animate-fade-in" data-name="goals">
-            <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                    <div className="icon-target text-emerald-600"></div>
+            <div className="flex justify-between items-center mb-2">
+                <h2 className="text-3xl font-black text-gray-900 flex items-center gap-3">
+                    <div className="icon-target text-emerald-600 text-3xl"></div>
                     সেভিংস গোল
                 </h2>
-                <button onClick={() => setIsAdding(true)} className="btn btn-primary">
-                    <div className="icon-plus"></div> নতুন গোল
+                <button onClick={() => setIsAdding(true)} className="btn btn-primary rounded-2xl py-3 px-8 font-bold text-base">
+                    <div className="icon-plus text-lg"></div> নতুন গোল
                 </button>
             </div>
 
             {isAdding && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-3xl shadow-xl max-w-md w-full p-6 sm:p-8 animate-scale-in">
-                        <h3 className="text-xl font-bold text-gray-800 mb-4">{editingId ? 'গোল আপডেট করুন' : 'নতুন গোল'}</h3>
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <input type="text" placeholder="গোলের নাম" className="input-field" required 
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fade-in">
+                    <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 animate-scale-in border border-gray-200">
+                        <h3 className="text-3xl font-black text-gray-900 mb-6">{editingId ? 'গোল আপডেট করুন' : 'নতুন গোল'}</h3>
+                        <form onSubmit={handleSubmit} className="space-y-5">
+                            <input type="text" placeholder="গোলের নাম" className="input-field text-base font-medium" required 
                                 value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-                            <input type="number" placeholder="টার্গেট পরিমাণ" className="input-field" required 
+                            <input type="number" placeholder="টার্গেট পরিমাণ" className="input-field text-base font-medium" required 
                                 value={formData.target_amount} onChange={e => setFormData({...formData, target_amount: e.target.value})} />
-                            <input type="number" placeholder="বর্তমানে জমা আছে" className="input-field" 
+                            <input type="number" placeholder="বর্তমানে জমা আছে" className="input-field text-base font-medium" 
                                 value={formData.saved_amount} onChange={e => setFormData({...formData, saved_amount: e.target.value})} />
-                            <input type="date" className="input-field" required 
+                            <input type="date" className="input-field text-base font-medium" required 
                                 value={formData.deadline} onChange={e => setFormData({...formData, deadline: e.target.value})} />
                             
-                            <div className="flex gap-2 mt-6">
-                                <button type="submit" className="flex-1 btn btn-primary justify-center">সংরক্ষণ</button>
-                                <button type="button" onClick={resetForm} className="flex-1 btn btn-ghost justify-center bg-gray-100">বাতিল</button>
+                            <div className="flex gap-3 mt-8">
+                                <button type="submit" className="flex-1 btn btn-primary justify-center rounded-2xl py-4 font-bold text-base">সংরক্ষণ</button>
+                                <button type="button" onClick={resetForm} className="flex-1 btn btn-ghost justify-center bg-gray-100 rounded-2xl py-4 font-bold text-base">বাতিল</button>
                             </div>
                         </form>
                     </div>

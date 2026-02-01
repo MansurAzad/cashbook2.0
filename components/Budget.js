@@ -37,61 +37,61 @@ function Budget({ data, onSave, onDelete }) {
     };
 
     return (
-        <div className="px-4 sm:px-6 pb-10 space-y-4 sm:space-y-6 animate-fade-in" data-name="budget">
+        <div className="px-4 sm:px-6 pb-10 space-y-6 animate-fade-in" data-name="budget">
             {/* Month Selector with iOS Style */}
-            <iOSCard>
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-xl">📅</div>
+                    <div className="flex items-center gap-5">
+                        <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center text-3xl font-bold shadow-md">📅</div>
                         <div>
-                            <p className="text-xs text-gray-500 font-medium">মাস নির্বাচন করুন</p>
+                            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">মাস নির্বাচন করুন</p>
                             <input 
                                 type="month" 
                                 value={currentMonth}
                                 onChange={(e) => setCurrentMonth(e.target.value)}
-                                className="border-none bg-transparent font-bold text-gray-800 text-lg focus:ring-0 cursor-pointer"
+                                className="border-none bg-transparent font-black text-2xl text-gray-900 focus:ring-0 cursor-pointer"
                             />
                         </div>
                     </div>
                     <button 
                         onClick={() => setIsAdding(true)}
                         disabled={availableCategories.length === 0}
-                        className={`btn btn-primary rounded-xl text-sm py-2 px-3 ${availableCategories.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        className={`btn btn-primary rounded-2xl text-base py-3 px-6 font-bold ${availableCategories.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
                         + যোগ করুন
                     </button>
                 </div>
-            </iOSCard>
+            </div>
 
             {/* Total Summary */}
-            <div className="card bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-                <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold opacity-90">মাসিক মোট বাজেট</h3>
-                    <div className="icon-chart-pie text-purple-400"></div>
+            <div className="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 text-white shadow-xl border border-gray-800">
+                <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-xl font-bold opacity-90">মাসিক মোট বাজেট</h3>
+                    <div className="icon-chart-pie text-purple-400 text-3xl"></div>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
+                <div className="flex flex-col sm:flex-row gap-6 sm:gap-10">
                     <div>
-                        <p className="text-sm text-gray-400">মোট বরাদ্দ</p>
-                        <p className="text-3xl font-bold">{formatCurrency(budgetStatus.total.amount)}</p>
+                        <p className="text-sm text-gray-400 font-semibold">মোট বরাদ্দ</p>
+                        <p className="text-4xl font-black mt-2">{formatCurrency(budgetStatus.total.amount)}</p>
                     </div>
                     <div>
-                        <p className="text-sm text-gray-400">মোট খরচ</p>
-                        <p className="text-3xl font-bold text-red-400">{formatCurrency(budgetStatus.total.spent)}</p>
+                        <p className="text-sm text-gray-400 font-semibold">মোট খরচ</p>
+                        <p className="text-4xl font-black text-red-400 mt-2">{formatCurrency(budgetStatus.total.spent)}</p>
                     </div>
                     <div>
-                        <p className="text-sm text-gray-400">অবশিষ্ট</p>
-                        <p className={`text-3xl font-bold ${budgetStatus.total.remaining < 0 ? 'text-red-500' : 'text-emerald-400'}`}>
+                        <p className="text-sm text-gray-400 font-semibold">অবশিষ্ট</p>
+                        <p className={`text-4xl font-black mt-2 ${budgetStatus.total.remaining < 0 ? 'text-red-500' : 'text-emerald-400'}`}>
                             {formatCurrency(budgetStatus.total.remaining)}
                         </p>
                     </div>
                 </div>
-                <div className="mt-6">
-                    <div className="flex justify-between text-xs mb-1">
+                <div className="mt-8">
+                    <div className="flex justify-between text-sm mb-2 font-semibold">
                         <span>ব্যবহৃত {Math.round(budgetStatus.total.percentage)}%</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2.5">
+                    <div className="w-full bg-gray-700 rounded-full h-3 shadow-lg">
                         <div 
-                            className={`h-2.5 rounded-full ${
+                            className={`h-3 rounded-full transition-all ${
                                 budgetStatus.total.percentage > 100 ? 'bg-red-500' : 
                                 budgetStatus.total.percentage > 80 ? 'bg-yellow-500' : 'bg-emerald-500'
                             }`}
@@ -103,13 +103,13 @@ function Budget({ data, onSave, onDelete }) {
 
             {/* Add New Budget Form */}
             {isAdding && (
-                <div className="card bg-blue-50 border border-blue-100 p-4 sm:p-6">
-                    <h4 className="font-bold text-blue-900 mb-4">নতুন বাজেট যুক্ত করুন</h4>
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-end">
+                <div className="bg-blue-50 rounded-3xl border-2 border-blue-200 p-8 shadow-lg">
+                    <h4 className="font-black text-blue-900 mb-6 text-xl">নতুন বাজেট যুক্ত করুন</h4>
+                    <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-end">
                         <div className="flex-1 w-full">
-                            <label className="form-label">ক্যাটাগরি</label>
+                            <label className="form-label font-bold text-base mb-2 block">ক্যাটাগরি</label>
                             <select 
-                                className="input-field"
+                                className="input-field text-base font-medium"
                                 value={newBudgetCategory}
                                 onChange={e => setNewBudgetCategory(e.target.value)}
                             >
@@ -120,26 +120,26 @@ function Budget({ data, onSave, onDelete }) {
                             </select>
                         </div>
                         <div className="flex-1 w-full">
-                            <label className="form-label">বাজেট পরিমাণ</label>
+                            <label className="form-label font-bold text-base mb-2 block">বাজেট পরিমাণ</label>
                             <input 
                                 type="number" 
-                                className="input-field"
+                                className="input-field text-base font-medium"
                                 placeholder="0.00"
                                 value={newBudgetAmount}
                                 onChange={e => setNewBudgetAmount(e.target.value)}
                             />
                         </div>
-                        <div className="flex gap-2 w-full sm:w-auto">
+                        <div className="flex gap-3 w-full sm:w-auto">
                             <button 
                                 onClick={() => handleSave(null, newBudgetCategory, newBudgetAmount)}
                                 disabled={!newBudgetCategory || !newBudgetAmount}
-                                className="btn btn-primary"
+                                className="btn btn-primary font-bold text-base py-3 px-8 rounded-2xl"
                             >
                                 সংরক্ষণ
                             </button>
                             <button 
                                 onClick={() => setIsAdding(false)}
-                                className="btn btn-ghost"
+                                className="btn btn-ghost font-bold text-base py-3 px-8 rounded-2xl bg-white"
                             >
                                 বাতিল
                             </button>

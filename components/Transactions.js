@@ -8,26 +8,26 @@ function TransactionItem({ t, onDelete, handleEdit, handleContextMenu, setContex
             className="hover:bg-gray-50/50"
         >
             <div 
-                className="px-6 py-4 flex items-center justify-between cursor-pointer"
+                className="px-8 py-5 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-transform"
                 onContextMenu={(e) => handleContextMenu(e, t)}
                 {...longPressEvents}
             >
-                <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs ${t.type === 'income' ? 'bg-emerald-100 text-emerald-600' : 'bg-red-100 text-red-600'}`}>
+                <div className="flex items-center gap-4">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-bold shadow-md ${t.type === 'income' ? 'bg-emerald-100 text-emerald-600' : 'bg-red-100 text-red-600'}`}>
                         <div className={t.type === 'income' ? 'icon-arrow-down-left' : 'icon-arrow-up-right'}></div>
                     </div>
                     <div>
-                        <div className="flex items-center gap-2">
-                            <span className="font-medium text-gray-800">{t.category}</span>
-                            <span className="text-xs text-gray-400">{t.date}</span>
+                        <div className="flex items-center gap-3">
+                            <span className="font-black text-gray-900 text-base">{t.category}</span>
+                            <span className="text-xs text-gray-500 font-semibold">{t.date}</span>
                         </div>
-                        <div className="flex items-center gap-2 text-xs text-gray-500">
-                            {t.account_name && <span className="bg-gray-100 px-1.5 py-0.5 rounded text-[10px] uppercase font-bold text-gray-600">{t.account_name}</span>}
-                            <span className="truncate max-w-[120px]">{t.note || 'কোন নোট নেই'}</span>
+                        <div className="flex items-center gap-2 text-xs text-gray-600 mt-1 font-medium">
+                            {t.account_name && <span className="bg-gray-200 px-2.5 py-1 rounded-full text-[11px] uppercase font-bold text-gray-700">{t.account_name}</span>}
+                            <span className="truncate max-w-[140px]">{t.note || 'কোন নোট নেই'}</span>
                         </div>
                     </div>
                 </div>
-                <div className={`font-bold ${t.type === 'income' ? 'text-emerald-600' : 'text-red-600'}`}>
+                <div className={`font-black text-lg ${t.type === 'income' ? 'text-emerald-600' : 'text-red-600'}`}>
                     {t.type === 'income' ? '+' : '-'} {formatCurrency(t.amount)}
                 </div>
             </div>
