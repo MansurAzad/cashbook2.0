@@ -104,7 +104,7 @@ function Settings({ data, onAddCategory, onDeleteCategory, settings, updateSetti
             </div>
 
             {activeTab === 'general' && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
                     <div className="card">
                         <h3 className="font-bold text-lg text-gray-800 mb-4 flex items-center gap-2">
                             <div className="icon-eye-off text-emerald-600"></div>

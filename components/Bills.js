@@ -57,7 +57,7 @@ function Bills({ data, onAdd, onUpdate, onDelete, confirmAction }) {
 
     return (
         <div className="space-y-6 animate-fade-in" data-name="bills">
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
                 <div className="card bg-orange-50 border-orange-100">
                     <p className="text-orange-600 text-sm font-semibold mb-1">বাকি বিল</p>
                     <h3 className="text-2xl font-bold text-orange-700">{formatCurrency(pendingBills)}</h3>
@@ -84,7 +84,7 @@ function Bills({ data, onAdd, onUpdate, onDelete, confirmAction }) {
 
             {isAdding && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 animate-fade-in-up">
+                    <div className="bg-white rounded-3xl shadow-xl max-w-md w-full p-6 sm:p-8 animate-scale-in">
                         <h3 className="text-xl font-bold text-gray-800 mb-4">নতুন বিল</h3>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <input type="text" placeholder="বিলের নাম (যেমন: বিদ্যুৎ বিল)" className="input-field" required 

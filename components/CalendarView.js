@@ -74,7 +74,7 @@ function CalendarView({ data }) {
 
     return (
         <div className="space-y-6 animate-fade-in" data-name="calendar-view">
-            <div className="flex items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
                 <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
                     <div className="icon-calendar-days text-emerald-600"></div>
                     ক্যালেন্ডার ভিউ

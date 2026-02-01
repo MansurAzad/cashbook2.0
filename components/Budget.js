@@ -32,7 +32,7 @@ function Budget({ data, onSave, onDelete }) {
     return (
         <div className="space-y-6 animate-fade-in" data-name="budget">
             {/* Header Controls */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
                 <div className="flex items-center gap-2">
                     <div className="p-2 bg-purple-100 rounded-lg text-purple-600">
                         <div className="icon-calendar"></div>
@@ -61,7 +61,7 @@ function Budget({ data, onSave, onDelete }) {
                     <h3 className="text-lg font-semibold opacity-90">মাসিক মোট বাজেট</h3>
                     <div className="icon-chart-pie text-purple-400"></div>
                 </div>
-                <div className="flex flex-col md:flex-row gap-8">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
                     <div>
                         <p className="text-sm text-gray-400">মোট বরাদ্দ</p>
                         <p className="text-3xl font-bold">{formatCurrency(budgetStatus.total.amount)}</p>
@@ -95,9 +95,9 @@ function Budget({ data, onSave, onDelete }) {
 
             {/* Add New Budget Form */}
             {isAdding && (
-                <div className="card border-2 border-purple-100 bg-purple-50">
+                <div className="card border-2 border-purple-100 bg-purple-50 p-4 sm:p-6">
                     <h4 className="font-bold text-purple-800 mb-4">নতুন বাজেট যুক্ত করুন</h4>
-                    <div className="flex flex-col md:flex-row gap-4 items-end">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-end">
                         <div className="flex-1 w-full">
                             <label className="block text-sm font-medium text-purple-700 mb-1">ক্যাটাগরি</label>
                             <select 

@@ -65,7 +65,7 @@ function Accounts({ data, onAdd, onUpdate, onDelete }) {
 
             {isAdding && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 animate-fade-in-up">
+                    <div className="bg-white rounded-3xl shadow-xl max-w-md w-full p-6 sm:p-8 animate-scale-in">
                         <h3 className="text-xl font-bold text-gray-800 mb-4">{editingId ? 'অ্যাকাউন্ট আপডেট' : 'নতুন অ্যাকাউন্ট'}</h3>
                         <form onSubmit={editingId ? handleUpdate : handleSubmit} className="space-y-4">
                             <input type="text" placeholder="অ্যাকাউন্টের নাম (যেমন: বিকাশ, মানিব্যাগ)" className="input-field" required 
@@ -96,15 +96,15 @@ function Accounts({ data, onAdd, onUpdate, onDelete }) {
                 </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4">
                 {data.accounts.map(acc => (
                     <SwipeableItem
                         key={acc.id}
                         onSwipeLeft={() => onDelete(acc.id)}
                         onSwipeRight={() => handleEdit(acc)}
-                        className="rounded-xl border border-gray-100 shadow-sm"
+                        className="rounded-3xl border border-gray-100 shadow-sm"
                     >
-                        <div className="p-4 flex items-center justify-between">
+                        <div className="p-4 sm:p-5 flex items-center justify-between">
                             <div className="flex items-center gap-4">
                                 <div className={`w-12 h-12 rounded-full flex items-center justify-center text-xl ${
                                     acc.type === 'cash' ? 'bg-green-100 text-green-600' :

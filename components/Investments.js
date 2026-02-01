@@ -80,7 +80,7 @@ function Investments({ data, onAdd, onUpdate, onDelete }) {
 
     return (
         <div className="space-y-6 animate-fade-in" data-name="investments">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <div className="card bg-gray-900 text-white">
                     <p className="text-gray-400 text-sm">পোর্টফোলিও ভ্যালু</p>
                     <h3 className="text-3xl font-bold mt-1">{formatCurrency(totalCurrent)}</h3>
@@ -113,7 +113,7 @@ function Investments({ data, onAdd, onUpdate, onDelete }) {
 
             {isAdding && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 animate-fade-in-up">
+                    <div className="bg-white rounded-3xl shadow-xl max-w-md w-full p-6 sm:p-8 animate-scale-in">
                         <h3 className="text-xl font-bold text-gray-800 mb-4">{editingId ? 'ইনভেস্টমেন্ট আপডেট করুন' : 'নতুন ইনভেস্টমেন্ট'}</h3>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <input type="text" placeholder="নাম (যেমন: গ্রামীণফোন শেয়ার)" className="input-field" required 
