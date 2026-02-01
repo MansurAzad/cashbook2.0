@@ -572,6 +572,347 @@ Largest Contentful Paint (LCP): <2.5s
 
 ---
 
+## 🔄 Transactions পৃষ্ঠা - সম্পূর্ণ iOS পুনর্নির্মাণ (নতুন!)
+
+### ট্রানজেকশনস পৃষ্ঠার উন্নতি
+
+**ফাইল:** `components/Transactions.js`
+
+#### A. **সারাংশ কার্ড (সামনে এবং কেন্দ্র)**
+
+```javascript
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
+    {/* মোট আয় - সবুজ */}
+    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
+        <p className="text-emerald-600 text-xs font-black mb-2 uppercase tracking-wider">মোট আয়</p>
+        <h3 className="text-4xl font-black text-emerald-700">৳1,50,000</h3>
+        <p className="text-xs text-gray-500 mt-2 font-semibold">৮৫টি লেনদেন</p>
+    </div>
+    
+    {/* মোট ব্যয় - লাল */}
+    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
+        <p className="text-red-600 text-xs font-black mb-2 uppercase tracking-wider">মোট ব্যয়</p>
+        <h3 className="text-4xl font-black text-red-700">৳75,000</h3>
+        <p className="text-xs text-gray-500 mt-2 font-semibold">১২৫টি লেনদেন</p>
+    </div>
+    
+    {/* নেট ব্যালেন্স - নীল/কমলা */}
+    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
+        <p className="text-blue-600 text-xs font-black mb-2 uppercase tracking-wider">নেট ব্যালেন্স</p>
+        <h3 className="text-4xl font-black text-blue-700">৳75,000</h3>
+        <p className="text-xs text-gray-500 mt-2 font-semibold">২১০টি মোট লেনদেন</p>
+    </div>
+</div>
+```
+
+**বৈশিষ্ট্য:**
+- ✅ বড় **৪xl (২৮px)** সংখ্যা (text-4xl font-black)
+- ✅ রঙ-কোডেড (সবুজ আয়, লাল ব্যয়, নীল/কমলা নেট)
+- ✅ গণনা সহ (কতটি লেনদেন)
+- ✅ গোল কার্নার (rounded-3xl)
+- ✅ প্রিমিয়াম শ্যাডো এবং হভার ইফেক্ট
+
+#### B. **উন্নত ফিল্টার ট্যাব**
+
+```javascript
+<div className="bg-white rounded-2xl p-1.5 shadow-md border border-gray-200 flex w-fit">
+    <button 
+        onClick={() => setFilter('all')} 
+        className={`px-6 py-2.5 rounded-xl text-base font-black transition-all 
+        ${filter === 'all' ? 'bg-gray-900 text-white shadow-md' : 'text-gray-600'}`}
+    >
+        সব
+    </button>
+    <button 
+        onClick={() => setFilter('income')} 
+        className={`px-6 py-2.5 rounded-xl text-base font-black transition-all 
+        ${filter === 'income' ? 'bg-emerald-500 text-white shadow-md' : 'text-gray-600'}`}
+    >
+        আয়
+    </button>
+    <button 
+        onClick={() => setFilter('expense')} 
+        className={`px-6 py-2.5 rounded-xl text-base font-black transition-all 
+        ${filter === 'expense' ? 'bg-red-500 text-white shadow-md' : 'text-gray-600'}`}
+    >
+        ব্যয়
+    </button>
+</div>
+```
+
+**বৈশিষ্ট্য:**
+- ✅ গোলাকার ট্যাব (rounded-xl)
+- ✅ সাদা পটভূমি সহ ভিতরে (border border-gray-200)
+- ✅ সক্রিয় অবস্থা রঙ পরিবর্তন সহ
+- ✅ বোল্ড ফন্ট (font-black)
+
+#### C. **সার্চ এবং ডেট রেঞ্জ ফিল্টার**
+
+```javascript
+<div className="bg-white rounded-2xl p-6 shadow-md border border-gray-200 space-y-4">
+    {/* সার্চ ফিল্ড */}
+    <div className="relative">
+        <div className="absolute left-4 top-3.5 text-gray-400 icon-search text-xl"></div>
+        <input 
+            type="text" 
+            placeholder="ক্যাটাগরি বা নোট খুঁজুন..." 
+            className="input-field pl-12 text-base font-medium w-full py-3 rounded-2xl" 
+        />
+    </div>
+    
+    {/* ডেট রেঞ্জ */}
+    <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex-1">
+            <label className="text-xs font-bold text-gray-600 uppercase tracking-wider block mb-2">
+                শুরু করুন
+            </label>
+            <input 
+                type="date" 
+                className="input-field text-base font-medium w-full py-3 rounded-2xl" 
+            />
+        </div>
+        <div className="flex-1">
+            <label className="text-xs font-bold text-gray-600 uppercase tracking-wider block mb-2">
+                শেষ করুন
+            </label>
+            <input 
+                type="date" 
+                className="input-field text-base font-medium w-full py-3 rounded-2xl" 
+            />
+        </div>
+    </div>
+</div>
+```
+
+**বৈশিষ্ট্য:**
+- ✅ বড় সার্চ ইনপুট (py-3)
+- ✅ গোল ইনপুট ফিল্ড (rounded-2xl)
+- ✅ সার্চ আইকন (left-4, অবস্থান)
+- ✅ ডেট রেঞ্জ সাইড-বাই-সাইড (flex)
+
+#### D. **নতুন লেনদেন ফর্ম - iOS বটম শীট স্টাইল**
+
+```javascript
+{isAdding && (
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-end sm:items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8">
+            
+            {/* হেডার */}
+            <div className="flex items-center justify-between mb-8">
+                <h3 className="text-3xl font-black text-gray-900">
+                    নতুন লেনদেন যুক্ত করুন
+                </h3>
+                <button onClick={resetForm} className="p-3 hover:bg-gray-100 rounded-full">
+                    <div className="icon-x text-2xl text-gray-600"></div>
+                </button>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-7">
+                
+                {/* আয়/ব্যয় কার্ড সিলেক্টর */}
+                <div>
+                    <label className="block text-base font-black text-gray-900 mb-4 uppercase tracking-wider">
+                        লেনদেনের ধরন
+                    </label>
+                    <div className="grid grid-cols-2 gap-4">
+                        <button 
+                            type="button" 
+                            className={`p-8 rounded-2xl border-2 text-center font-black text-lg flex flex-col items-center justify-center gap-3 transition-all ${
+                                formData.type === 'income' 
+                                    ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-lg' 
+                                    : 'border-gray-300 text-gray-600'
+                            }`}
+                        >
+                            <div className="icon-arrow-down-left text-4xl"></div>
+                            <div>আয়</div>
+                        </button>
+                        <button 
+                            type="button" 
+                            className={`p-8 rounded-2xl border-2 text-center font-black text-lg flex flex-col items-center justify-center gap-3 transition-all ${
+                                formData.type === 'expense' 
+                                    ? 'border-red-500 bg-red-50 text-red-700 shadow-lg' 
+                                    : 'border-gray-300 text-gray-600'
+                            }`}
+                        >
+                            <div className="icon-arrow-up-right text-4xl"></div>
+                            <div>ব্যয়</div>
+                        </button>
+                    </div>
+                </div>
+                
+                {/* পরিমাণ - বড় এবং প্রধান ফোকাস */}
+                <div>
+                    <label className="block text-base font-black text-gray-900 mb-3 uppercase tracking-wider">
+                        পরিমাণ (৳)
+                    </label>
+                    <div className="relative">
+                        <span className="absolute left-5 top-4 text-2xl font-black text-gray-900">৳</span>
+                        <input 
+                            type="number" 
+                            required 
+                            autoFocus
+                            className="input-field text-4xl font-black py-5 pl-12 rounded-2xl w-full" 
+                            placeholder="0" 
+                        />
+                    </div>
+                </div>
+                
+                {/* ক্যাটাগরি সিলেক্ট */}
+                <div>
+                    <label className="block text-base font-black text-gray-900 mb-3 uppercase tracking-wider">
+                        ক্যাটাগরি
+                    </label>
+                    <select className="input-field text-base font-bold py-4 px-5 rounded-2xl w-full border border-gray-300">
+                        <option value="">— নির্বাচন করুন —</option>
+                        <option>খাদ্য</option>
+                        <option>পরিবহন</option>
+                    </select>
+                </div>
+                
+                {/* অ্যাকাউন্ট সিলেক্ট */}
+                <div>
+                    <label className="block text-base font-black text-gray-900 mb-3 uppercase tracking-wider">
+                        অ্যাকাউন্ট
+                    </label>
+                    <select className="input-field text-base font-bold py-4 px-5 rounded-2xl w-full border border-gray-300">
+                        <option>— কোনোটি না (শুধু রেকর্ড) —</option>
+                    </select>
+                    <p className="text-xs text-gray-600 mt-3 font-semibold bg-blue-50 p-3 rounded-lg border border-blue-200">
+                        💡 অ্যাকাউন্ট সিলেক্ট করলে এর ব্যালেন্স স্বয়ংক্রিয়ভাবে আপডেট হবে
+                    </p>
+                </div>
+                
+                {/* তারিখ */}
+                <div>
+                    <label className="block text-base font-black text-gray-900 mb-3 uppercase tracking-wider">
+                        তারিখ
+                    </label>
+                    <input type="date" className="input-field text-base font-bold py-4 px-5 rounded-2xl w-full border border-gray-300" />
+                </div>
+                
+                {/* নোট এবং ভয়েস ইনপুট */}
+                <div>
+                    <div className="flex justify-between items-center mb-3">
+                        <label className="block text-base font-black text-gray-900 uppercase tracking-wider">
+                            নোট
+                        </label>
+                        <button 
+                            type="button" 
+                            className="text-sm font-bold flex items-center gap-2 px-4 py-2 rounded-xl text-emerald-600 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300"
+                        >
+                            <div className="icon-mic text-xl"></div> ভয়েস টাইপ
+                        </button>
+                    </div>
+                    <textarea 
+                        className="input-field text-base font-medium py-4 px-5 rounded-2xl w-full border border-gray-300" 
+                        rows="4" 
+                        placeholder="আরও বিবরণ যুক্ত করুন..." 
+                    ></textarea>
+                </div>
+                
+                {/* সাবমিট বাটন */}
+                <div className="flex gap-4 mt-8 pt-4 border-t border-gray-200">
+                    <button 
+                        type="submit" 
+                        className="flex-1 btn btn-primary justify-center py-4 px-6 rounded-2xl font-black text-lg"
+                    >
+                        সংরক্ষণ করুন
+                    </button>
+                    <button 
+                        type="button" 
+                        className="flex-1 btn btn-ghost bg-gray-100 rounded-2xl py-4 px-6 font-black text-lg"
+                    >
+                        বাতিল
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+)}
+```
+
+**বৈশিষ্ট্য:**
+- ✅ **iOS বটম শীট স্টাইল** - `rounded-t-3xl` (মোবাইল), `rounded-3xl` (ডেস্কটপ)
+- ✅ **ব্যাকড্রপ ব্লুর** - কালো আধা-স্বচ্ছ `bg-black/60 backdrop-blur-md`
+- ✅ **আয়/ব্যয় কার্ড সিলেক্টর** - বড় আইকন, রঙ-কোডেড
+- ✅ **বড় পরিমাণ ইনপুট** - `text-4xl font-black`
+- ✅ **প্রিমিয়াম সিলেক্ট ড্রপডাউন** - `border border-gray-300`
+- ✅ **ভয়েস ইনপুট বাটন** - প্রিমিয়াম সবুজ স্টাইল
+- ✅ **ডুয়াল বাটন** - সাবমিট এবং বাতিল
+
+#### E. **লেনদেন আইটেম - উন্নত ডিসপ্লে**
+
+```javascript
+function TransactionItem({ t, formatCurrency }) {
+    return (
+        <div className="px-8 py-5 flex items-center justify-between cursor-pointer hover:bg-gray-50 active:scale-95">
+            {/* আইকন */}
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-md flex-shrink-0 
+                ${t.type === 'income' ? 'bg-emerald-100 text-emerald-600' : 'bg-red-100 text-red-600'}`}>
+                <div className={t.type === 'income' ? 'icon-arrow-down-left' : 'icon-arrow-up-right'}></div>
+            </div>
+            
+            {/* বিবরণ */}
+            <div className="flex-1 min-w-0 ml-4">
+                <div className="flex items-center gap-3 mb-1">
+                    <span className="font-black text-gray-900 text-lg">{t.category}</span>
+                    <span className="text-xs text-gray-500 font-bold bg-gray-100 px-2.5 py-1 rounded-full">
+                        {t.date}
+                    </span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-600 font-medium">
+                    {t.account_name && (
+                        <span className="bg-blue-100 px-3 py-1 rounded-full text-xs font-bold text-blue-700">
+                            {t.account_name}
+                        </span>
+                    )}
+                    <span className="text-gray-500 truncate">{t.note ? `"${t.note}"` : '—'}</span>
+                </div>
+            </div>
+            
+            {/* পরিমাণ */}
+            <div className={`font-black text-xl whitespace-nowrap ml-4 
+                ${t.type === 'income' ? 'text-emerald-600' : 'text-red-600'}`}>
+                {t.type === 'income' ? '+' : '−'} {formatCurrency(t.amount)}
+            </div>
+        </div>
+    );
+}
+```
+
+**বৈশিষ্ট্য:**
+- ✅ বড় আইকন (w-14 h-14, 56px × 56px)
+- ✅ বড় পাঠ্য (text-lg font-black ক্যাটাগরির জন্য)
+- ✅ ছোট তারিখ ব্যাজ (gray-100 পটভূমি সহ)
+- ✅ অ্যাকাউন্ট নাম নীল ব্যাজে
+- ✅ পরিমাণ বড় এবং সাহসী (text-xl font-black)
+- ✅ বর্ণ-কোডেড (সবুজ আয়, লাল ব্যয়)
+
+---
+
+### তুলনা: আগে এবং এখন
+
+| বৈশিষ্ট্য | আগে | এখন |
+|----------|------|------|
+| মোট কার্ড | কোনো নেই | ৩টি বড় summary কার্ড (৪xl সংখ্যা) |
+| ফিল্টার | ছোট (sm) | বড় গোলাকার ট্যাব (rounded-xl) |
+| সার্চ | সাধারণ ইনপুট | বড় সার্চ বার (py-3) আইকন সহ |
+| ফর্ম মডাল | `rounded-xl` | `rounded-t-3xl` iOS শীট + `backdrop-blur-md` |
+| পরিমাণ ফিল্ড | 16px | **36px (text-4xl font-black)** |
+| আয়/ব্যয় কার্ড | ছোট বাটন | **বড় কার্ড (p-8) আইকন সহ** |
+| ক্যাটাগরি সিলেক্ট | সাধারণ | bordered select (border-gray-300) |
+| ভয়েস বাটন | নীল টেক্সট | সবুজ ব্যাজ (bg-emerald-50) |
+| লেনদেন আইটেম | sm আইকন | **14×14 (56px) গোল কার্ড** |
+| লেনদেন টেক্সট | xs/sm | **lg font-black ক্যাটাগরি** |
+
+---
+
+**স্থিতি:** ✅ সম্পূর্ণ iOS পুনর্নির্মাণ সম্পন্ন
+**শেষ আপডেট:** এখনই (সম্পূর্ণ ফর্ম ডিজাইন)
+**ব্যবহারকারী প্রভাব:** ✨ প্রিমিয়াম অনুভূতি এবং সহজ ব্যবহার
+
+---
+
 ## ✨ চূড়ান্ত নোট
 
 আপনার DBH CASH অ্যাপ এখন:
