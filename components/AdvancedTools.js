@@ -17,7 +17,7 @@ const AdvancedTools = ({ data, setData }) => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 rounded-lg transition-all whitespace-nowrap ${
+            className={`px-4 py-3 rounded-lg transition-all whitespace-nowrap ${
               activeTab === tab.id
                 ? 'bg-emerald-500 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -109,7 +109,7 @@ const LoanPayoffCalculator = () => {
             type="number"
             value={principal}
             onChange={(e) => setPrincipal(parseFloat(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
           />
           <p className="text-xs text-gray-500">৳{principal.toLocaleString('bn-BD')}</p>
         </div>
@@ -120,7 +120,7 @@ const LoanPayoffCalculator = () => {
             type="number"
             value={rate}
             onChange={(e) => setRate(parseFloat(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
           />
         </div>
 
@@ -130,14 +130,14 @@ const LoanPayoffCalculator = () => {
             type="number"
             value={payment}
             onChange={(e) => setPayment(parseFloat(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
           />
           <p className="text-xs text-gray-500">৳{payment.toLocaleString('bn-BD')}</p>
         </div>
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+          className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
         >
           হিসাব করুন
         </button>
@@ -182,7 +182,7 @@ const InvestmentReturnsCalculator = () => {
             type="number"
             value={invested}
             onChange={(e) => setInvested(parseFloat(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
           />
         </div>
 
@@ -192,13 +192,13 @@ const InvestmentReturnsCalculator = () => {
             type="number"
             value={current}
             onChange={(e) => setCurrent(parseFloat(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
           />
         </div>
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+          className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
         >
           হিসাব করুন
         </button>
@@ -243,7 +243,7 @@ const SavingsGoalCalculator = () => {
             type="number"
             value={target}
             onChange={(e) => setTarget(parseFloat(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
           />
         </div>
 
@@ -253,13 +253,13 @@ const SavingsGoalCalculator = () => {
             type="number"
             value={monthly}
             onChange={(e) => setMonthly(parseFloat(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
           />
         </div>
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+          className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
         >
           হিসাব করুন
         </button>
@@ -301,13 +301,13 @@ const BudgetAllocationCalculator = () => {
             type="number"
             value={income}
             onChange={(e) => setIncome(parseFloat(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
           />
         </div>
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+          className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
         >
           বিতরণ করুন
         </button>
@@ -381,7 +381,7 @@ const DataExportPanel = ({ transactions }) => {
         <select
           value={exportFormat}
           onChange={(e) => setExportFormat(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg"
         >
           <option value="json">JSON (সব তথ্য সহ)</option>
           <option value="csv">CSV (স্প্রেডশীট এর জন্য)</option>
@@ -394,7 +394,7 @@ const DataExportPanel = ({ transactions }) => {
 
       <button
         onClick={handleExport}
-        className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+        className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
       >
         এখনই ডাউনলোড করুন
       </button>

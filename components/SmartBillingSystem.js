@@ -152,7 +152,7 @@ const SmartBillingSystem = ({ data, setData }) => {
         <h2 className="text-2xl font-bold">📋 স্মার্ট বিলিং সিস্টেম</h2>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors"
+          className="bg-emerald-500 text-white px-4 py-3 rounded-lg hover:bg-emerald-600 transition-colors"
         >
           {showForm ? '❌ বাতিল' : '➕ নতুন বিল'}
         </button>
@@ -191,7 +191,7 @@ const SmartBillingSystem = ({ data, setData }) => {
               placeholder="বিলের নাম"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-lg"
               required
             />
 
@@ -200,7 +200,7 @@ const SmartBillingSystem = ({ data, setData }) => {
               placeholder="পরিমাণ (৳)"
               value={formData.amount}
               onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-lg"
               required
             />
 
@@ -208,14 +208,14 @@ const SmartBillingSystem = ({ data, setData }) => {
               type="date"
               value={formData.dueDate}
               onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-lg"
               required
             />
 
             <select
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-lg"
             >
               {categories.map(cat => (
                 <option key={cat.name} value={cat.name}>{cat.name}</option>
@@ -226,14 +226,14 @@ const SmartBillingSystem = ({ data, setData }) => {
               placeholder="নোট (ঐচ্ছিক)"
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-              className="col-span-2 px-4 py-2 border border-gray-300 rounded-lg resize-none"
+              className="col-span-2 px-4 py-3 border border-gray-300 rounded-lg resize-none"
               rows="2"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+            className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
           >
             বিল যোগ করুন
           </button>
@@ -251,7 +251,7 @@ const SmartBillingSystem = ({ data, setData }) => {
           <button
             key={filter.id}
             onClick={() => setFilterStatus(filter.id)}
-            className={`px-4 py-2 rounded-lg whitespace-nowrap transition-all ${
+            className={`px-4 py-3 rounded-lg whitespace-nowrap transition-all ${
               filterStatus === filter.id
                 ? 'bg-emerald-500 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -354,14 +354,14 @@ const BillCard = ({ bill, category, daysLeft, isOverdue, onPay, onDelete }) => {
         {bill.status !== 'paid' && (
           <button
             onClick={() => onPay(bill.id)}
-            className="flex-1 bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium text-sm"
+            className="flex-1 bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium text-sm"
           >
             প্রদত্ত করুন
           </button>
         )}
         <button
           onClick={() => onDelete(bill.id)}
-          className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm"
+          className="px-4 py-3 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm"
         >
           🗑️
         </button>
