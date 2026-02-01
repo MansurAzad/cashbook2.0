@@ -38,10 +38,7 @@ const AdvancedAnalyticsPanel = ({ transactions, budgets, bills, investments }) =
 
   // বাজেট সতর্কতা
   const budgetAlerts = React.useMemo(() => {
-    // budgets হতে পারে object বা array - উভয়ই handle করুন
-    const budgetsArray = Array.isArray(budgets) ? budgets : Object.values(budgets || {});
-    
-    return budgetsArray.map(budget => {
+    return budgets.map(budget => {
       const spent = monthComparison.current
         .filter(t => t.type === 'expense' && t.category === budget.category)
         .reduce((sum, t) => sum + t.amount, 0);
@@ -82,8 +79,8 @@ const AdvancedAnalyticsPanel = ({ transactions, budgets, bills, investments }) =
 
       {/* বিশ্লেষণ ট্যাব */}
       {activeTab === 'analytics' && (
-        <div className="space-y-3 sm:space-y-4">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* আয় কার্ড */}
             <div className="bg-white p-4 rounded-lg shadow-md">
               <p className="text-gray-600 text-sm">মোট আয়</p>

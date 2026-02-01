@@ -56,16 +56,16 @@ function Dashboard({ data, onNavigate, onRefresh }) {
 
     return (
         <PullToRefresh onRefresh={onRefresh}>
-            <div className="space-y-4 sm:space-y-6 animate-fade-in pb-10" data-name="dashboard">
+            <div className="space-y-6 animate-fade-in pb-10" data-name="dashboard">
                 {/* Financial Health Widget - Premium iOS Style */}
                 <div 
                     className="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 text-white shadow-2xl active:scale-[0.98] transition-transform duration-200 transform-gpu cursor-pointer border border-gray-800"
                     {...GestureHooks.useLongPress(() => alert('সম্পূর্ণ স্বাস্থ্য প্রতিবেদন: \nনেট ওয়ার্থ: ' + formatCurrency(financialHealth.netWorth)))}
                 >
-                    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                         <div>
                             <p className="text-gray-400 text-xs font-bold mb-2 tracking-widest uppercase">নেট ওয়ার্থ</p>
-                            <h2 className="text-5xl sm:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500 mb-6">
+                            <h2 className="text-5xl md:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500 mb-6">
                                 {formatCurrency(financialHealth.netWorth)}
                             </h2>
                             <div className="flex flex-wrap gap-3">
@@ -85,9 +85,9 @@ function Dashboard({ data, onNavigate, onRefresh }) {
                 </div>
 
                 {/* Main Stats with iOS style cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div 
-                        className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-gray-200 active:scale-95 transition-all duration-200 cursor-pointer hover:shadow-xl"
+                        className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 active:scale-95 transition-all duration-200 cursor-pointer hover:shadow-xl"
                         onClick={() => onNavigate('transactions', { type: 'income' })}
                     >
                         <div className="flex items-center justify-between mb-6">
@@ -100,7 +100,7 @@ function Dashboard({ data, onNavigate, onRefresh }) {
                     </div>
 
                     <div 
-                        className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-gray-200 active:scale-95 transition-all duration-200 cursor-pointer hover:shadow-xl"
+                        className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 active:scale-95 transition-all duration-200 cursor-pointer hover:shadow-xl"
                         onClick={() => onNavigate('transactions', { type: 'expense' })}
                     >
                         <div className="flex items-center justify-between mb-6">
@@ -112,7 +112,7 @@ function Dashboard({ data, onNavigate, onRefresh }) {
                         <h3 className="text-3xl font-black text-gray-900">{formatCurrency(expense)}</h3>
                     </div>
 
-                    <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-200">
+                    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-200">
                         <div className="flex items-center justify-between mb-6">
                             <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center shadow-md">
                                 <div className="icon-wallet text-blue-600 text-2xl"></div>
@@ -123,9 +123,9 @@ function Dashboard({ data, onNavigate, onRefresh }) {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Recent Transactions */}
-                    <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-gray-200">
+                    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
                         <div className="flex items-center justify-between mb-6">
                             <h3 className="font-black text-2xl text-gray-900">সাম্প্রতিক</h3>
                             <button 

@@ -510,19 +510,19 @@ function App() {
                 </div>
             )}
             
-            <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 pb-28 sm:pb-32 lg:pb-8 scroll-smooth relative" id="main-content">
+            <main className="flex-1 overflow-y-auto p-4 lg:p-8 pb-24 lg:pb-8 scroll-smooth relative" id="main-content">
                 {isLoading && !data.categories.all.length ? (
                      <div className="p-8">
                         <SkeletonLoader count={3} type="card" />
                      </div>
                 ) : (
-                    <div className="w-full max-w-7xl mx-auto px-0 sm:px-2">
+                    <div className="max-w-6xl mx-auto">
                         {/* Views */}
                         {view === 'dashboard' && <Dashboard data={data} onNavigate={handleNavigate} onRefresh={async () => { await loadData(); notify('রিফ্রেশ সম্পূর্ণ'); }} />}
                         {view === 'transactions' && <Transactions data={data} onAdd={(d)=>handleTransaction('add',d)} onUpdate={(id,d)=>handleTransaction('update',{id,...d})} onDelete={(id)=>confirmAction('লেনদেন মুছুন', 'এটি মুছে ফেলতে চান?', ()=>handleTransaction('delete',id))} loading={false} currencySymbol={getCurrencySymbol()} initialParams={viewParams} />}
                         {view === 'accounts' && <Accounts data={data} onAdd={(d)=>handleAccount('add',null,d)} onUpdate={(id,d)=>handleAccount('update',id,d)} onDelete={(id)=>confirmAction('অ্যাকাউন্ট মুছুন', 'নিশ্চিত?', ()=>handleAccount('delete',id))} />}
                         {view === 'loans' && <Loans data={data} onAdd={(d)=>handleLoan('add',null,d)} onUpdate={(id,d)=>handleLoan('update',id,d)} onDelete={(id)=>confirmAction('ঋণ মুছুন', 'নিশ্চিত?', ()=>handleLoan('delete',id))} />}
-                        {view === 'tools' && <Tools data={data} setData={setData} />}
+                        {view === 'tools' && <Tools />}
                         {view === 'calendar' && <CalendarView data={data} />}
                         {view === 'goals' && <Goals data={data} onAdd={(d)=>handleGoal('add',null,d)} onUpdate={(id,d)=>handleGoal('update',id,d)} onDelete={(id)=>confirmAction('গোল মুছুন', 'নিশ্চিত?', ()=>handleGoal('delete',id))} />}
                         {view === 'bills' && <Bills data={data} onAdd={(d)=>handleBill('add',null,d)} onUpdate={(id,d)=>handleBill('update',id,d)} onDelete={(id)=>confirmAction('বিল মুছুন', 'নিশ্চিত?', ()=>handleBill('delete',id))} confirmAction={confirmAction} />}

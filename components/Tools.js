@@ -1,6 +1,6 @@
-function Tools({ data = {}, setData = () => {} }) {
-    const [activeTool, setActiveTool] = React.useState('menu');
-    const [localData, setLocalData] = React.useState(data || {
+function Tools() {
+    const [activeTool, setActiveTool] = React.useState('menu'); // menu, emi, shopping, challenge, advanced, predictive, recurring, mobile, budget
+    const [data, setData] = React.useState(JSON.parse(localStorage.getItem('bk_app_data')) || {
         transactions: [],
         budgets: {},
         bills: [],
@@ -12,13 +12,6 @@ function Tools({ data = {}, setData = () => {} }) {
         mobilePayments: [],
         budgetPlans: []
     });
-
-    // Update localData when data prop changes
-    React.useEffect(() => {
-        if (data && Object.keys(data).length > 0) {
-            setLocalData(data);
-        }
-    }, [data]);
 
     const tools = [
         { id: 'emi', label: 'EMI ক্যালকুলেটর', icon: 'icon-calculator', color: 'bg-blue-500' },
@@ -40,7 +33,7 @@ function Tools({ data = {}, setData = () => {} }) {
                     <div className="icon-wrench text-gray-600"></div>
                     টুলস ও ইউটিলিটি
                 </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div className="grid grid-cols-2 gap-4">
                     {tools.map(tool => (
                         <div 
                             key={tool.id} 
@@ -66,13 +59,13 @@ function Tools({ data = {}, setData = () => {} }) {
             {activeTool === 'emi' && <EMICalculator />}
             {activeTool === 'shopping' && <ShoppingList />}
             {activeTool === 'challenge' && <SavingsChallenge />}
-            {activeTool === 'advanced' && <AdvancedTools data={localData} setData={(newData) => { setLocalData(newData); setData(newData); }} />}
-            {activeTool === 'predictive' && <PredictiveAnalytics transactions={localData.transactions || []} budgets={localData.budgets || {}} />}
-            {activeTool === 'recurring' && <RecurringTransactionManager data={localData} setData={(newData) => { setLocalData(newData); setData(newData); }} />}
-            {activeTool === 'mobile' && <MobilePaymentIntegration data={localData} setData={(newData) => { setLocalData(newData); setData(newData); }} />}
-            {activeTool === 'budget' && <SmartBudgetPlanning data={localData} setData={(newData) => { setLocalData(newData); setData(newData); }} />}
-            {activeTool === 'billing' && <SmartBillingSystem data={localData} setData={(newData) => { setLocalData(newData); setData(newData); }} />}
-            {activeTool === 'networth' && <NetWorthTracker data={localData} setData={(newData) => { setLocalData(newData); setData(newData); }} />}
+            {activeTool === 'advanced' && <AdvancedTools data={data} setData={setData} />}
+            {activeTool === 'predictive' && <PredictiveAnalytics transactions={data.transactions || []} budgets={data.budgets || {}} />}
+            {activeTool === 'recurring' && <RecurringTransactionManager data={data} setData={setData} />}
+            {activeTool === 'mobile' && <MobilePaymentIntegration data={data} setData={setData} />}
+            {activeTool === 'budget' && <SmartBudgetPlanning data={data} setData={setData} />}
+            {activeTool === 'billing' && <SmartBillingSystem data={data} setData={setData} />}
+            {activeTool === 'networth' && <NetWorthTracker data={data} setData={setData} />}
         </div>
     );
 }
