@@ -53,17 +53,17 @@ function BottomNav({ currentView, onNavigate, onOpenMenu }) {
                 </div>
             )}
 
-            <nav className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-gray-200 lg:hidden z-40 pb-safe-area shadow-lg-up">
-                <div className="flex justify-around items-center h-16">
+            <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 lg:hidden z-40 pb-safe-area shadow-2xl">
+                <div className="flex justify-around items-center h-20 px-2">
                     {navItems.map(item => {
                         if (item.isFab) {
                             return (
                                 <button 
                                     key={item.id}
                                     onClick={() => handleClick(item)}
-                                    className={`relative -top-5 bg-red-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-red-200 hover:bg-red-700 active:scale-95 transition-all border-4 border-white ${isMenuOpen ? 'rotate-45 bg-red-700' : 'rotate-0'}`}
+                                    className={`relative -top-8 bg-red-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg shadow-red-300 hover:bg-red-700 active:scale-95 transition-all border-4 border-white ${isMenuOpen ? 'rotate-45 bg-red-700' : 'rotate-0'}`}
                                 >
-                                    <div className={`${item.icon} text-2xl`}></div>
+                                    <div className={`${item.icon} text-3xl`}></div>
                                 </button>
                             );
                         }
@@ -73,10 +73,10 @@ function BottomNav({ currentView, onNavigate, onOpenMenu }) {
                             <button 
                                 key={item.id}
                                 onClick={() => handleClick(item)}
-                                className={`flex flex-col items-center justify-center w-full h-full space-y-1 active:scale-90 transition-transform ${isActive ? 'text-emerald-600' : 'text-gray-500'}`}
+                                className={`flex flex-col items-center justify-center w-full h-full space-y-1 active:scale-90 transition-transform px-1`}
                             >
-                                <div className={`${item.icon} text-xl transition-all ${isActive ? 'scale-110 drop-shadow-sm' : ''}`}></div>
-                                <span className="text-[10px] font-medium">{item.label}</span>
+                                <div className={`${item.icon} text-2xl transition-all ${isActive ? 'text-emerald-600 scale-110 drop-shadow-sm' : 'text-gray-600'}`}></div>
+                                <span className={`text-xs font-bold whitespace-nowrap ${isActive ? 'text-emerald-600' : 'text-gray-600'}`}>{item.label}</span>
                             </button>
                         );
                     })}

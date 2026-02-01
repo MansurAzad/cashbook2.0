@@ -510,13 +510,13 @@ function App() {
                 </div>
             )}
             
-            <main className="flex-1 overflow-y-auto p-4 lg:p-8 pb-24 lg:pb-8 scroll-smooth relative" id="main-content">
+            <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 pb-28 sm:pb-32 lg:pb-8 scroll-smooth relative" id="main-content">
                 {isLoading && !data.categories.all.length ? (
                      <div className="p-8">
                         <SkeletonLoader count={3} type="card" />
                      </div>
                 ) : (
-                    <div className="max-w-6xl mx-auto">
+                    <div className="w-full max-w-7xl mx-auto px-0 sm:px-2">
                         {/* Views */}
                         {view === 'dashboard' && <Dashboard data={data} onNavigate={handleNavigate} onRefresh={async () => { await loadData(); notify('রিফ্রেশ সম্পূর্ণ'); }} />}
                         {view === 'transactions' && <Transactions data={data} onAdd={(d)=>handleTransaction('add',d)} onUpdate={(id,d)=>handleTransaction('update',{id,...d})} onDelete={(id)=>confirmAction('লেনদেন মুছুন', 'এটি মুছে ফেলতে চান?', ()=>handleTransaction('delete',id))} loading={false} currencySymbol={getCurrencySymbol()} initialParams={viewParams} />}

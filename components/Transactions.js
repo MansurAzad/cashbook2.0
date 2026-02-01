@@ -241,7 +241,7 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                         </div>
                         
                         <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-2 gap-3 sm:gap-4">
                                 <button type="button" onClick={() => setFormData({...formData, type: 'income', category: ''})} className={`p-3 rounded-lg border text-center font-medium transition-all ${formData.type === 'income' ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-gray-200 text-gray-600'}`}>আয়</button>
                                 <button type="button" onClick={() => setFormData({...formData, type: 'expense', category: ''})} className={`p-3 rounded-lg border text-center font-medium transition-all ${formData.type === 'expense' ? 'border-red-500 bg-red-50 text-red-700' : 'border-gray-200 text-gray-600'}`}>ব্যয়</button>
                             </div>
