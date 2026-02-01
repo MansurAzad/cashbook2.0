@@ -2,24 +2,24 @@ function Header({ toggleSidebar, title }) {
     const [showQuickMenu, setShowQuickMenu] = React.useState(false);
 
     return (
-        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 lg:px-8">
+        <header className="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-6 lg:px-8 shadow-sm">
             <div className="flex items-center gap-4">
                 <button 
                     onClick={toggleSidebar}
-                    className="p-2 hover:bg-gray-100 rounded-lg lg:hidden"
+                    className="p-3 hover:bg-gray-100 rounded-full lg:hidden transition-colors active:scale-90"
                 >
-                    <div className="icon-menu text-gray-600"></div>
+                    <div className="icon-menu text-gray-700 text-2xl"></div>
                 </button>
-                <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+                <h2 className="text-2xl font-black text-gray-900">{title}</h2>
             </div>
             
-            <div className="flex items-center gap-4 relative">
-                <button className="p-2 hover:bg-gray-100 rounded-full relative">
-                    <div className="icon-bell text-gray-600"></div>
-                    <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
+            <div className="flex items-center gap-3 relative">
+                <button className="p-3 hover:bg-gray-100 rounded-full relative transition-colors active:scale-90">
+                    <div className="icon-bell text-gray-700 text-xl"></div>
+                    <span className="absolute top-2 right-2 w-3 h-3 bg-red-500 rounded-full shadow-lg animate-pulse"></span>
                 </button>
                 <div 
-                    className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold border-2 border-white shadow-sm cursor-pointer select-none"
+                    className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-emerald-50 font-black border-3 border-white shadow-md cursor-pointer select-none hover:shadow-lg transition-all active:scale-90"
                     {...GestureHooks.useLongPress(() => setShowQuickMenu(true))}
                 >
                     A
