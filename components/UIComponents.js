@@ -31,10 +31,10 @@ const Toast = ({ message, type, onClose }) => {
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
-            className={`fixed top-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-8 py-4 rounded-full shadow-2xl backdrop-blur-xl text-white animate-fade-in-down ${bgColors[type] || bgColors.info} touch-none border border-white/30`}
+            className={`fixed top-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-6 py-3 rounded-xl shadow-lg backdrop-blur-xl text-white animate-fade-in-down ${bgColors[type] || bgColors.info} touch-none border border-white/20`}
         >
-            <div className={`${icons[type] || icons.info} text-2xl`}></div>
-            <p className="font-bold text-base whitespace-nowrap">{message}</p>
+            <div className={`${icons[type] || icons.info} text-2xl flex-shrink-0`}></div>
+            <p className="font-semibold text-sm whitespace-nowrap">{message}</p>
         </div>
     );
 };
@@ -48,30 +48,30 @@ const ConfirmModal = ({ isOpen, title, message, onConfirm, onCancel }) => {
     });
 
     return (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[60] flex items-end sm:items-center justify-center sm:p-4 animate-fade-in">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-md z-[60] flex items-end sm:items-center justify-center sm:p-4 animate-fade-in">
             <div 
-                className="bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl max-w-sm w-full p-8 animate-scale-in relative border border-gray-200"
+                className="bg-white rounded-2xl sm:rounded-2xl shadow-2xl max-w-sm w-full p-6 sm:p-8 animate-scale-in border border-gray-200"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
             >
-                <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-8 opacity-50"></div>
+                <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-6 opacity-50"></div>
                 
-                <div className="text-center mb-8">
-                    <h3 className="text-3xl font-black text-gray-900 mb-3">{title}</h3>
-                    <p className="text-gray-600 leading-relaxed font-medium text-base">{message}</p>
+                <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{title}</h3>
+                    <p className="text-gray-600 leading-relaxed font-medium text-sm">{message}</p>
                 </div>
                 
                 <div className="flex flex-col gap-3">
                     <button 
                         onClick={onConfirm}
-                        className="w-full py-4 bg-red-500 text-white rounded-2xl font-bold text-lg active:scale-95 transition-all shadow-lg shadow-red-200/50 hover:bg-red-600"
+                        className="w-full py-3 bg-red-500 text-white rounded-xl font-bold text-base active:scale-95 transition-all shadow-md hover:bg-red-600"
                     >
                         হ্যাঁ, নিশ্চিত
                     </button>
                     <button 
                         onClick={onCancel}
-                        className="w-full py-4 bg-gray-100 text-gray-900 rounded-2xl font-bold text-lg active:scale-95 transition-all hover:bg-gray-200"
+                        className="w-full py-3 bg-gray-100 text-gray-900 rounded-xl font-bold text-base active:scale-95 transition-all hover:bg-gray-200"
                     >
                         বাতিল
                     </button>
@@ -145,15 +145,15 @@ const ScrollProgress = () => {
 
 const UndoToast = ({ onUndo, onClose }) => {
     return (
-        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 bg-gray-900 text-white px-8 py-4 rounded-full shadow-2xl flex items-center gap-6 animate-scale-in border border-gray-700">
-            <span className="font-bold text-base">মুছে ফেলা হয়েছে</span>
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-4 animate-scale-in border border-gray-700">
+            <span className="font-semibold text-sm">মুছে ফেলা হয়েছে</span>
             <button 
                 onClick={onUndo} 
-                className="text-emerald-400 font-black uppercase text-sm tracking-widest hover:text-emerald-300"
+                className="text-emerald-400 font-bold text-xs tracking-widest hover:text-emerald-300"
             >
                 UNDO
             </button>
-            <button onClick={onClose} className="opacity-60 hover:opacity-100 transition-opacity">
+            <button onClick={onClose} className="opacity-60 hover:opacity-100 transition-opacity ml-auto">
                 <div className="icon-x text-lg"></div>
             </button>
         </div>
@@ -173,25 +173,25 @@ const InstallPWA = ({ deferredPrompt, onClose }) => {
     };
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-[100] p-6 animate-scale-in bg-white border-t border-gray-200 shadow-2xl lg:w-96 lg:right-6 lg:left-auto lg:bottom-6 lg:rounded-3xl lg:border">
-            <div className="flex items-center gap-5 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
-                    <div className="icon-download text-white text-3xl"></div>
+        <div className="fixed bottom-0 left-0 right-0 z-[100] p-4 sm:p-6 animate-scale-in bg-white border-t border-gray-200 shadow-2xl lg:w-96 lg:right-6 lg:left-auto lg:bottom-6 lg:rounded-2xl lg:border-none">
+            <div className="flex items-center gap-4 mb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
+                    <div className="icon-download text-white text-2xl"></div>
                 </div>
-                <div className="flex-1">
-                    <h4 className="font-black text-lg text-gray-900">অ্যাপ ইনস্টল করুন</h4>
-                    <p className="text-sm text-gray-600 font-medium">সেরা অভিজ্ঞতার জন্য অ্যাপটি ইনস্টল করুন</p>
+                <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-base text-gray-900">অ্যাপ ইনস্টল করুন</h4>
+                    <p className="text-xs text-gray-600 font-medium">সেরা অভিজ্ঞতার জন্য অ্যাপটি ইনস্টল করুন</p>
                 </div>
                 <button 
                     onClick={onClose}
-                    className="p-2 text-gray-400 hover:text-gray-600 transition-colors active:scale-90"
+                    className="p-2 text-gray-400 hover:text-gray-600 transition-colors active:scale-90 flex-shrink-0"
                 >
-                    <div className="icon-x text-xl"></div>
+                    <div className="icon-x text-lg"></div>
                 </button>
             </div>
             <button 
                 onClick={handleInstall}
-                className="w-full bg-gray-900 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-all text-base hover:bg-gray-800"
+                className="w-full bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-md active:scale-95 transition-all text-sm hover:bg-emerald-600"
             >
                 ইনস্টল করুন
             </button>

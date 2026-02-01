@@ -1,17 +1,23 @@
 function Budget({ data, onSave, onDelete }) {
-    const [currentMonth, setCurrentMonth] = React.useState(new Date().toISOString().slice(0, 7)); // YYYY-MM
+    const [currentMonth, setCurrentMonth] = React.useState(new Date().toISOString().slice(0, 7));
     const [editingId, setEditingId] = React.useState(null);
     const [editAmount, setEditAmount] = React.useState('');
     const [isAdding, setIsAdding] = React.useState(false);
+    const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(null);
     const [newBudgetCategory, setNewBudgetCategory] = React.useState('');
     const [newBudgetAmount, setNewBudgetAmount] = React.useState('');
 
+    // iOS Card Component
+    const iOSCard = ({ children }) => <div className="ios-card">{children}</div>;
+
     const budgetStatus = DataManager.getMonthlyBudgetStatus(data.transactions, data.budgets, currentMonth);
-    
-    // Filter out categories that already have a budget
     const availableCategories = data.categories.expense.filter(c => 
         !budgetStatus.items.find(b => b.category === c.name)
     );
+
+    const formatCurrency = (amount) => {
+        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT' }).format(amount);
+    };
 
     const handleSave = async (id, category, amount) => {
         await onSave({
@@ -25,35 +31,37 @@ function Budget({ data, onSave, onDelete }) {
         setNewBudgetAmount('');
     };
 
-    const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT' }).format(amount);
+    const handleDelete = async (id) => {
+        await onDelete(id);
+        setShowDeleteConfirm(null);
     };
 
     return (
-        <div className="space-y-6 animate-fade-in" data-name="budget">
-            {/* Header Controls */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
-                <div className="flex items-center gap-2">
-                    <div className="p-2 bg-purple-100 rounded-lg text-purple-600">
-                        <div className="icon-calendar"></div>
+        <div className="px-4 sm:px-6 pb-10 space-y-4 sm:space-y-6 animate-fade-in" data-name="budget">
+            {/* Month Selector with iOS Style */}
+            <iOSCard>
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-xl">📅</div>
+                        <div>
+                            <p className="text-xs text-gray-500 font-medium">মাস নির্বাচন করুন</p>
+                            <input 
+                                type="month" 
+                                value={currentMonth}
+                                onChange={(e) => setCurrentMonth(e.target.value)}
+                                className="border-none bg-transparent font-bold text-gray-800 text-lg focus:ring-0 cursor-pointer"
+                            />
+                        </div>
                     </div>
-                    <input 
-                        type="month" 
-                        value={currentMonth}
-                        onChange={(e) => setCurrentMonth(e.target.value)}
-                        className="border-none bg-transparent font-bold text-gray-800 text-lg focus:ring-0 cursor-pointer"
-                    />
+                    <button 
+                        onClick={() => setIsAdding(true)}
+                        disabled={availableCategories.length === 0}
+                        className={`btn btn-primary rounded-xl text-sm py-2 px-3 ${availableCategories.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    >
+                        + যোগ করুন
+                    </button>
                 </div>
-                
-                <button 
-                    onClick={() => setIsAdding(true)}
-                    disabled={availableCategories.length === 0}
-                    className={`btn ${availableCategories.length === 0 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'btn-primary bg-purple-600 hover:bg-purple-700'}`}
-                >
-                    <div className="icon-plus-circle"></div>
-                    বাজেট সেট করুন
-                </button>
-            </div>
+            </iOSCard>
 
             {/* Total Summary */}
             <div className="card bg-gradient-to-br from-gray-900 to-gray-800 text-white">
@@ -95,11 +103,11 @@ function Budget({ data, onSave, onDelete }) {
 
             {/* Add New Budget Form */}
             {isAdding && (
-                <div className="card border-2 border-purple-100 bg-purple-50 p-4 sm:p-6">
-                    <h4 className="font-bold text-purple-800 mb-4">নতুন বাজেট যুক্ত করুন</h4>
+                <div className="card bg-blue-50 border border-blue-100 p-4 sm:p-6">
+                    <h4 className="font-bold text-blue-900 mb-4">নতুন বাজেট যুক্ত করুন</h4>
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-end">
                         <div className="flex-1 w-full">
-                            <label className="block text-sm font-medium text-purple-700 mb-1">ক্যাটাগরি</label>
+                            <label className="form-label">ক্যাটাগরি</label>
                             <select 
                                 className="input-field"
                                 value={newBudgetCategory}
@@ -112,7 +120,7 @@ function Budget({ data, onSave, onDelete }) {
                             </select>
                         </div>
                         <div className="flex-1 w-full">
-                            <label className="block text-sm font-medium text-purple-700 mb-1">বাজেট পরিমাণ</label>
+                            <label className="form-label">বাজেট পরিমাণ</label>
                             <input 
                                 type="number" 
                                 className="input-field"
@@ -125,13 +133,13 @@ function Budget({ data, onSave, onDelete }) {
                             <button 
                                 onClick={() => handleSave(null, newBudgetCategory, newBudgetAmount)}
                                 disabled={!newBudgetCategory || !newBudgetAmount}
-                                className="btn btn-primary bg-purple-600 hover:bg-purple-700"
+                                className="btn btn-primary"
                             >
                                 সংরক্ষণ
                             </button>
                             <button 
                                 onClick={() => setIsAdding(false)}
-                                className="btn bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
+                                className="btn btn-ghost"
                             >
                                 বাতিল
                             </button>
@@ -149,15 +157,15 @@ function Budget({ data, onSave, onDelete }) {
                                 <h4 className="font-bold text-gray-800">{item.category}</h4>
                                 <p className="text-xs text-gray-500">মাসিক সীমা</p>
                             </div>
-                            <div className="flex gap-1">
-                                <button className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200" onClick={() => {
+                        <div className="flex gap-2">
+                                <button className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors" onClick={() => {
                                     setEditingId(item.id);
                                     setEditAmount(item.amount);
                                 }}>
-                                    <div className="icon-pencil text-gray-500 text-sm"></div>
+                                    <div className="icon-pencil text-gray-600 text-sm"></div>
                                 </button>
-                                <button className="p-2 bg-red-50 rounded-lg hover:bg-red-100" onClick={() => onDelete(item.id)}>
-                                    <div className="icon-trash-2 text-red-500 text-sm"></div>
+                                <button className="p-2 bg-red-50 rounded-lg hover:bg-red-100 transition-colors" onClick={() => onDelete(item.id)}>
+                                    <div className="icon-trash-2 text-red-600 text-sm"></div>
                                 </button>
                             </div>
                         </div>
@@ -166,20 +174,20 @@ function Budget({ data, onSave, onDelete }) {
                             <div className="flex gap-2 mb-4">
                                 <input 
                                     type="number" 
-                                    className="input-field py-1 px-2 text-sm"
+                                    className="input-field py-2 px-3 text-sm"
                                     value={editAmount}
                                     onChange={e => setEditAmount(e.target.value)}
                                     autoFocus
                                 />
                                 <button 
                                     onClick={() => handleSave(item.id, item.category, editAmount)}
-                                    className="p-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600"
+                                    className="p-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
                                 >
                                     <div className="icon-check text-sm"></div>
                                 </button>
                                 <button 
                                     onClick={() => setEditingId(null)}
-                                    className="p-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300"
+                                    className="p-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
                                 >
                                     <div className="icon-x text-sm"></div>
                                 </button>
