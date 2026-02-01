@@ -60,28 +60,28 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
   }, [transactions]);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 space-y-4 font-[Hind Siliguri]">
-      <h2 className="text-xl font-bold">🔍 উন্নত অনুসন্ধান এবং ফিল্টার</h2>
+    <div className="bg-white rounded-3xl shadow-lg p-8 space-y-6 font-[Hind Siliguri] border border-gray-200">
+      <h2 className="text-3xl font-black">🔍 উন্নত অনুসন্ধান এবং ফিল্টার</h2>
 
       {/* অনুসন্ধান বক্স */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">অনুসন্ধান করুন</label>
+        <label className="block text-sm font-bold text-gray-700 mb-2">অনুসন্ধান করুন</label>
         <input
           type="text"
           placeholder="বর্ণনা, ক্যাটাগরি বা পরিমাণ দিয়ে অনুসন্ধান করুন..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+          className="w-full px-5 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none text-lg font-bold"
         />
       </div>
 
       {/* ক্যাটাগরি নির্বাচন */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">বিভাগ</label>
+        <label className="block text-sm font-bold text-gray-700 mb-2">বিভাগ</label>
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+          className="w-full px-5 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none text-lg font-bold"
         >
           {categories.map(cat => (
             <option key={cat} value={cat}>{cat}</option>
@@ -90,37 +90,47 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
       </div>
 
       {/* পরিমাণ পরিসর */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">ন্যূনতম পরিমাণ</label>
+          <label className="block text-sm font-bold text-gray-700 mb-2">ন্যূনতম পরিমাণ</label>
           <input
             type="number"
             placeholder="০"
             value={minAmount}
             onChange={(e) => setMinAmount(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-base"
+            className="w-full px-5 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-lg font-bold"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2">সর্বোচ্চ পরিমাণ</label>
+          <input
+            type="number"
+            placeholder="অসীম"
+            value={maxAmount}
+            onChange={(e) => setMaxAmount(e.target.value)}
+            className="w-full px-5 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none text-lg font-bold"
           />
         </div>
       </div>
 
       {/* তারিখ পরিসর */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">শুরু তারিখ</label>
+          <label className="block text-sm font-bold text-gray-700 mb-2">শুরু তারিখ</label>
           <input
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+            className="w-full px-5 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none text-lg font-bold"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">শেষ তারিখ</label>
+          <label className="block text-sm font-bold text-gray-700 mb-2">শেষ তারিখ</label>
           <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+            className="w-full px-5 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none text-lg font-bold"
           />
         </div>
       </div>
@@ -128,8 +138,8 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
       {/* ট্যাগ নির্বাচন */}
       {allTags.length > 0 && (
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">ট্যাগ নির্বাচন করুন</label>
-          <div className="flex flex-wrap gap-2">
+          <label className="block text-sm font-bold text-gray-700 mb-3">ট্যাগ নির্বাচন করুন</label>
+          <div className="flex flex-wrap gap-3">
             {allTags.map(tag => (
               <button
                 key={tag}
@@ -140,9 +150,9 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
                       : [...prev, tag]
                   );
                 }}
-                className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                className={`px-5 py-3 rounded-full text-lg font-bold transition-all ${
                   selectedTags.includes(tag)
-                    ? 'bg-emerald-500 text-white'
+                    ? 'bg-emerald-500 text-white shadow-lg scale-105'
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
@@ -154,8 +164,8 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
       )}
 
       {/* ফলাফল সংখ্যা */}
-      <div className="bg-blue-50 p-3 rounded-lg">
-        <p className="text-sm font-medium">
+      <div className="bg-blue-50 p-6 rounded-3xl border border-blue-200 shadow-md">
+        <p className="text-lg font-black text-blue-700">
           📊 {filteredResults.length} টি লেনদেন পাওয়া গেছে
         </p>
       </div>
@@ -171,7 +181,7 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
           setEndDate('');
           setSelectedTags([]);
         }}
-        className="w-full bg-gray-300 text-gray-800 py-2 rounded-lg hover:bg-gray-400 transition-colors font-medium"
+        className="w-full bg-gray-400 text-white py-4 px-6 rounded-2xl hover:bg-gray-500 active:scale-95 transition-all font-black text-lg shadow-lg"
       >
         রিসেট করুন
       </button>

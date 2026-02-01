@@ -92,7 +92,7 @@ const SmartBudgetPlanning = ({ data, setData }) => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 font-medium transition-all border-b-2 ${
+            className={`rounded-2xl px-5 py-3 font-bold transition-all border-b-2 active:scale-90 ${
               activeTab === tab.id
                 ? 'border-emerald-500 text-emerald-600'
                 : 'border-transparent text-gray-600 hover:text-gray-800'
@@ -105,24 +105,24 @@ const SmartBudgetPlanning = ({ data, setData }) => {
 
       {/* নতুন পরিকল্পনা তৈরি ট্যাব */}
       {activeTab === 'create' && (
-        <div className="bg-white p-6 rounded-lg shadow-md space-y-6">
-          <h3 className="text-xl font-bold">🎯 নতুন আর্থিক লক্ষ্য তৈরি করুন</h3>
+        <div className="rounded-3xl p-8 shadow-lg bg-gradient-to-br from-emerald-50 to-blue-50 border border-gray-200 space-y-6">
+          <h3 className="text-3xl font-black">🎯 নতুন আর্থিক লক্ষ্য তৈরি করুন</h3>
 
           {/* বিভাগ নির্বাচন */}
           <div>
-            <label className="block font-medium mb-3">বিভাগ নির্বাচন করুন</label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+            <label className="block font-black text-xl mb-3">বিভাগ নির্বাচন করুন</label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {categories.map(cat => (
                 <button
                   key={cat.name}
                   onClick={() => setFormData({ ...formData, category: cat.name })}
-                  className={`p-4 rounded-lg transition-all font-medium ${
+                  className={`rounded-3xl p-6 transition-all font-black text-lg active:scale-90 ${
                     formData.category === cat.name
-                      ? `${cat.color} border-2 border-gray-800`
-                      : `${cat.color} border-2 border-transparent hover:border-gray-400`
+                      ? `${cat.color} border-4 border-gray-800 shadow-lg`
+                      : `${cat.color} border-4 border-transparent hover:border-gray-400`
                   }`}
                 >
-                  <div className="text-2xl mb-1">{cat.icon}</div>
+                  <div className="text-3xl mb-2">{cat.icon}</div>
                   <div className="text-sm">{cat.name}</div>
                 </button>
               ))}
@@ -132,44 +132,44 @@ const SmartBudgetPlanning = ({ data, setData }) => {
           {/* ফর্ম */}
           <form onSubmit={handleCreateBudget} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">লক্ষ্যের নাম</label>
+              <label className="block text-sm font-black mb-2">লক্ষ্যের নাম</label>
               <input
                 type="text"
                 placeholder="যেমন: বার্ষিক ছুটির ট্রিপ"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+                className="w-full rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none font-medium"
                 required
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">লক্ষ্য পরিমাণ (৳)</label>
+                <label className="block text-sm font-black mb-2">লক্ষ্য পরিমাণ (৳)</label>
                 <input
                   type="number"
                   placeholder="100000"
                   value={formData.targetAmount}
                   onChange={(e) => setFormData({ ...formData, targetAmount: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+                  className="w-full rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none font-medium"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">সময়সীমা</label>
+                <label className="block text-sm font-black mb-2">সময়সীমা</label>
                 <input
                   type="date"
                   value={formData.deadline}
                   onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+                  className="w-full rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none font-medium"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">অগ্রাধিকার</label>
+              <label className="block text-sm font-black mb-3">অগ্রাধিকার</label>
               <div className="flex gap-3">
                 {['low', 'medium', 'high'].map(priority => (
                   <label key={priority} className="flex items-center gap-2 cursor-pointer">
@@ -181,7 +181,7 @@ const SmartBudgetPlanning = ({ data, setData }) => {
                       onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
                       className="w-4 h-4"
                     />
-                    <span className="text-sm">
+                    <span className="text-sm font-bold">
                       {{
                         low: '🟢 কম',
                         medium: '🟡 মাঝারি',
@@ -195,7 +195,7 @@ const SmartBudgetPlanning = ({ data, setData }) => {
 
             <button
               type="submit"
-              className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-bold"
+              className="w-full btn btn-primary rounded-2xl py-4 px-6 font-black transition-all active:scale-90"
             >
               লক্ষ্য তৈরি করুন
             </button>
@@ -207,8 +207,8 @@ const SmartBudgetPlanning = ({ data, setData }) => {
       {activeTab === 'track' && (
         <div className="space-y-4">
           {budgetPlans.length === 0 ? (
-            <div className="bg-gray-50 p-8 rounded-lg text-center">
-              <p className="text-gray-500">এখনও কোনো পরিকল্পনা নেই</p>
+            <div className="rounded-3xl p-8 shadow-lg bg-gray-50 text-center">
+              <p className="text-gray-500 font-bold text-lg">এখনও কোনো পরিকল্পনা নেই</p>
             </div>
           ) : (
             budgetPlans.map(plan => (
@@ -247,37 +247,37 @@ const BudgetPlanCard = ({ plan, category, onUpdate, onDelete }) => {
   };
 
   return (
-    <div className={`border rounded-lg p-4 ${getStatusColor()}`}>
-      <div className="flex justify-between items-start mb-3">
-        <div className="flex gap-3">
-          <span className="text-3xl">{category?.icon}</span>
+    <div className={`rounded-3xl p-8 shadow-lg border-2 ${getStatusColor()}`}>
+      <div className="flex justify-between items-start mb-4">
+        <div className="flex gap-4">
+          <span className="text-4xl">{category?.icon}</span>
           <div>
-            <h4 className="font-bold text-lg">{plan.name}</h4>
+            <h4 className="font-black text-2xl">{plan.name}</h4>
             <p className="text-sm text-gray-500">{plan.category}</p>
           </div>
         </div>
         <button
           onClick={() => onDelete(plan.id)}
-          className="text-red-500 hover:text-red-700 text-xl"
+          className="text-red-500 hover:text-red-700 text-3xl font-black active:scale-90 transition-all"
         >
           🗑️
         </button>
       </div>
 
       {/* অগ্রগতি বার */}
-      <div className="mb-3">
-        <div className="flex justify-between items-center mb-1">
+      <div className="mb-4">
+        <div className="flex justify-between items-center mb-2">
           <div>
-            <span className="font-bold">৳{plan.currentAmount.toLocaleString('bn-BD')}</span>
-            <span className="text-gray-500"> / ৳{plan.targetAmount.toLocaleString('bn-BD')}</span>
+            <span className="font-black text-2xl">৳{plan.currentAmount.toLocaleString('bn-BD')}</span>
+            <span className="text-gray-500 font-bold"> / ৳{plan.targetAmount.toLocaleString('bn-BD')}</span>
           </div>
-          <span className={`text-sm font-bold ${isCompleted ? 'text-green-600' : progress > 75 ? 'text-blue-600' : 'text-gray-600'}`}>
+          <span className={`text-lg font-black ${isCompleted ? 'text-green-600' : progress > 75 ? 'text-blue-600' : 'text-gray-600'}`}>
             {progress.toFixed(1)}%
           </span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+        <div className="w-full rounded-full h-3 bg-opacity-20">
           <div
-            className={`h-full transition-all ${
+            className={`h-full rounded-full transition-all ${
               isCompleted
                 ? 'bg-green-500'
                 : progress > 75
@@ -290,24 +290,24 @@ const BudgetPlanCard = ({ plan, category, onUpdate, onDelete }) => {
       </div>
 
       {/* তথ্য */}
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 text-sm">
+      <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
         <div>
-          <p className="text-gray-600">সময়সীমা</p>
-          <p className="font-bold">{new Date(plan.deadline).toLocaleDateString('bn-BD')}</p>
+          <p className="text-gray-600 font-bold">সময়সীমা</p>
+          <p className="font-black text-lg">{new Date(plan.deadline).toLocaleDateString('bn-BD')}</p>
         </div>
         <div>
-          <p className="text-gray-600">অবশিষ্ট সময়</p>
-          <p className={`font-bold ${daysLeft < 0 ? 'text-red-600' : 'text-green-600'}`}>
+          <p className="text-gray-600 font-bold">অবশিষ্ট সময়</p>
+          <p className={`font-black text-lg ${daysLeft < 0 ? 'text-red-600' : 'text-green-600'}`}>
             {daysLeft < 0 ? '❌ শেষ' : `${daysLeft} দিন`}
           </p>
         </div>
         <div>
-          <p className="text-gray-600">প্রয়োজনীয় পরিমাণ</p>
-          <p className="font-bold">৳{(plan.targetAmount - plan.currentAmount).toLocaleString('bn-BD')}</p>
+          <p className="text-gray-600 font-bold">প্রয়োজনীয় পরিমাণ</p>
+          <p className="font-black text-lg">৳{(plan.targetAmount - plan.currentAmount).toLocaleString('bn-BD')}</p>
         </div>
         <div>
-          <p className="text-gray-600">অগ্রাধিকার</p>
-          <p className="font-bold">
+          <p className="text-gray-600 font-bold">অগ্রাধিকার</p>
+          <p className="font-black text-lg">
             {{
               low: '🟢 কম',
               medium: '🟡 মাঝারি',
@@ -324,7 +324,7 @@ const BudgetPlanCard = ({ plan, category, onUpdate, onDelete }) => {
             placeholder="পরিমাণ যোগ করুন"
             value={addAmount}
             onChange={(e) => setAddAmount(e.target.value)}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm"
+            className="flex-1 rounded-2xl py-4 px-5 border border-gray-300 text-sm outline-none focus:ring-2 focus:ring-emerald-500"
           />
           <button
             onClick={() => {
@@ -333,7 +333,7 @@ const BudgetPlanCard = ({ plan, category, onUpdate, onDelete }) => {
                 setAddAmount('');
               }
             }}
-            className="bg-emerald-500 text-white px-4 py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium text-sm"
+            className="btn btn-primary rounded-2xl py-4 px-6 font-black transition-all active:scale-90"
           >
             যোগ করুন
           </button>
@@ -341,7 +341,7 @@ const BudgetPlanCard = ({ plan, category, onUpdate, onDelete }) => {
       )}
 
       {isCompleted && (
-        <div className="bg-green-100 text-green-700 p-2 rounded-lg text-center font-bold">
+        <div className="rounded-2xl bg-green-100 text-green-700 p-4 text-center font-black text-lg">
           ✅ লক্ষ্য অর্জিত!
         </div>
       )}
@@ -359,29 +359,29 @@ const BudgetAnalysisPanel = ({ budgetPlans, categories }) => {
   return (
     <div className="space-y-6">
       {/* সারাংশ কার্ড */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-          <p className="text-sm text-gray-600">মোট লক্ষ্য</p>
-          <p className="text-2xl font-bold text-blue-600">৳{totalTarget.toLocaleString('bn-BD')}</p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        <div className="rounded-3xl p-8 shadow-lg bg-blue-50 border border-blue-200">
+          <p className="text-sm text-gray-600 font-bold">মোট লক্ষ্য</p>
+          <p className="text-3xl font-black text-blue-600">৳{totalTarget.toLocaleString('bn-BD')}</p>
         </div>
-        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-          <p className="text-sm text-gray-600">সংগৃহীত</p>
-          <p className="text-2xl font-bold text-green-600">৳{totalSaved.toLocaleString('bn-BD')}</p>
+        <div className="rounded-3xl p-8 shadow-lg bg-green-50 border border-green-200">
+          <p className="text-sm text-gray-600 font-bold">সংগৃহীত</p>
+          <p className="text-3xl font-black text-green-600">৳{totalSaved.toLocaleString('bn-BD')}</p>
         </div>
-        <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-          <p className="text-sm text-gray-600">সামগ্রিক অগ্রগতি</p>
-          <p className="text-2xl font-bold text-purple-600">{avgProgress}%</p>
+        <div className="rounded-3xl p-8 shadow-lg bg-purple-50 border border-purple-200">
+          <p className="text-sm text-gray-600 font-bold">সামগ্রিক অগ্রগতি</p>
+          <p className="text-3xl font-black text-purple-600">{avgProgress}%</p>
         </div>
-        <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
-          <p className="text-sm text-gray-600">সম্পন্ন লক্ষ্য</p>
-          <p className="text-2xl font-bold text-orange-600">{completedPlans}/{budgetPlans.length}</p>
+        <div className="rounded-3xl p-8 shadow-lg bg-orange-50 border border-orange-200">
+          <p className="text-sm text-gray-600 font-bold">সম্পন্ন লক্ষ্য</p>
+          <p className="text-3xl font-black text-orange-600">{completedPlans}/{budgetPlans.length}</p>
         </div>
       </div>
 
       {/* বিভাগ-ভিত্তিক বিশ্লেষণ */}
       {budgetPlans.length > 0 && (
-        <div className="bg-white p-6 rounded-lg border">
-          <h3 className="font-bold text-lg mb-4">বিভাগ-ভিত্তিক তথ্য</h3>
+        <div className="rounded-3xl p-8 shadow-lg border border-gray-200">
+          <h3 className="font-black text-3xl mb-4">বিভাগ-ভিত্তিক তথ্য</h3>
           <div className="space-y-3">
             {categories.map(cat => {
               const categoryPlans = budgetPlans.filter(p => p.category === cat.name);
@@ -391,18 +391,18 @@ const BudgetAnalysisPanel = ({ budgetPlans, categories }) => {
               if (categoryTarget === 0) return null;
 
               return (
-                <div key={cat.name} className={`${cat.color} p-4 rounded-lg`}>
-                  <div className="flex justify-between items-center mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">{cat.icon}</span>
+                <div key={cat.name} className={`${cat.color} rounded-3xl p-8`}>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                      <span className="text-3xl">{cat.icon}</span>
                       <div>
-                        <p className="font-bold">{cat.name}</p>
-                        <p className="text-xs opacity-75">{categoryPlans.length} লক্ষ্য</p>
+                        <p className="font-black text-lg">{cat.name}</p>
+                        <p className="text-xs opacity-75 font-bold">{categoryPlans.length} লক্ষ্য</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold">৳{categorySaved.toLocaleString('bn-BD')}</p>
-                      <p className="text-xs opacity-75">/ ৳{categoryTarget.toLocaleString('bn-BD')}</p>
+                      <p className="font-black text-lg">৳{categorySaved.toLocaleString('bn-BD')}</p>
+                      <p className="text-xs opacity-75 font-bold">/ ৳{categoryTarget.toLocaleString('bn-BD')}</p>
                     </div>
                   </div>
                 </div>

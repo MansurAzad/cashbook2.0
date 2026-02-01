@@ -149,49 +149,49 @@ const SmartBillingSystem = ({ data, setData }) => {
     <div className="space-y-6 font-[Hind Siliguri]">
       {/* শিরোনাম এবং বোতাম */}
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">📋 স্মার্ট বিলিং সিস্টেম</h2>
+        <h2 className="text-3xl font-black">📋 স্মার্ট বিলিং সিস্টেম</h2>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-emerald-500 text-white px-4 py-3 rounded-lg hover:bg-emerald-600 transition-colors"
+          className="bg-emerald-500 text-white px-6 py-4 rounded-2xl hover:bg-emerald-600 active:scale-90 transition-all font-black"
         >
           {showForm ? '❌ বাতিল' : '➕ নতুন বিল'}
         </button>
       </div>
 
       {/* পরিসংখ্যান কার্ড */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-          <p className="text-xs text-gray-600">মোট বিল</p>
-          <p className="text-2xl font-bold text-blue-600">{bills.length}</p>
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3">
+        <div className="rounded-3xl p-8 shadow-lg bg-blue-50 border border-blue-200">
+          <p className="text-xs text-gray-600 font-bold">মোট বিল</p>
+          <p className="text-4xl font-black text-blue-600">{bills.length}</p>
         </div>
-        <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-          <p className="text-xs text-gray-600">অপেক্ষমান</p>
-          <p className="text-2xl font-bold text-yellow-600">{stats.pending}</p>
+        <div className="rounded-3xl p-8 shadow-lg bg-yellow-50 border border-yellow-200">
+          <p className="text-xs text-gray-600 font-bold">অপেক্ষমান</p>
+          <p className="text-4xl font-black text-yellow-600">{stats.pending}</p>
         </div>
-        <div className="bg-red-50 p-4 rounded-lg border border-red-200">
-          <p className="text-xs text-gray-600">মেয়াদোত্তীর্ণ</p>
-          <p className="text-2xl font-bold text-red-600">{stats.overdue}</p>
+        <div className="rounded-3xl p-8 shadow-lg bg-red-50 border border-red-200">
+          <p className="text-xs text-gray-600 font-bold">মেয়াদোত্তীর্ণ</p>
+          <p className="text-4xl font-black text-red-600">{stats.overdue}</p>
         </div>
-        <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-          <p className="text-xs text-gray-600">প্রদত্ত</p>
-          <p className="text-2xl font-bold text-green-600">{stats.paid}</p>
+        <div className="rounded-3xl p-8 shadow-lg bg-green-50 border border-green-200">
+          <p className="text-xs text-gray-600 font-bold">প্রদত্ত</p>
+          <p className="text-4xl font-black text-green-600">{stats.paid}</p>
         </div>
-        <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-          <p className="text-xs text-gray-600">মোট বকেয়া</p>
-          <p className="text-xl font-bold text-purple-600">৳{stats.totalDue.toLocaleString('bn-BD')}</p>
+        <div className="rounded-3xl p-8 shadow-lg bg-purple-50 border border-purple-200">
+          <p className="text-xs text-gray-600 font-bold">মোট বকেয়া</p>
+          <p className="text-3xl font-black text-purple-600">৳{stats.totalDue.toLocaleString('bn-BD')}</p>
         </div>
       </div>
 
       {/* বিল যোগ করার ফর্ম */}
       {showForm && (
-        <form onSubmit={handleAddBill} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
+        <form onSubmit={handleAddBill} className="rounded-3xl p-8 shadow-lg border border-gray-200 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               placeholder="বিলের নাম"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
@@ -200,7 +200,7 @@ const SmartBillingSystem = ({ data, setData }) => {
               placeholder="পরিমাণ (৳)"
               value={formData.amount}
               onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
@@ -208,14 +208,14 @@ const SmartBillingSystem = ({ data, setData }) => {
               type="date"
               value={formData.dueDate}
               onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
             <select
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             >
               {categories.map(cat => (
                 <option key={cat.name} value={cat.name}>{cat.name}</option>
@@ -226,14 +226,14 @@ const SmartBillingSystem = ({ data, setData }) => {
               placeholder="নোট (ঐচ্ছিক)"
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-              className="col-span-2 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none resize-none"
+              className="col-span-2 rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none resize-none"
               rows="2"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+            className="w-full btn btn-primary rounded-2xl py-4 px-6 font-black transition-all active:scale-90"
           >
             বিল যোগ করুন
           </button>
@@ -251,7 +251,7 @@ const SmartBillingSystem = ({ data, setData }) => {
           <button
             key={filter.id}
             onClick={() => setFilterStatus(filter.id)}
-            className={`px-4 py-3 rounded-lg whitespace-nowrap transition-all ${
+            className={`rounded-2xl px-5 py-3 font-bold transition-all whitespace-nowrap active:scale-90 ${
               filterStatus === filter.id
                 ? 'bg-emerald-500 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -290,9 +290,9 @@ const SmartBillingSystem = ({ data, setData }) => {
 
       {/* আসন্ন বিল সম্পর্কিত সতর্কতা */}
       {stats.overdue > 0 && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
-          <p className="font-bold text-red-700">🚨 মনোযোগ প্রয়োজন</p>
-          <p className="text-red-600">{stats.overdue}টি বিল মেয়াদোত্তীর্ণ হয়েছে। অবিলম্বে পরিশোধ করুন।</p>
+        <div className="rounded-3xl p-8 shadow-lg bg-red-50 border-l-4 border-red-500">
+          <p className="font-black text-2xl text-red-700">🚨 মনোযোগ প্রয়োজন</p>
+          <p className="text-red-600 font-bold">{stats.overdue}টি বিল মেয়াদোত্তীর্ণ হয়েছে। অবিলম্বে পরিশোধ করুন।</p>
         </div>
       )}
     </div>
@@ -310,35 +310,35 @@ const BillCard = ({ bill, category, daysLeft, isOverdue, onPay, onDelete }) => {
     : 'bg-white border-gray-200';
 
   return (
-    <div className={`border rounded-lg p-4 ${bgColor}`}>
+    <div className={`rounded-3xl p-8 shadow-lg border-2 ${bgColor}`}>
       <div className="flex justify-between items-start gap-4">
         <div className="flex gap-3 flex-1">
-          <div className={`text-2xl p-2 rounded-lg ${category?.color}`}>
+          <div className={`text-4xl p-3 rounded-3xl ${category?.color}`}>
             {category?.icon}
           </div>
           <div className="flex-1">
-            <h4 className="font-bold text-lg">{bill.name}</h4>
+            <h4 className="font-black text-2xl">{bill.name}</h4>
             <p className="text-sm text-gray-600">{bill.category}</p>
             {bill.notes && <p className="text-xs text-gray-500 mt-1">📝 {bill.notes}</p>}
           </div>
         </div>
 
         <div className="text-right">
-          <p className="text-2xl font-bold text-emerald-600">৳{bill.amount.toLocaleString('bn-BD')}</p>
+          <p className="text-4xl font-black text-emerald-600">৳{bill.amount.toLocaleString('bn-BD')}</p>
           {bill.status === 'paid' ? (
-            <span className="text-xs bg-green-200 text-green-700 px-2 py-1 rounded inline-block mt-1">✅ প্রদত্ত</span>
+            <span className="text-xs bg-green-200 text-green-700 px-3 py-1 rounded-2xl inline-block mt-1 font-bold">✅ প্রদত্ত</span>
           ) : isOverdue ? (
-            <span className="text-xs bg-red-200 text-red-700 px-2 py-1 rounded inline-block mt-1">🚨 মেয়াদোত্তীর্ণ</span>
+            <span className="text-xs bg-red-200 text-red-700 px-3 py-1 rounded-2xl inline-block mt-1 font-bold">🚨 মেয়াদোত্তীর্ণ</span>
           ) : daysLeft <= 3 ? (
-            <span className="text-xs bg-yellow-200 text-yellow-700 px-2 py-1 rounded inline-block mt-1">⏰ {daysLeft} দিন বাকি</span>
+            <span className="text-xs bg-yellow-200 text-yellow-700 px-3 py-1 rounded-2xl inline-block mt-1 font-bold">⏰ {daysLeft} দিন বাকি</span>
           ) : (
-            <span className="text-xs bg-blue-200 text-blue-700 px-2 py-1 rounded inline-block mt-1">📅 {daysLeft} দিন</span>
+            <span className="text-xs bg-blue-200 text-blue-700 px-3 py-1 rounded-2xl inline-block mt-1 font-bold">📅 {daysLeft} দিন</span>
           )}
         </div>
       </div>
 
       {/* তারিখ তথ্য */}
-      <div className="mt-3 pt-3 border-t border-gray-200 flex justify-between text-sm text-gray-600">
+      <div className="mt-4 pt-4 border-t border-gray-200 flex justify-between text-sm text-gray-600">
         <div>
           <p>নির্ধারিত: {new Date(bill.dueDate).toLocaleDateString('bn-BD')}</p>
         </div>
@@ -350,18 +350,18 @@ const BillCard = ({ bill, category, daysLeft, isOverdue, onPay, onDelete }) => {
       </div>
 
       {/* অ্যাকশন বোতাম */}
-      <div className="mt-3 flex gap-2">
+      <div className="mt-4 flex gap-2">
         {bill.status !== 'paid' && (
           <button
             onClick={() => onPay(bill.id)}
-            className="flex-1 bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium text-sm"
+            className="flex-1 btn btn-primary rounded-2xl py-4 px-6 font-black transition-all active:scale-90 text-sm"
           >
             প্রদত্ত করুন
           </button>
         )}
         <button
           onClick={() => onDelete(bill.id)}
-          className="px-4 py-3 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm"
+          className="px-6 py-4 bg-red-100 text-red-700 rounded-2xl hover:bg-red-200 transition-colors font-black text-sm"
         >
           🗑️
         </button>

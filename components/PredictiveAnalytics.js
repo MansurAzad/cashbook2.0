@@ -142,20 +142,20 @@ const PredictiveAnalytics = ({ transactions, budgets }) => {
     <div className="space-y-6 font-[Hind Siliguri]">
       {/* পূর্বাভাস কার্ড */}
       {predictions && (
-        <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-8 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">📊 পরবর্তী মাসের পূর্বাভাস</h2>
+        <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-8 rounded-3xl shadow-2xl">
+          <h2 className="text-3xl font-black mb-4">📊 পরবর্তী মাসের পূর্বাভাস</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-            <div className="bg-white bg-opacity-20 p-4 rounded-lg">
+            <div className="bg-white bg-opacity-20 p-6 rounded-2xl">
               <p className="text-sm opacity-90">গড় মাসিক খরচ</p>
-              <p className="text-3xl font-bold">৳{predictions.avgMonthly.toLocaleString('bn-BD')}</p>
+              <p className="text-3xl font-black">৳{predictions.avgMonthly.toLocaleString('bn-BD')}</p>
             </div>
-            <div className="bg-white bg-opacity-20 p-4 rounded-lg">
+            <div className="bg-white bg-opacity-20 p-6 rounded-2xl">
               <p className="text-sm opacity-90">পূর্বাভাসিত খরচ</p>
-              <p className="text-3xl font-bold">৳{predictions.nextMonthExpected.toLocaleString('bn-BD')}</p>
+              <p className="text-3xl font-black">৳{predictions.nextMonthExpected.toLocaleString('bn-BD')}</p>
             </div>
-            <div className="col-span-2 bg-white bg-opacity-20 p-4 rounded-lg">
+            <div className="col-span-2 bg-white bg-opacity-20 p-6 rounded-2xl">
               <p className="text-sm opacity-90">প্রত্যাশিত বৃদ্ধি</p>
-              <p className="text-2xl font-bold">{predictions.growthRate}%</p>
+              <p className="text-2xl font-black">{predictions.growthRate}%</p>
             </div>
           </div>
         </div>
@@ -175,16 +175,16 @@ const PredictiveAnalytics = ({ transactions, budgets }) => {
 
       {/* বিভাগ-ভিত্তিক পূর্বাভাস */}
       {predictions && Object.keys(predictions.categoryPredictions).length > 0 && (
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-blue-50 p-8 rounded-3xl shadow-lg border border-blue-200">
           <h3 className="font-bold text-lg mb-4">📈 বিভাগ-ভিত্তিক প্রবণতা</h3>
           <div className="space-y-3">
             {Object.entries(predictions.categoryPredictions).map(([cat, pred]) => (
-              <div key={cat} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+              <div key={cat} className="flex justify-between items-center p-6 bg-white rounded-2xl">
                 <div>
                   <p className="font-medium">{cat}</p>
                   <p className="text-sm text-gray-500">পূর্বাভাস: ৳{pred.predicted.toLocaleString('bn-BD')}</p>
                 </div>
-                <div className={`text-lg font-bold ${parseFloat(pred.trend) > 0 ? 'text-red-500' : 'text-green-500'}`}>
+                <div className={`text-lg font-black ${parseFloat(pred.trend) > 0 ? 'text-red-500' : 'text-green-500'}`}>
                   {parseFloat(pred.trend) > 0 ? '↑' : '↓'} {Math.abs(pred.trend)}%
                 </div>
               </div>
@@ -206,7 +206,7 @@ const InsightCard = ({ type, icon, title, message }) => {
   };
 
   return (
-    <div className={`border-l-4 p-4 rounded-lg ${bgColors[type]}`}>
+    <div className={`border-l-4 p-6 rounded-2xl ${bgColors[type]}`}>
       <div className="flex gap-3">
         <span className="text-2xl">{icon}</span>
         <div>

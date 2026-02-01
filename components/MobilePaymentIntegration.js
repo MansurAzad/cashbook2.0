@@ -83,10 +83,10 @@ const MobilePaymentIntegration = ({ data, setData }) => {
     <div className="space-y-6 font-[Hind Siliguri]">
       {/* শিরোনাম */}
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">💳 ডিজিটাল পেমেন্ট হাব</h2>
+        <h2 className="text-2xl font-black">💳 ডিজিটাল পেমেন্ট হাব</h2>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-emerald-500 text-white px-4 py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all"
+          className="bg-emerald-500 text-white px-4 py-3 rounded-2xl hover:bg-emerald-600 active:scale-95 transition-all"
         >
           {showForm ? '❌ বাতিল' : '➕ নতুন পেমেন্ট'}
         </button>
@@ -98,7 +98,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
           <button
             key={method.id}
             onClick={() => setSelectedPaymentMethod(method.id)}
-            className={`p-4 rounded-lg transition-all font-bold ${
+            className={`p-4 rounded-2xl transition-all font-bold ${
               selectedPaymentMethod === method.id
                 ? `${method.color} text-white scale-105 shadow-lg`
                 : 'bg-white border-2 border-gray-300 hover:border-gray-400'
@@ -112,14 +112,14 @@ const MobilePaymentIntegration = ({ data, setData }) => {
 
       {/* পেমেন্ট ফর্ম */}
       {showForm && (
-        <form onSubmit={handleAddPayment} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
+        <form onSubmit={handleAddPayment} className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="number"
               placeholder="পরিমাণ (৳)"
               value={formData.amount}
               onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
@@ -128,7 +128,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
               placeholder="প্রাপক (নাম বা নম্বর)"
               value={formData.recipient}
               onChange={(e) => setFormData({ ...formData, recipient: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             />
 
             <input
@@ -136,7 +136,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
               placeholder="উদ্দেশ্য"
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             />
 
             <input
@@ -144,13 +144,13 @@ const MobilePaymentIntegration = ({ data, setData }) => {
               placeholder="রেফারেন্স নম্বর (ঐচ্ছিক)"
               value={formData.reference}
               onChange={(e) => setFormData({ ...formData, reference: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
+            className="w-full bg-emerald-500 text-white py-4 px-6 rounded-2xl hover:bg-emerald-600 active:scale-95 transition-all font-black"
           >
             পেমেন্ট সম্পন্ন করুন
           </button>
@@ -160,7 +160,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
       {/* পদ্ধতি-ভিত্তিক পরিসংখ্যান */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {paymentMethods.map(method => (
-          <div key={method.id} className={`${method.color} text-white p-4 rounded-lg`}>
+          <div key={method.id} className={`${method.color} text-white p-4 rounded-3xl shadow-lg`}>
             <p className="text-sm opacity-90">{method.name}</p>
             <p className="text-2xl font-bold">{methodStats[method.id].count}</p>
             <p className="text-xs opacity-75">৳{methodStats[method.id].total.toLocaleString('bn-BD')}</p>
@@ -178,7 +178,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
             {payments.slice().reverse().map(payment => {
               const method = paymentMethods.find(m => m.id === payment.method);
               return (
-                <div key={payment.id} className="bg-white p-4 rounded-lg border border-gray-200">
+                <div key={payment.id} className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
                   <div className="flex justify-between items-start">
                     <div className="flex gap-3">
                       <span className="text-2xl">{method?.icon}</span>
@@ -204,7 +204,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
       </div>
 
       {/* মোবাইল পেমেন্ট টিপস */}
-      <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg space-y-2">
+      <div className="bg-blue-50 border-l-4 border-blue-500 p-8 rounded-3xl shadow-lg border border-gray-200 space-y-2">
         <h4 className="font-bold">💡 নিরাপদ পেমেন্টের টিপস</h4>
         <ul className="text-sm space-y-1 list-disc list-inside">
           <li>সর্বদা ৪ ডিজিটের পিন ব্যবহার করুন</li>

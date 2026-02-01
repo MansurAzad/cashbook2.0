@@ -133,20 +133,20 @@ const NetWorthTracker = ({ data, setData }) => {
   return (
     <div className="space-y-6 font-[Hind Siliguri]">
       {/* নেট ওয়ার্থ সংক্ষিপ্ত */}
-      <div className="bg-gradient-to-r from-emerald-500 to-green-600 text-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold mb-6">💰 আপনার নেট ওয়ার্থ</h2>
+      <div className="bg-gradient-to-r from-emerald-500 to-green-600 text-white p-8 rounded-3xl shadow-2xl">
+        <h2 className="text-3xl font-black mb-6">💰 আপনার নেট ওয়ার্থ</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
-          <div className="bg-white bg-opacity-20 p-4 rounded-lg">
+          <div className="bg-white bg-opacity-20 p-6 rounded-2xl">
             <p className="text-sm opacity-90">মোট সম্পদ</p>
-            <p className="text-3xl font-bold">৳{totalAssets.toLocaleString('bn-BD')}</p>
+            <p className="text-3xl font-black">৳{totalAssets.toLocaleString('bn-BD')}</p>
           </div>
-          <div className="bg-white bg-opacity-20 p-4 rounded-lg">
+          <div className="bg-white bg-opacity-20 p-6 rounded-2xl">
             <p className="text-sm opacity-90">মোট দায়বদ্ধতা</p>
-            <p className="text-3xl font-bold">৳{totalLiabilities.toLocaleString('bn-BD')}</p>
+            <p className="text-3xl font-black">৳{totalLiabilities.toLocaleString('bn-BD')}</p>
           </div>
-          <div className={`${netWorth >= 0 ? 'bg-white bg-opacity-30' : 'bg-red-500 bg-opacity-30'} p-4 rounded-lg`}>
+          <div className={`${netWorth >= 0 ? 'bg-white bg-opacity-30' : 'bg-red-500 bg-opacity-30'} p-6 rounded-2xl`}>
             <p className="text-sm opacity-90">নেট ওয়ার্থ</p>
-            <p className="text-3xl font-bold">৳{netWorth.toLocaleString('bn-BD')}</p>
+            <p className="text-3xl font-black">৳{netWorth.toLocaleString('bn-BD')}</p>
             <p className={`text-xs mt-1 ${netWorth >= 0 ? 'text-green-200' : 'text-red-200'}`}>
               {netWorth >= 0 ? '📈 ইতিবাচক' : '📉 নেতিবাচক'}
             </p>
@@ -182,21 +182,21 @@ const NetWorthTracker = ({ data, setData }) => {
             <h3 className="text-xl font-bold">💎 আপনার সম্পদ</h3>
             <button
               onClick={() => setShowAssetForm(!showAssetForm)}
-              className="bg-emerald-500 text-white px-4 py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all"
+              className="bg-emerald-500 text-white px-4 py-3 rounded-2xl hover:bg-emerald-600 active:scale-95 transition-all font-black text-lg"
             >
               {showAssetForm ? '❌' : '➕'} যোগ করুন
             </button>
           </div>
 
           {showAssetForm && (
-            <form onSubmit={handleAddAsset} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
+            <form onSubmit={handleAddAsset} className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200 space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <input
                   type="text"
                   placeholder="সম্পদের নাম"
                   value={assetForm.name}
                   onChange={(e) => setAssetForm({ ...assetForm, name: e.target.value })}
-                  className="px-4 py-2 border border-gray-300 rounded-lg"
+                  className="px-5 py-4 border border-gray-300 rounded-2xl"
                   required
                 />
 
@@ -205,14 +205,14 @@ const NetWorthTracker = ({ data, setData }) => {
                   placeholder="মূল্য (৳)"
                   value={assetForm.value}
                   onChange={(e) => setAssetForm({ ...assetForm, value: e.target.value })}
-                  className="px-4 py-2 border border-gray-300 rounded-lg"
+                  className="px-5 py-4 border border-gray-300 rounded-2xl"
                   required
                 />
 
                 <select
                   value={assetForm.category}
                   onChange={(e) => setAssetForm({ ...assetForm, category: e.target.value })}
-                  className="col-span-2 px-4 py-2 border border-gray-300 rounded-lg"
+                  className="col-span-2 px-5 py-4 border border-gray-300 rounded-2xl"
                 >
                   {assetCategories.map(cat => (
                     <option key={cat.name} value={cat.name}>{cat.name}</option>
@@ -223,13 +223,13 @@ const NetWorthTracker = ({ data, setData }) => {
                   type="date"
                   value={assetForm.date}
                   onChange={(e) => setAssetForm({ ...assetForm, date: e.target.value })}
-                  className="col-span-2 px-4 py-2 border border-gray-300 rounded-lg"
+                  className="col-span-2 px-5 py-4 border border-gray-300 rounded-2xl"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
+                className="w-full bg-emerald-500 text-white py-4 px-6 rounded-2xl hover:bg-emerald-600 active:scale-95 transition-all font-black text-lg"
               >
                 সম্পদ যোগ করুন
               </button>
@@ -241,7 +241,7 @@ const NetWorthTracker = ({ data, setData }) => {
             {assets.map(asset => {
               const category = assetCategories.find(c => c.name === asset.category);
               return (
-                <div key={asset.id} className={`border rounded-lg p-4 ${category?.color}`}>
+                <div key={asset.id} className={`border rounded-3xl p-8 shadow-lg ${category?.color}`}>
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2 mb-2">
@@ -252,7 +252,7 @@ const NetWorthTracker = ({ data, setData }) => {
                       <p className="text-xs text-gray-500 mt-1">{asset.date}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-emerald-600">৳{asset.value.toLocaleString('bn-BD')}</p>
+                      <p className="text-3xl font-bold text-emerald-600">৳{asset.value.toLocaleString('bn-BD')}</p>
                       <button
                         onClick={() => handleDeleteAsset(asset.id)}
                         className="text-red-500 hover:text-red-700 text-lg mt-2"
@@ -279,21 +279,21 @@ const NetWorthTracker = ({ data, setData }) => {
             <h3 className="text-xl font-bold">📉 আপনার দায়বদ্ধতা</h3>
             <button
               onClick={() => setShowLiabilityForm(!showLiabilityForm)}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
+              className="bg-red-500 text-white px-4 py-3 rounded-2xl hover:bg-red-600 transition-colors font-black text-lg"
             >
               {showLiabilityForm ? '❌' : '➕'} যোগ করুন
             </button>
           </div>
 
           {showLiabilityForm && (
-            <form onSubmit={handleAddLiability} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
+            <form onSubmit={handleAddLiability} className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200 space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <input
                   type="text"
                   placeholder="দায়বদ্ধতার নাম"
                   value={liabilityForm.name}
                   onChange={(e) => setLiabilityForm({ ...liabilityForm, name: e.target.value })}
-                  className="px-4 py-2 border border-gray-300 rounded-lg"
+                  className="px-5 py-4 border border-gray-300 rounded-2xl"
                   required
                 />
 
@@ -302,14 +302,14 @@ const NetWorthTracker = ({ data, setData }) => {
                   placeholder="পরিমাণ (৳)"
                   value={liabilityForm.amount}
                   onChange={(e) => setLiabilityForm({ ...liabilityForm, amount: e.target.value })}
-                  className="px-4 py-2 border border-gray-300 rounded-lg"
+                  className="px-5 py-4 border border-gray-300 rounded-2xl"
                   required
                 />
 
                 <select
                   value={liabilityForm.category}
                   onChange={(e) => setLiabilityForm({ ...liabilityForm, category: e.target.value })}
-                  className="px-4 py-2 border border-gray-300 rounded-lg"
+                  className="px-5 py-4 border border-gray-300 rounded-2xl"
                 >
                   {liabilityCategories.map(cat => (
                     <option key={cat.name} value={cat.name}>{cat.name}</option>
@@ -321,20 +321,20 @@ const NetWorthTracker = ({ data, setData }) => {
                   placeholder="সুদের হার (%)"
                   value={liabilityForm.interestRate}
                   onChange={(e) => setLiabilityForm({ ...liabilityForm, interestRate: e.target.value })}
-                  className="px-4 py-2 border border-gray-300 rounded-lg"
+                  className="px-5 py-4 border border-gray-300 rounded-2xl"
                 />
 
                 <input
                   type="date"
                   value={liabilityForm.date}
                   onChange={(e) => setLiabilityForm({ ...liabilityForm, date: e.target.value })}
-                  className="col-span-2 px-4 py-2 border border-gray-300 rounded-lg"
+                  className="col-span-2 px-5 py-4 border border-gray-300 rounded-2xl"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 font-medium"
+                className="w-full bg-red-500 text-white py-4 px-6 rounded-2xl hover:bg-red-600 font-black text-lg"
               >
                 দায়বদ্ধতা যোগ করুন
               </button>
@@ -347,7 +347,7 @@ const NetWorthTracker = ({ data, setData }) => {
               const category = liabilityCategories.find(c => c.name === liability.category);
               const annualCost = liability.amount * (liability.interestRate || 0) / 100;
               return (
-                <div key={liability.id} className={`border rounded-lg p-4 ${category?.color}`}>
+                <div key={liability.id} className={`border rounded-3xl p-8 shadow-lg ${category?.color}`}>
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2 mb-2">
@@ -361,7 +361,7 @@ const NetWorthTracker = ({ data, setData }) => {
                       <p className="text-xs text-gray-500">{liability.date}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-red-600">৳{liability.amount.toLocaleString('bn-BD')}</p>
+                      <p className="text-3xl font-bold text-red-600">৳{liability.amount.toLocaleString('bn-BD')}</p>
                       <button
                         onClick={() => handleDeleteLiability(liability.id)}
                         className="text-red-500 hover:text-red-700 text-lg mt-2"
@@ -385,40 +385,40 @@ const NetWorthTracker = ({ data, setData }) => {
       {historyTab === 'analysis' && (
         <div className="space-y-6">
           {/* নেট ওয়ার্থ বৃদ্ধি */}
-          <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+          <div className="bg-blue-50 border border-blue-200 p-8 rounded-3xl shadow-lg">
             <h3 className="font-bold text-lg mb-4">📈 নেট ওয়ার্থ বিশ্লেষণ</h3>
             <div className="space-y-3">
-              <div className="flex justify-between items-center p-3 bg-white rounded-lg">
+              <div className="flex justify-between items-center p-6 bg-white rounded-2xl">
                 <span className="font-medium">মোট সম্পদ</span>
-                <span className="font-bold text-green-600">৳{totalAssets.toLocaleString('bn-BD')}</span>
+                <span className="font-black text-green-600 text-2xl">৳{totalAssets.toLocaleString('bn-BD')}</span>
               </div>
-              <div className="flex justify-between items-center p-3 bg-white rounded-lg">
+              <div className="flex justify-between items-center p-6 bg-white rounded-2xl">
                 <span className="font-medium">মোট দায়বদ্ধতা</span>
-                <span className="font-bold text-red-600">-৳{totalLiabilities.toLocaleString('bn-BD')}</span>
+                <span className="font-black text-red-600 text-2xl">-৳{totalLiabilities.toLocaleString('bn-BD')}</span>
               </div>
-              <div className="flex justify-between items-center p-3 bg-emerald-100 rounded-lg">
+              <div className="flex justify-between items-center p-6 bg-emerald-100 rounded-2xl">
                 <span className="font-bold">নেট ওয়ার্থ</span>
-                <span className="font-bold text-emerald-600 text-xl">৳{netWorth.toLocaleString('bn-BD')}</span>
+                <span className="font-black text-emerald-600 text-3xl">৳{netWorth.toLocaleString('bn-BD')}</span>
               </div>
             </div>
           </div>
 
           {/* সুদ বিশ্লেষণ */}
           {annualInterest > 0 && (
-            <div className="bg-orange-50 border border-orange-200 p-6 rounded-lg">
+            <div className="bg-orange-50 border border-orange-200 p-8 rounded-3xl shadow-lg">
               <h3 className="font-bold text-lg mb-4">📊 বার্ষিক সুদ খরচ</h3>
-              <p className="text-3xl font-bold text-orange-600">৳{annualInterest.toLocaleString('bn-BD')}</p>
+              <p className="text-4xl font-black text-orange-600">৳{annualInterest.toLocaleString('bn-BD')}</p>
               <p className="text-sm text-gray-600 mt-2">প্রতি মাসে: ৳{(annualInterest / 12).toLocaleString('bn-BD')}</p>
             </div>
           )}
 
           {/* ঋণ-থেকে-সম্পদ অনুপাত */}
-          <div className="bg-purple-50 border border-purple-200 p-6 rounded-lg">
+          <div className="bg-purple-50 border border-purple-200 p-8 rounded-3xl shadow-lg">
             <h3 className="font-bold text-lg mb-4">📐 আর্থিক অনুপাত</h3>
             <div className="space-y-3">
               <div>
                 <p className="text-sm text-gray-600">দায়বদ্ধতা থেকে সম্পদ অনুপাত</p>
-                <p className="text-2xl font-bold">
+                <p className="text-3xl font-black">
                   {totalAssets > 0 ? (totalLiabilities / totalAssets * 100).toFixed(1) : 0}%
                 </p>
                 <p className="text-xs text-gray-500 mt-1">
@@ -427,7 +427,7 @@ const NetWorthTracker = ({ data, setData }) => {
               </div>
               <div>
                 <p className="text-sm text-gray-600">নেট ওয়ার্থ মার্জিন</p>
-                <p className="text-2xl font-bold">
+                <p className="text-3xl font-black">
                   {totalAssets > 0 ? (netWorth / totalAssets * 100).toFixed(1) : 0}%
                 </p>
               </div>

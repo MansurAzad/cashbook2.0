@@ -147,10 +147,10 @@ const RecurringTransactionManager = ({ data, setData }) => {
     <div className="space-y-6 font-[Hind Siliguri]">
       {/* শিরোনাম এবং বোতাম */}
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">🔄 পুনরাবৃত্ত লেনদেন</h2>
+        <h2 className="text-3xl font-black">🔄 পুনরাবৃত্ত লেনদেন</h2>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-emerald-500 text-white px-4 py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all"
+          className="bg-emerald-500 text-white px-6 py-4 rounded-2xl hover:bg-emerald-600 active:scale-90 transition-all font-black"
         >
           {showForm ? '❌ বাতিল' : '➕ নতুন'}
         </button>
@@ -158,14 +158,14 @@ const RecurringTransactionManager = ({ data, setData }) => {
 
       {/* ফর্ম */}
       {showForm && (
-        <form onSubmit={handleAddRecurring} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
+        <form onSubmit={handleAddRecurring} className="rounded-3xl p-8 shadow-lg border border-gray-200 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               placeholder="বর্ণনা (যেমন: মোবাইল বিল)"
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
@@ -174,14 +174,14 @@ const RecurringTransactionManager = ({ data, setData }) => {
               placeholder="পরিমাণ"
               value={formData.amount}
               onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
             <select
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             >
               <option value="খাওয়া-দাওয়া">খাওয়া-দাওয়া</option>
               <option value="পরিবহন">পরিবহন</option>
@@ -195,7 +195,7 @@ const RecurringTransactionManager = ({ data, setData }) => {
             <select
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             >
               <option value="expense">খরচ</option>
               <option value="income">আয়</option>
@@ -204,7 +204,7 @@ const RecurringTransactionManager = ({ data, setData }) => {
             <select
               value={formData.frequency}
               onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             >
               <option value="daily">প্রতিদিন</option>
               <option value="weekly">প্রতি সপ্তাহ</option>
@@ -216,14 +216,14 @@ const RecurringTransactionManager = ({ data, setData }) => {
               type="date"
               value={formData.nextDate}
               onChange={(e) => setFormData({ ...formData, nextDate: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="rounded-2xl py-4 px-5 border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
+            className="w-full btn btn-primary rounded-2xl py-4 px-6 font-black transition-all active:scale-90"
           >
             যোগ করুন
           </button>
@@ -266,7 +266,7 @@ const RecurringTransactionCard = ({ recurring, onToggle, onDelete }) => {
   const typeIcon = recurring.type === 'expense' ? '📤' : '📥';
 
   return (
-    <div className={`p-4 rounded-lg border-2 transition-all ${
+    <div className={`rounded-3xl p-8 shadow-lg border-2 transition-all ${
       recurring.active 
         ? 'bg-white border-emerald-300' 
         : 'bg-gray-50 border-gray-300 opacity-60'
@@ -275,8 +275,8 @@ const RecurringTransactionCard = ({ recurring, onToggle, onDelete }) => {
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-xl">{typeIcon}</span>
-            <h3 className="font-bold text-lg">{recurring.description}</h3>
-            {!recurring.active && <span className="text-xs bg-gray-300 text-white px-2 py-1 rounded">অক্ষম</span>}
+            <h3 className="font-black text-2xl">{recurring.description}</h3>
+            {!recurring.active && <span className="text-xs bg-gray-300 text-white px-3 py-1 rounded-2xl font-bold">অক্ষম</span>}
           </div>
 
           <div className="space-y-1 text-sm text-gray-600">
@@ -291,7 +291,7 @@ const RecurringTransactionCard = ({ recurring, onToggle, onDelete }) => {
           <button
             onClick={() => onToggle(recurring.id)}
             title={recurring.active ? 'বিচ্ছিন্ন করুন' : 'সক্ষম করুন'}
-            className="p-2 rounded-lg bg-yellow-100 hover:bg-yellow-200 transition-colors"
+            className="p-3 rounded-2xl bg-yellow-100 hover:bg-yellow-200 transition-colors font-black"
           >
             {recurring.active ? '⏸️' : '▶️'}
           </button>
@@ -301,7 +301,7 @@ const RecurringTransactionCard = ({ recurring, onToggle, onDelete }) => {
                 onDelete(recurring.id);
               }
             }}
-            className="p-2 rounded-lg bg-red-100 hover:bg-red-200 transition-colors"
+            className="p-3 rounded-2xl bg-red-100 hover:bg-red-200 transition-colors font-black"
           >
             🗑️
           </button>
@@ -322,21 +322,21 @@ const RecurringTransactionStats = ({ recurring }) => {
     .reduce((sum, r) => sum + r.amount, 0);
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg border border-blue-200">
-      <h3 className="font-bold text-lg mb-4">📊 মাসিক প্রভাব</h3>
-      <div className="grid grid-cols-2 gap-4">
+    <div className="rounded-3xl p-8 shadow-lg bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200">
+      <h3 className="font-black text-3xl mb-4">📊 মাসিক প্রভাব</h3>
+      <div className="grid grid-cols-2 gap-6">
         <div>
-          <p className="text-sm text-gray-600">মাসিক খরচ</p>
-          <p className="text-2xl font-bold text-red-500">৳{monthlyExpense.toLocaleString('bn-BD')}</p>
+          <p className="text-sm text-gray-600 font-bold">মাসিক খরচ</p>
+          <p className="text-3xl font-black text-red-500">৳{monthlyExpense.toLocaleString('bn-BD')}</p>
         </div>
         <div>
-          <p className="text-sm text-gray-600">মাসিক আয়</p>
-          <p className="text-2xl font-bold text-green-500">৳{monthlyIncome.toLocaleString('bn-BD')}</p>
+          <p className="text-sm text-gray-600 font-bold">মাসিক আয়</p>
+          <p className="text-3xl font-black text-green-500">৳{monthlyIncome.toLocaleString('bn-BD')}</p>
         </div>
       </div>
-      <div className="mt-4 pt-4 border-t border-blue-200">
-        <p className="text-sm text-gray-600">সক্রিয় লেনদেন</p>
-        <p className="text-xl font-bold">{activeRecurring.length} টি</p>
+      <div className="mt-6 pt-6 border-t border-blue-200">
+        <p className="text-sm text-gray-600 font-bold">সক্রিয় লেনদেন</p>
+        <p className="text-3xl font-black text-emerald-600">{activeRecurring.length} টি</p>
       </div>
     </div>
   );
