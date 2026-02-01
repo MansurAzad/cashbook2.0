@@ -71,7 +71,7 @@ function Accounts({ data, onAdd, onUpdate, onDelete }) {
                             <input type="text" placeholder="অ্যাকাউন্টের নাম (যেমন: বিকাশ, মানিব্যাগ)" className="input-field" required 
                                 value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
                             
-                            <div className="grid grid-cols-2 gap-2">
+                            <div className="grid grid-cols-2 gap-3 sm:gap-4">
                                 {accountTypes.map(type => (
                                     <div 
                                         key={type.id}

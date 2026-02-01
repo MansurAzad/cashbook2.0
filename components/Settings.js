@@ -269,7 +269,7 @@ function Settings({ data, onAddCategory, onDeleteCategory, settings, updateSetti
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">আইকন</label>
-                                    <div className="grid grid-cols-4 gap-2">
+                                    <div className="grid grid-cols-4 gap-3 sm:gap-4">
                                         {icons.map(icon => (
                                             <div 
                                                 key={icon}

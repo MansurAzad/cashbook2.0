@@ -184,14 +184,14 @@ const SmartBillingSystem = ({ data, setData }) => {
 
       {/* বিল যোগ করার ফর্ম */}
       {showForm && (
-        <form onSubmit={handleAddBill} className="bg-white p-6 rounded-lg shadow-md space-y-4">
+        <form onSubmit={handleAddBill} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               placeholder="বিলের নাম"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
@@ -200,7 +200,7 @@ const SmartBillingSystem = ({ data, setData }) => {
               placeholder="পরিমাণ (৳)"
               value={formData.amount}
               onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
@@ -208,14 +208,14 @@ const SmartBillingSystem = ({ data, setData }) => {
               type="date"
               value={formData.dueDate}
               onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
             <select
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="px-4 py-3 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             >
               {categories.map(cat => (
                 <option key={cat.name} value={cat.name}>{cat.name}</option>
@@ -226,7 +226,7 @@ const SmartBillingSystem = ({ data, setData }) => {
               placeholder="নোট (ঐচ্ছিক)"
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-              className="col-span-2 px-4 py-3 border border-gray-300 rounded-lg resize-none"
+              className="col-span-2 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none resize-none"
               rows="2"
             />
           </div>

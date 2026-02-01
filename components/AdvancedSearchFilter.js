@@ -71,7 +71,7 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
           placeholder="বর্ণনা, ক্যাটাগরি বা পরিমাণ দিয়ে অনুসন্ধান করুন..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
         />
       </div>
 
@@ -81,7 +81,7 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
         >
           {categories.map(cat => (
             <option key={cat} value={cat}>{cat}</option>
@@ -111,7 +111,7 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
         </div>
         <div>
@@ -120,7 +120,7 @@ const AdvancedSearchFilter = ({ transactions, onFilter }) => {
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
+            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
         </div>
       </div>

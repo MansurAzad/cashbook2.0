@@ -150,7 +150,7 @@ const RecurringTransactionManager = ({ data, setData }) => {
         <h2 className="text-2xl font-bold">🔄 পুনরাবৃত্ত লেনদেন</h2>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors"
+          className="bg-emerald-500 text-white px-4 py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all"
         >
           {showForm ? '❌ বাতিল' : '➕ নতুন'}
         </button>
@@ -158,14 +158,14 @@ const RecurringTransactionManager = ({ data, setData }) => {
 
       {/* ফর্ম */}
       {showForm && (
-        <form onSubmit={handleAddRecurring} className="bg-white p-6 rounded-lg shadow-md space-y-4">
+        <form onSubmit={handleAddRecurring} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               placeholder="বর্ণনা (যেমন: মোবাইল বিল)"
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
@@ -174,14 +174,14 @@ const RecurringTransactionManager = ({ data, setData }) => {
               placeholder="পরিমাণ"
               value={formData.amount}
               onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
             <select
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             >
               <option value="খাওয়া-দাওয়া">খাওয়া-দাওয়া</option>
               <option value="পরিবহন">পরিবহন</option>
@@ -195,7 +195,7 @@ const RecurringTransactionManager = ({ data, setData }) => {
             <select
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             >
               <option value="expense">খরচ</option>
               <option value="income">আয়</option>
@@ -223,7 +223,7 @@ const RecurringTransactionManager = ({ data, setData }) => {
 
           <button
             type="submit"
-            className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+            className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
           >
             যোগ করুন
           </button>

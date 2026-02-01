@@ -109,7 +109,7 @@ const LoanPayoffCalculator = () => {
             type="number"
             value={principal}
             onChange={(e) => setPrincipal(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
           <p className="text-xs text-gray-500">৳{principal.toLocaleString('bn-BD')}</p>
         </div>
@@ -120,7 +120,7 @@ const LoanPayoffCalculator = () => {
             type="number"
             value={rate}
             onChange={(e) => setRate(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
         </div>
 
@@ -130,7 +130,7 @@ const LoanPayoffCalculator = () => {
             type="number"
             value={payment}
             onChange={(e) => setPayment(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
           <p className="text-xs text-gray-500">৳{payment.toLocaleString('bn-BD')}</p>
         </div>
@@ -182,7 +182,7 @@ const InvestmentReturnsCalculator = () => {
             type="number"
             value={invested}
             onChange={(e) => setInvested(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
         </div>
 
@@ -192,7 +192,7 @@ const InvestmentReturnsCalculator = () => {
             type="number"
             value={current}
             onChange={(e) => setCurrent(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
         </div>
 
@@ -243,7 +243,7 @@ const SavingsGoalCalculator = () => {
             type="number"
             value={target}
             onChange={(e) => setTarget(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
         </div>
 
@@ -253,7 +253,7 @@ const SavingsGoalCalculator = () => {
             type="number"
             value={monthly}
             onChange={(e) => setMonthly(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
         </div>
 
@@ -301,7 +301,7 @@ const BudgetAllocationCalculator = () => {
             type="number"
             value={income}
             onChange={(e) => setIncome(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-lg"
+            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
           />
         </div>
 
@@ -381,7 +381,7 @@ const DataExportPanel = ({ transactions }) => {
         <select
           value={exportFormat}
           onChange={(e) => setExportFormat(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
         >
           <option value="json">JSON (সব তথ্য সহ)</option>
           <option value="csv">CSV (স্প্রেডশীট এর জন্য)</option>

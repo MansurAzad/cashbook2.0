@@ -182,14 +182,14 @@ const NetWorthTracker = ({ data, setData }) => {
             <h3 className="text-xl font-bold">💎 আপনার সম্পদ</h3>
             <button
               onClick={() => setShowAssetForm(!showAssetForm)}
-              className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors"
+              className="bg-emerald-500 text-white px-4 py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all"
             >
               {showAssetForm ? '❌' : '➕'} যোগ করুন
             </button>
           </div>
 
           {showAssetForm && (
-            <form onSubmit={handleAddAsset} className="bg-white p-6 rounded-lg shadow-md space-y-4">
+            <form onSubmit={handleAddAsset} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <input
                   type="text"
@@ -229,7 +229,7 @@ const NetWorthTracker = ({ data, setData }) => {
 
               <button
                 type="submit"
-                className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 font-medium"
+                className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
               >
                 সম্পদ যোগ করুন
               </button>
@@ -286,7 +286,7 @@ const NetWorthTracker = ({ data, setData }) => {
           </div>
 
           {showLiabilityForm && (
-            <form onSubmit={handleAddLiability} className="bg-white p-6 rounded-lg shadow-md space-y-4">
+            <form onSubmit={handleAddLiability} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <input
                   type="text"

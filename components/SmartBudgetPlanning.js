@@ -138,7 +138,7 @@ const SmartBudgetPlanning = ({ data, setData }) => {
                 placeholder="যেমন: বার্ষিক ছুটির ট্রিপ"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-emerald-500 focus:outline-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
                 required
               />
             </div>
@@ -151,7 +151,7 @@ const SmartBudgetPlanning = ({ data, setData }) => {
                   placeholder="100000"
                   value={formData.targetAmount}
                   onChange={(e) => setFormData({ ...formData, targetAmount: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
                   required
                 />
               </div>
@@ -162,7 +162,7 @@ const SmartBudgetPlanning = ({ data, setData }) => {
                   type="date"
                   value={formData.deadline}
                   onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
                   required
                 />
               </div>
@@ -290,7 +290,7 @@ const BudgetPlanCard = ({ plan, category, onUpdate, onDelete }) => {
       </div>
 
       {/* তথ্য */}
-      <div className="grid grid-cols-2 gap-2 mb-4 text-sm">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 text-sm">
         <div>
           <p className="text-gray-600">সময়সীমা</p>
           <p className="font-bold">{new Date(plan.deadline).toLocaleDateString('bn-BD')}</p>
@@ -333,7 +333,7 @@ const BudgetPlanCard = ({ plan, category, onUpdate, onDelete }) => {
                 setAddAmount('');
               }
             }}
-            className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium text-sm"
+            className="bg-emerald-500 text-white px-4 py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium text-sm"
           >
             যোগ করুন
           </button>

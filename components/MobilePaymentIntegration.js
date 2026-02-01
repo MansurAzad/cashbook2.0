@@ -86,7 +86,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
         <h2 className="text-2xl font-bold">💳 ডিজিটাল পেমেন্ট হাব</h2>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors"
+          className="bg-emerald-500 text-white px-4 py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all"
         >
           {showForm ? '❌ বাতিল' : '➕ নতুন পেমেন্ট'}
         </button>
@@ -112,14 +112,14 @@ const MobilePaymentIntegration = ({ data, setData }) => {
 
       {/* পেমেন্ট ফর্ম */}
       {showForm && (
-        <form onSubmit={handleAddPayment} className="bg-white p-6 rounded-lg shadow-md space-y-4">
+        <form onSubmit={handleAddPayment} className="bg-white p-6 rounded-xl shadow-lg space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="number"
               placeholder="পরিমাণ (৳)"
               value={formData.amount}
               onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
               required
             />
 
@@ -128,7 +128,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
               placeholder="প্রাপক (নাম বা নম্বর)"
               value={formData.recipient}
               onChange={(e) => setFormData({ ...formData, recipient: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             />
 
             <input
@@ -136,7 +136,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
               placeholder="উদ্দেশ্য"
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             />
 
             <input
@@ -144,13 +144,13 @@ const MobilePaymentIntegration = ({ data, setData }) => {
               placeholder="রেফারেন্স নম্বর (ঐচ্ছিক)"
               value={formData.reference}
               onChange={(e) => setFormData({ ...formData, reference: e.target.value })}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+            className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
           >
             পেমেন্ট সম্পন্ন করুন
           </button>
