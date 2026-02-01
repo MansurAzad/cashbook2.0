@@ -316,22 +316,6 @@ const SystemSettings = ({ data, setData }) => {
         <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200 space-y-4">
           <h3 className="text-3xl font-black">ℹ️ অ্যাপ্লিকেশন তথ্য</h3>
 
-            {/* ডেটা মুছে ফেলা */}
-            <button
-              onClick={handleClearAllData}
-              className="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition-colors font-bold"
-            >
-              🗑️ সব ডেটা মুছে ফেলুন
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* তথ্য */}
-      {activeTab === 'info' && (
-        <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
-          <h3 className="text-xl font-bold">ℹ️ অ্যাপ্লিকেশন তথ্য</h3>
-
           <div className="space-y-3">
             <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl shadow-md border border-gray-200">
               <p className="text-sm font-bold text-gray-600 mb-1">অ্যাপ নাম</p>
@@ -375,4 +359,5 @@ const SystemSettings = ({ data, setData }) => {
     </div>
   );
 };
-};
+
+export default SystemSettings;
