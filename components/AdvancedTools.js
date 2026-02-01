@@ -99,7 +99,7 @@ const LoanPayoffCalculator = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+    <div className="bg-white p-6 rounded-xl shadow-lg space-y-4">
       <h3 className="font-bold text-lg">🏦 ঋণ পরিশোধ ক্যালকুলেটর</h3>
       
       <div className="space-y-3">
@@ -137,14 +137,14 @@ const LoanPayoffCalculator = () => {
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+          className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
         >
           হিসাব করুন
         </button>
       </div>
 
       {result && (
-        <div className="bg-blue-50 p-4 rounded-lg space-y-2">
+        <div className="bg-blue-50 p-4 rounded-xl space-y-2">
           <p><span className="font-bold">সময়কাল:</span> {result.months} মাস ({result.years} বছর)</p>
           <p><span className="font-bold">মোট সুদ:</span> ৳{parseFloat(result.totalInterest).toLocaleString('bn-BD')}</p>
           <p><span className="font-bold">মোট পরিশোধ:</span> ৳{parseFloat(result.totalPayment).toLocaleString('bn-BD')}</p>
@@ -172,7 +172,7 @@ const InvestmentReturnsCalculator = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+    <div className="bg-white p-6 rounded-xl shadow-lg space-y-4">
       <h3 className="font-bold text-lg">💼 বিনিয়োগ রিটার্ন</h3>
       
       <div className="space-y-3">
@@ -198,14 +198,14 @@ const InvestmentReturnsCalculator = () => {
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+          className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
         >
           হিসাব করুন
         </button>
       </div>
 
       {result && (
-        <div className="bg-blue-50 p-4 rounded-lg space-y-2">
+        <div className="bg-blue-50 p-4 rounded-xl space-y-2">
           <p><span className="font-bold">{result.status}</span></p>
           <p><span className="font-bold">লাভ/ক্ষতি:</span> ৳{result.profit.toLocaleString('bn-BD')}</p>
           <p><span className="font-bold">রিটার্ন:</span> {result.percentage}%</p>
@@ -233,7 +233,7 @@ const SavingsGoalCalculator = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+    <div className="bg-white p-6 rounded-xl shadow-lg space-y-4">
       <h3 className="font-bold text-lg">🎯 সঞ্চয় লক্ষ্য</h3>
       
       <div className="space-y-3">
@@ -259,14 +259,14 @@ const SavingsGoalCalculator = () => {
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+          className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
         >
           হিসাব করুন
         </button>
       </div>
 
       {result && (
-        <div className="bg-blue-50 p-4 rounded-lg space-y-2">
+        <div className="bg-blue-50 p-4 rounded-xl space-y-2">
           <p><span className="font-bold">প্রয়োজনীয় সময়:</span> {result.months} মাস ({result.years} বছর)</p>
           <p><span className="font-bold">মাসিক সঞ্চয়:</span> ৳{monthly.toLocaleString('bn-BD')}</p>
         </div>
@@ -291,7 +291,7 @@ const BudgetAllocationCalculator = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+    <div className="bg-white p-6 rounded-xl shadow-lg space-y-4">
       <h3 className="font-bold text-lg">📊 বাজেট বিতরণ (৫০/৩০/২০)</h3>
       
       <div className="space-y-3">
@@ -307,14 +307,14 @@ const BudgetAllocationCalculator = () => {
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+          className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
         >
           বিতরণ করুন
         </button>
       </div>
 
       {result && (
-        <div className="bg-blue-50 p-4 rounded-lg space-y-2">
+        <div className="bg-blue-50 p-4 rounded-xl space-y-2">
           <div className="flex justify-between items-center">
             <span className="font-bold">প্রয়োজন (৫০%):</span>
             <span>৳{parseInt(result.needs).toLocaleString('bn-BD')}</span>
@@ -373,7 +373,7 @@ const DataExportPanel = ({ transactions }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md space-y-4">
+    <div className="bg-white p-6 rounded-xl shadow-lg space-y-4">
       <h3 className="font-bold text-lg">📥 ডেটা এক্সপোর্ট করুন</h3>
 
       <div>
@@ -388,13 +388,13 @@ const DataExportPanel = ({ transactions }) => {
         </select>
       </div>
 
-      <div className="bg-blue-50 p-4 rounded-lg">
+      <div className="bg-blue-50 p-4 rounded-xl">
         <p className="text-sm">📊 মোট লেনদেন: {transactions.length}</p>
       </div>
 
       <button
         onClick={handleExport}
-        className="w-full bg-emerald-500 text-white py-3 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
+        className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
       >
         এখনই ডাউনলোড করুন
       </button>
