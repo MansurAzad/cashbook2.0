@@ -6,8 +6,8 @@ const AdvancedTools = ({ data, setData }) => {
 
   return (
     <div className="space-y-6 font-[Hind Siliguri]">
-      {/* ট্যাব নেভিগেশন */}
-      <div className="flex gap-2 overflow-x-auto pb-2 border-b border-gray-200">
+      {/* iOS Tab Navigation */}
+      <div className="bg-white rounded-3xl p-1 shadow-lg border border-gray-200 flex gap-1 overflow-x-auto">
         {[
           { id: 'analytics', icon: '📊', label: 'বিশ্লেষণ' },
           { id: 'search', icon: '🔍', label: 'অনুসন্ধান' },
@@ -17,13 +17,13 @@ const AdvancedTools = ({ data, setData }) => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-3 rounded-lg transition-all whitespace-nowrap ${
+            className={`flex-1 px-5 py-3 rounded-2xl font-black transition-all whitespace-nowrap active:scale-90 flex items-center justify-center gap-2 ${
               activeTab === tab.id
-                ? 'bg-emerald-500 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-emerald-500 text-white shadow-lg' 
+                : 'text-gray-700 hover:bg-gray-100'
             }`}
           >
-            {tab.icon} {tab.label}
+            <span className="text-xl">{tab.icon}</span> <span className="hidden sm:inline">{tab.label}</span>
           </button>
         ))}
       </div>
@@ -48,7 +48,7 @@ const AdvancedTools = ({ data, setData }) => {
 
       {/* ক্যালকুলেটর ট্যাব */}
       {activeTab === 'calculator' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* ঋণ পরিশোধ ক্যালকুলেটর */}
           <LoanPayoffCalculator />
 
@@ -99,55 +99,57 @@ const LoanPayoffCalculator = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg space-y-4">
-      <h3 className="font-bold text-lg">🏦 ঋণ পরিশোধ ক্যালকুলেটর</h3>
+    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
+      <h3 className="text-2xl font-black text-gray-900 mb-6 flex items-center gap-3">
+        <span className="text-4xl">🏦</span> ঋণ পরিশোধ ক্যালকুলেটর
+      </h3>
       
-      <div className="space-y-3">
+      <div className="space-y-5">
         <div>
-          <label className="block text-sm font-medium mb-1">মূল টাকা</label>
+          <label className="block text-sm font-bold mb-2 text-gray-700">মূল টাকা</label>
           <input
             type="number"
             value={principal}
             onChange={(e) => setPrincipal(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+            className="input-field text-lg font-bold py-4 px-5 rounded-2xl w-full border border-gray-300"
           />
-          <p className="text-xs text-gray-500">৳{principal.toLocaleString('bn-BD')}</p>
+          <p className="text-xs text-gray-500 mt-2">৳{principal.toLocaleString('bn-BD')}</p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">বার্ষিক সুদের হার (%)</label>
+          <label className="block text-sm font-bold mb-2 text-gray-700">বার্ষিক সুদের হার (%)</label>
           <input
             type="number"
             value={rate}
             onChange={(e) => setRate(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+            className="input-field text-lg font-bold py-4 px-5 rounded-2xl w-full border border-gray-300"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">মাসিক পরিশোধ</label>
+          <label className="block text-sm font-bold mb-2 text-gray-700">মাসিক পরিশোধ</label>
           <input
             type="number"
             value={payment}
             onChange={(e) => setPayment(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+            className="input-field text-lg font-bold py-4 px-5 rounded-2xl w-full border border-gray-300"
           />
-          <p className="text-xs text-gray-500">৳{payment.toLocaleString('bn-BD')}</p>
+          <p className="text-xs text-gray-500 mt-2">৳{payment.toLocaleString('bn-BD')}</p>
         </div>
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
+          className="w-full btn btn-primary py-4 px-6 rounded-2xl font-black text-lg active:scale-95"
         >
           হিসাব করুন
         </button>
       </div>
 
       {result && (
-        <div className="bg-blue-50 p-4 rounded-xl space-y-2">
-          <p><span className="font-bold">সময়কাল:</span> {result.months} মাস ({result.years} বছর)</p>
-          <p><span className="font-bold">মোট সুদ:</span> ৳{parseFloat(result.totalInterest).toLocaleString('bn-BD')}</p>
-          <p><span className="font-bold">মোট পরিশোধ:</span> ৳{parseFloat(result.totalPayment).toLocaleString('bn-BD')}</p>
+        <div className="bg-blue-50 rounded-3xl p-8 border border-blue-200 space-y-4 mt-6">
+          <p className="text-lg font-bold"><span className="text-blue-600">সময়কাল:</span> {result.months} মাস ({result.years} বছর)</p>
+          <p className="text-lg font-bold"><span className="text-blue-600">মোট সুদ:</span> ৳{parseFloat(result.totalInterest).toLocaleString('bn-BD')}</p>
+          <p className="text-2xl font-black text-blue-600">মোট পরিশোধ: ৳{parseFloat(result.totalPayment).toLocaleString('bn-BD')}</p>
         </div>
       )}
     </div>
@@ -172,43 +174,45 @@ const InvestmentReturnsCalculator = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg space-y-4">
-      <h3 className="font-bold text-lg">💼 বিনিয়োগ রিটার্ন</h3>
+    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
+      <h3 className="text-2xl font-black text-gray-900 mb-6 flex items-center gap-3">
+        <span className="text-4xl">💼</span> বিনিয়োগ রিটার্ন
+      </h3>
       
-      <div className="space-y-3">
+      <div className="space-y-5">
         <div>
-          <label className="block text-sm font-medium mb-1">বিনিয়োগ করা টাকা</label>
+          <label className="block text-sm font-bold mb-2 text-gray-700">বিনিয়োগ করা টাকা</label>
           <input
             type="number"
             value={invested}
             onChange={(e) => setInvested(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+            className="input-field text-lg font-bold py-4 px-5 rounded-2xl w-full border border-gray-300"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">বর্তমান মূল্য</label>
+          <label className="block text-sm font-bold mb-2 text-gray-700">বর্তমান মূল্য</label>
           <input
             type="number"
             value={current}
             onChange={(e) => setCurrent(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+            className="input-field text-lg font-bold py-4 px-5 rounded-2xl w-full border border-gray-300"
           />
         </div>
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
+          className="w-full btn btn-primary py-4 px-6 rounded-2xl font-black text-lg active:scale-95"
         >
           হিসাব করুন
         </button>
       </div>
 
       {result && (
-        <div className="bg-blue-50 p-4 rounded-xl space-y-2">
-          <p><span className="font-bold">{result.status}</span></p>
-          <p><span className="font-bold">লাভ/ক্ষতি:</span> ৳{result.profit.toLocaleString('bn-BD')}</p>
-          <p><span className="font-bold">রিটার্ন:</span> {result.percentage}%</p>
+        <div className="bg-amber-50 rounded-3xl p-8 border border-amber-200 space-y-4 mt-6">
+          <p className="text-2xl font-black text-amber-600">{result.status}</p>
+          <p className="text-lg font-bold"><span className="text-amber-600">লাভ/ক্ষতি:</span> ৳{result.profit.toLocaleString('bn-BD')}</p>
+          <p className="text-2xl font-black text-amber-600">রিটার্ন: {result.percentage}%</p>
         </div>
       )}
     </div>
@@ -233,42 +237,44 @@ const SavingsGoalCalculator = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg space-y-4">
-      <h3 className="font-bold text-lg">🎯 সঞ্চয় লক্ষ্য</h3>
+    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
+      <h3 className="text-2xl font-black text-gray-900 mb-6 flex items-center gap-3">
+        <span className="text-4xl">🎯</span> সঞ্চয় লক্ষ্য
+      </h3>
       
-      <div className="space-y-3">
+      <div className="space-y-5">
         <div>
-          <label className="block text-sm font-medium mb-1">লক্ষ্য পরিমাণ</label>
+          <label className="block text-sm font-bold mb-2 text-gray-700">লক্ষ্য পরিমাণ</label>
           <input
             type="number"
             value={target}
             onChange={(e) => setTarget(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+            className="input-field text-lg font-bold py-4 px-5 rounded-2xl w-full border border-gray-300"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">মাসিক সঞ্চয়</label>
+          <label className="block text-sm font-bold mb-2 text-gray-700">মাসিক সঞ্চয়</label>
           <input
             type="number"
             value={monthly}
             onChange={(e) => setMonthly(parseFloat(e.target.value))}
-            className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none"
+            className="input-field text-lg font-bold py-4 px-5 rounded-2xl w-full border border-gray-300"
           />
         </div>
 
         <button
           onClick={calculate}
-          className="w-full bg-emerald-500 text-white py-3 rounded-xl hover:bg-emerald-600 active:scale-95 transition-all font-medium"
+          className="w-full btn btn-primary py-4 px-6 rounded-2xl font-black text-lg active:scale-95"
         >
           হিসাব করুন
         </button>
       </div>
 
       {result && (
-        <div className="bg-blue-50 p-4 rounded-xl space-y-2">
-          <p><span className="font-bold">প্রয়োজনীয় সময়:</span> {result.months} মাস ({result.years} বছর)</p>
-          <p><span className="font-bold">মাসিক সঞ্চয়:</span> ৳{monthly.toLocaleString('bn-BD')}</p>
+        <div className="bg-green-50 rounded-3xl p-8 border border-green-200 space-y-4 mt-6">
+          <p className="text-lg font-bold"><span className="text-green-600">প্রয়োজনীয় সময়:</span> {result.months} মাস ({result.years} বছর)</p>
+          <p className="text-2xl font-black text-green-600">মাসিক সঞ্চয়: ৳{monthly.toLocaleString('bn-BD')}</p>
         </div>
       )}
     </div>
