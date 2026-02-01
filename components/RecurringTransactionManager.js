@@ -159,7 +159,7 @@ const RecurringTransactionManager = ({ data, setData }) => {
       {/* ফর্ম */}
       {showForm && (
         <form onSubmit={handleAddRecurring} className="bg-white p-6 rounded-lg shadow-md space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               placeholder="বর্ণনা (যেমন: মোবাইল বিল)"

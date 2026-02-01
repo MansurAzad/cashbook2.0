@@ -159,7 +159,7 @@ const SmartBillingSystem = ({ data, setData }) => {
       </div>
 
       {/* পরিসংখ্যান কার্ড */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
         <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
           <p className="text-xs text-gray-600">মোট বিল</p>
           <p className="text-2xl font-bold text-blue-600">{bills.length}</p>
@@ -185,7 +185,7 @@ const SmartBillingSystem = ({ data, setData }) => {
       {/* বিল যোগ করার ফর্ম */}
       {showForm && (
         <form onSubmit={handleAddBill} className="bg-white p-6 rounded-lg shadow-md space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               placeholder="বিলের নাম"

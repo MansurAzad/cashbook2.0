@@ -121,7 +121,7 @@ function Budget({ data, onSave, onDelete }) {
                                 onChange={e => setNewBudgetAmount(e.target.value)}
                             />
                         </div>
-                        <div className="flex gap-2 w-full md:w-auto">
+                        <div className="flex gap-2 w-full sm:w-auto">
                             <button 
                                 onClick={() => handleSave(null, newBudgetCategory, newBudgetAmount)}
                                 disabled={!newBudgetCategory || !newBudgetAmount}
@@ -141,7 +141,7 @@ function Budget({ data, onSave, onDelete }) {
             )}
 
             {/* Budget List */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
                 {budgetStatus.items.map(item => (
                     <div key={item.id} className="card hover:shadow-md transition-shadow group relative">
                         <div className="flex justify-between items-start mb-4">

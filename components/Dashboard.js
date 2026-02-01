@@ -62,10 +62,10 @@ function Dashboard({ data, onNavigate, onRefresh }) {
                     className="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 text-white shadow-2xl active:scale-[0.98] transition-transform duration-200 transform-gpu cursor-pointer border border-gray-800"
                     {...GestureHooks.useLongPress(() => alert('সম্পূর্ণ স্বাস্থ্য প্রতিবেদন: \nনেট ওয়ার্থ: ' + formatCurrency(financialHealth.netWorth)))}
                 >
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
                         <div>
                             <p className="text-gray-400 text-xs font-bold mb-2 tracking-widest uppercase">নেট ওয়ার্থ</p>
-                            <h2 className="text-5xl md:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500 mb-6">
+                            <h2 className="text-5xl sm:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500 mb-6">
                                 {formatCurrency(financialHealth.netWorth)}
                             </h2>
                             <div className="flex flex-wrap gap-3">
@@ -85,7 +85,7 @@ function Dashboard({ data, onNavigate, onRefresh }) {
                 </div>
 
                 {/* Main Stats with iOS style cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
                     <div 
                         className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-gray-200 active:scale-95 transition-all duration-200 cursor-pointer hover:shadow-xl"
                         onClick={() => onNavigate('transactions', { type: 'income' })}

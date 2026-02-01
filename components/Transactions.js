@@ -208,7 +208,7 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
             />
 
             <div className="flex flex-col gap-4">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
                     <div className="flex bg-white p-1 rounded-lg border border-gray-200 w-fit">
                         <button onClick={() => setFilter('all')} className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${filter === 'all' ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}>সব</button>
                         <button onClick={() => setFilter('income')} className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${filter === 'income' ? 'bg-emerald-100 text-emerald-700' : 'text-gray-500 hover:text-gray-700'}`}>আয়</button>
@@ -219,7 +219,7 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                     </button>
                 </div>
 
-                <div className={`flex flex-col md:flex-row gap-4 transition-all duration-300 overflow-hidden ${showSearch ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0 md:max-h-20 md:opacity-100'}`}>
+                <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 transition-all duration-300 overflow-hidden ${showSearch ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0 sm:max-h-20 sm:opacity-100'}`}>
                     <div className="relative flex-1">
                         <div className="absolute left-3 top-2.5 text-gray-400 icon-search"></div>
                         <input type="text" placeholder="ক্যাটাগরি বা নোট খুঁজুন..." className="input-field pl-10" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />

@@ -98,7 +98,7 @@ function Reports({ data }) {
                 />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
                 <div className="card">
                     <div className="flex justify-between items-center mb-6">
                         <h3 className="font-bold text-lg text-gray-800">আয়ের উৎসসমূহ</h3>
@@ -120,7 +120,7 @@ function Reports({ data }) {
             </div>
             
             <div className="card bg-gradient-to-r from-emerald-500 to-teal-500 text-white p-8">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
                     <div>
                         <h2 className="text-2xl font-bold mb-2">সারসংক্ষেপ</h2>
                         <p className="opacity-90">

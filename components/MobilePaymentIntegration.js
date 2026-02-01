@@ -93,7 +93,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
       </div>
 
       {/* পেমেন্ট পদ্ধতি নির্বাচন */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
         {paymentMethods.map(method => (
           <button
             key={method.id}
@@ -113,7 +113,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
       {/* পেমেন্ট ফর্ম */}
       {showForm && (
         <form onSubmit={handleAddPayment} className="bg-white p-6 rounded-lg shadow-md space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="number"
               placeholder="পরিমাণ (৳)"
@@ -158,7 +158,7 @@ const MobilePaymentIntegration = ({ data, setData }) => {
       )}
 
       {/* পদ্ধতি-ভিত্তিক পরিসংখ্যান */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {paymentMethods.map(method => (
           <div key={method.id} className={`${method.color} text-white p-4 rounded-lg`}>
             <p className="text-sm opacity-90">{method.name}</p>

@@ -223,9 +223,9 @@ function Settings({ data, onAddCategory, onDeleteCategory, settings, updateSetti
             )}
 
             {activeTab === 'categories' && (
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                     {/* Add New Category */}
-                    <div className="lg:col-span-1">
+                    <div className="sm:col-span-1 lg:col-span-1">
                         <div className="card sticky top-6">
                             <h3 className="font-bold text-lg text-gray-800 mb-4">নতুন ক্যাটাগরি</h3>
                             <form onSubmit={handleAdd} className="space-y-4">
@@ -298,7 +298,7 @@ function Settings({ data, onAddCategory, onDeleteCategory, settings, updateSetti
                             <h4 className="font-bold text-emerald-600 mb-3 flex items-center gap-2">
                                 <div className="icon-arrow-down-left"></div> আয়ের ক্যাটাগরি
                             </h4>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                                 {data.categories.income.map(cat => (
                                     <div key={cat.id} className="flex items-center justify-between p-3 bg-white border border-gray-100 rounded-lg shadow-sm">
                                         <div className="flex items-center gap-3">
@@ -324,7 +324,7 @@ function Settings({ data, onAddCategory, onDeleteCategory, settings, updateSetti
                             <h4 className="font-bold text-red-600 mb-3 flex items-center gap-2">
                                 <div className="icon-arrow-up-right"></div> ব্যয়ের ক্যাটাগরি
                             </h4>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                                 {data.categories.expense.map(cat => (
                                     <div key={cat.id} className="flex items-center justify-between p-3 bg-white border border-gray-100 rounded-lg shadow-sm">
                                         <div className="flex items-center gap-3">

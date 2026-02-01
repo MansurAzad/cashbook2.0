@@ -135,7 +135,7 @@ const NetWorthTracker = ({ data, setData }) => {
       {/* নেট ওয়ার্থ সংক্ষিপ্ত */}
       <div className="bg-gradient-to-r from-emerald-500 to-green-600 text-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold mb-6">💰 আপনার নেট ওয়ার্থ</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
           <div className="bg-white bg-opacity-20 p-4 rounded-lg">
             <p className="text-sm opacity-90">মোট সম্পদ</p>
             <p className="text-3xl font-bold">৳{totalAssets.toLocaleString('bn-BD')}</p>
@@ -190,7 +190,7 @@ const NetWorthTracker = ({ data, setData }) => {
 
           {showAssetForm && (
             <form onSubmit={handleAddAsset} className="bg-white p-6 rounded-lg shadow-md space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <input
                   type="text"
                   placeholder="সম্পদের নাম"
@@ -237,7 +237,7 @@ const NetWorthTracker = ({ data, setData }) => {
           )}
 
           {/* সম্পদ তালিকা */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {assets.map(asset => {
               const category = assetCategories.find(c => c.name === asset.category);
               return (
@@ -287,7 +287,7 @@ const NetWorthTracker = ({ data, setData }) => {
 
           {showLiabilityForm && (
             <form onSubmit={handleAddLiability} className="bg-white p-6 rounded-lg shadow-md space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <input
                   type="text"
                   placeholder="দায়বদ্ধতার নাম"
@@ -342,7 +342,7 @@ const NetWorthTracker = ({ data, setData }) => {
           )}
 
           {/* দায়বদ্ধতা তালিকা */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {liabilities.map(liability => {
               const category = liabilityCategories.find(c => c.name === liability.category);
               const annualCost = liability.amount * (liability.interestRate || 0) / 100;

@@ -111,7 +111,7 @@ const SmartBudgetPlanning = ({ data, setData }) => {
           {/* বিভাগ নির্বাচন */}
           <div>
             <label className="block font-medium mb-3">বিভাগ নির্বাচন করুন</label>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
               {categories.map(cat => (
                 <button
                   key={cat.name}
@@ -359,7 +359,7 @@ const BudgetAnalysisPanel = ({ budgetPlans, categories }) => {
   return (
     <div className="space-y-6">
       {/* সারাংশ কার্ড */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
           <p className="text-sm text-gray-600">মোট লক্ষ্য</p>
           <p className="text-2xl font-bold text-blue-600">৳{totalTarget.toLocaleString('bn-BD')}</p>

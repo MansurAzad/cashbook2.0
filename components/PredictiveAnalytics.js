@@ -144,7 +144,7 @@ const PredictiveAnalytics = ({ transactions, budgets }) => {
       {predictions && (
         <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-8 rounded-lg">
           <h2 className="text-2xl font-bold mb-4">📊 পরবর্তী মাসের পূর্বাভাস</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="bg-white bg-opacity-20 p-4 rounded-lg">
               <p className="text-sm opacity-90">গড় মাসিক খরচ</p>
               <p className="text-3xl font-bold">৳{predictions.avgMonthly.toLocaleString('bn-BD')}</p>
