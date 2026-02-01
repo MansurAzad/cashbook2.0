@@ -1,5 +1,5 @@
 function Tools() {
-    const [activeTool, setActiveTool] = React.useState('menu'); // menu, emi, shopping, challenge, advanced, predictive, recurring, mobile, budget
+    const [activeTool, setActiveTool] = React.useState('menu');
     const [data, setData] = React.useState(JSON.parse(localStorage.getItem('bk_app_data')) || {
         transactions: [],
         budgets: {},
@@ -14,37 +14,43 @@ function Tools() {
     });
 
     const tools = [
-        { id: 'emi', label: 'EMI ক্যালকুলেটর', icon: 'icon-calculator', color: 'bg-blue-500' },
-        { id: 'shopping', label: 'শপিং লিস্ট', icon: 'icon-shopping-cart', color: 'bg-emerald-500' },
-        { id: 'challenge', label: '৫২ সপ্তাহের সঞ্চয়', icon: 'icon-trophy', color: 'bg-purple-500' },
-        { id: 'advanced', label: 'উন্নত সরঞ্জাম', icon: '🛠️', color: 'bg-orange-500' },
-        { id: 'predictive', label: 'পূর্বাভাস', icon: '📊', color: 'bg-indigo-500' },
-        { id: 'recurring', label: 'পুনরাবৃত্ত', icon: '🔄', color: 'bg-pink-500' },
-        { id: 'mobile', label: 'ডিজিটাল পেমেন্ট', icon: '💳', color: 'bg-cyan-500' },
-        { id: 'budget', label: 'বাজেট পরিকল্পনা', icon: '🎯', color: 'bg-lime-500' },
-        { id: 'billing', label: 'বিল ম্যানেজমেন্ট', icon: '📋', color: 'bg-red-500' },
-        { id: 'networth', label: 'নেট ওয়ার্থ', icon: '💰', color: 'bg-yellow-500' },
+        { id: 'emi', label: 'EMI ক্যালকুলেটর', icon: 'icon-calculator', color: 'from-blue-900 to-blue-700' },
+        { id: 'shopping', label: 'শপিং লিস্ট', icon: 'icon-shopping-cart', color: 'from-emerald-900 to-emerald-700' },
+        { id: 'challenge', label: '৫২ সপ্তাহ সঞ্চয়', icon: 'icon-trophy', color: 'from-purple-900 to-purple-700' },
+        { id: 'advanced', label: 'উন্নত সরঞ্জাম', icon: 'icon-settings', color: 'from-orange-900 to-orange-700' },
+        { id: 'predictive', label: 'পূর্বাভাস', icon: 'icon-bar-chart-2', color: 'from-indigo-900 to-indigo-700' },
+        { id: 'recurring', label: 'পুনরাবৃত্ত', icon: 'icon-repeat', color: 'from-pink-900 to-pink-700' },
+        { id: 'mobile', label: 'ডিজিটাল পেমেন্ট', icon: 'icon-smartphone', color: 'from-cyan-900 to-cyan-700' },
+        { id: 'budget', label: 'বাজেট পরিকল্পনা', icon: 'icon-target', color: 'from-lime-900 to-lime-700' },
     ];
 
     if (activeTool === 'menu') {
         return (
-            <div className="space-y-6 animate-fade-in" data-name="tools">
-                <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                    <div className="icon-wrench text-gray-600"></div>
-                    টুলস ও ইউটিলিটি
-                </h2>
-                <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-6 animate-fade-in pb-10" data-name="tools">
+                <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 mb-6">
+                    <h2 className="text-4xl font-black text-gray-900 flex items-center gap-3 mb-2">
+                        <div className="icon-wrench text-3xl text-emerald-600"></div>
+                        টুলস ও ইউটিলিটি
+                    </h2>
+                    <p className="text-base text-gray-600 font-bold">আপনার আর্থিক ব্যবস্থাপনা সহজ করার জন্য শক্তিশালী সরঞ্জাম</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5">
                     {tools.map(tool => (
-                        <div 
-                            key={tool.id} 
+                        <button
+                            key={tool.id}
                             onClick={() => setActiveTool(tool.id)}
-                            className="card flex flex-col items-center justify-center gap-3 hover:shadow-md cursor-pointer transition-all active:scale-95"
+                            className={`bg-gradient-to-br ${tool.color} rounded-3xl p-8 text-white shadow-lg hover:shadow-xl transition-all active:scale-95 border border-opacity-20 border-white group`}
                         >
-                            <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white text-2xl ${tool.color}`}>
-                                <div className={tool.icon}></div>
+                            <div className="flex items-start justify-between mb-4">
+                                <div className="text-5xl font-black opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <div className={tool.icon}></div>
+                                </div>
+                                <div className="text-3xl opacity-20">→</div>
                             </div>
-                            <span className="font-bold text-gray-700 text-center">{tool.label}</span>
-                        </div>
+                            <h3 className="font-black text-xl text-left mb-2 group-hover:text-white transition-colors">{tool.label}</h3>
+                            <p className="text-sm opacity-90 text-left">ট্যাপ করুন শুরু করতে</p>
+                        </button>
                     ))}
                 </div>
             </div>
@@ -52,9 +58,12 @@ function Tools() {
     }
 
     return (
-        <div className="animate-fade-in">
-            <button onClick={() => setActiveTool('menu')} className="mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium">
-                <div className="icon-arrow-left"></div> ফিরে যান
+        <div className="animate-fade-in pb-10">
+            <button 
+                onClick={() => setActiveTool('menu')} 
+                className="mb-6 flex items-center gap-3 text-emerald-600 hover:text-emerald-700 font-black text-lg p-4 bg-white rounded-2xl shadow-sm border border-gray-200 active:scale-95 transition-all"
+            >
+                <div className="icon-arrow-left text-xl"></div> ফিরে যান
             </button>
             {activeTool === 'emi' && <EMICalculator />}
             {activeTool === 'shopping' && <ShoppingList />}
@@ -64,8 +73,6 @@ function Tools() {
             {activeTool === 'recurring' && <RecurringTransactionManager data={data} setData={setData} />}
             {activeTool === 'mobile' && <MobilePaymentIntegration data={data} setData={setData} />}
             {activeTool === 'budget' && <SmartBudgetPlanning data={data} setData={setData} />}
-            {activeTool === 'billing' && <SmartBillingSystem data={data} setData={setData} />}
-            {activeTool === 'networth' && <NetWorthTracker data={data} setData={setData} />}
         </div>
     );
 }
@@ -73,7 +80,7 @@ function Tools() {
 function EMICalculator() {
     const [loanAmount, setLoanAmount] = React.useState('');
     const [interestRate, setInterestRate] = React.useState('');
-    const [tenure, setTenure] = React.useState(''); // months
+    const [tenure, setTenure] = React.useState('');
     const [result, setResult] = React.useState(null);
 
     const calculate = () => {
@@ -93,38 +100,72 @@ function EMICalculator() {
     };
 
     return (
-        <div className="card max-w-md mx-auto">
-            <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <div className="icon-calculator text-blue-500"></div> EMI ক্যালকুলেটর
-            </h3>
-            <div className="space-y-4">
+        <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
+            <div className="bg-gradient-to-br from-blue-900 to-blue-700 rounded-3xl p-8 text-white shadow-2xl border border-blue-700">
+                <h3 className="text-3xl font-black mb-3 flex items-center gap-3">
+                    <div className="icon-calculator text-4xl"></div> EMI ক্যালকুলেটর
+                </h3>
+                <p className="text-base opacity-90">আপনার ঋণের মাসিক কিস্তি হিসাব করুন</p>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 space-y-6">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">ঋণের পরিমাণ</label>
-                    <input type="number" className="input-field" value={loanAmount} onChange={e => setLoanAmount(e.target.value)} />
+                    <label className="block text-base font-black text-gray-900 mb-3">ঋণের পরিমাণ (৳)</label>
+                    <div className="relative">
+                        <span className="absolute left-5 top-4 text-2xl font-black text-gray-900">৳</span>
+                        <input 
+                            type="number" 
+                            className="input-field text-3xl font-black py-5 pl-12 rounded-2xl w-full border border-gray-300"
+                            placeholder="০"
+                            value={loanAmount}
+                            onChange={e => setLoanAmount(e.target.value)}
+                        />
+                    </div>
                 </div>
+
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">সুদের হার (%)</label>
-                    <input type="number" className="input-field" value={interestRate} onChange={e => setInterestRate(e.target.value)} />
+                    <label className="block text-base font-black text-gray-900 mb-3">সুদের হার (% বার্ষিক)</label>
+                    <input 
+                        type="number" 
+                        className="input-field text-2xl font-bold py-4 px-5 rounded-2xl w-full border border-gray-300"
+                        placeholder="০"
+                        value={interestRate}
+                        onChange={e => setInterestRate(e.target.value)}
+                        step="0.1"
+                    />
                 </div>
+
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">সময়সীমা (মাস)</label>
-                    <input type="number" className="input-field" value={tenure} onChange={e => setTenure(e.target.value)} />
+                    <label className="block text-base font-black text-gray-900 mb-3">সময়সীমা (মাস)</label>
+                    <input 
+                        type="number" 
+                        className="input-field text-2xl font-bold py-4 px-5 rounded-2xl w-full border border-gray-300"
+                        placeholder="০"
+                        value={tenure}
+                        onChange={e => setTenure(e.target.value)}
+                    />
                 </div>
-                <button onClick={calculate} className="btn btn-primary w-full justify-center">হিসাব করুন</button>
+
+                <button 
+                    onClick={calculate} 
+                    className="btn btn-primary w-full rounded-2xl py-4 px-6 font-black text-lg active:scale-95"
+                >
+                    <div className="icon-calculator mr-2"></div> হিসাব করুন
+                </button>
                 
                 {result && (
-                    <div className="mt-6 bg-blue-50 p-4 rounded-lg space-y-2 border border-blue-100">
-                        <div className="flex justify-between font-bold text-blue-900">
-                            <span>মাসিক কিস্তি (EMI)</span>
-                            <span>{result.emi}</span>
+                    <div className="bg-blue-50 rounded-3xl p-8 border border-blue-200 space-y-4">
+                        <div className="flex justify-between items-center">
+                            <span className="font-bold text-gray-900 text-lg">মাসিক কিস্তি (EMI)</span>
+                            <span className="text-3xl font-black text-blue-600">৳{result.emi}</span>
                         </div>
-                        <div className="flex justify-between text-sm text-gray-600">
-                            <span>মোট সুদ</span>
-                            <span>{result.interest}</span>
+                        <div className="border-t border-blue-100 pt-4 flex justify-between items-center">
+                            <span className="font-bold text-gray-700">মোট সুদ</span>
+                            <span className="text-xl font-black text-gray-900">৳{result.interest}</span>
                         </div>
-                        <div className="flex justify-between text-sm text-gray-600 border-t border-blue-200 pt-2">
-                            <span>মোট পরিশোধ</span>
-                            <span>{result.total}</span>
+                        <div className="border-t border-blue-100 pt-4 flex justify-between items-center">
+                            <span className="font-bold text-gray-700">মোট পরিশোধ</span>
+                            <span className="text-2xl font-black text-blue-600">৳{result.total}</span>
                         </div>
                     </div>
                 )}
@@ -158,87 +199,108 @@ function ShoppingList() {
         DataManager.saveShoppingList(updated);
     };
 
-    const convertToExpense = async (item) => {
-        const amount = prompt(`'${item.text}' এর জন্য কত টাকা খরচ হয়েছে?`);
-        if (amount) {
-            const expenseData = {
-                type: 'expense',
-                amount: parseFloat(amount),
-                category: 'শপিং',
-                note: `Shopping List: ${item.text}`,
-                date: new Date().toISOString().split('T')[0]
-            };
-            await DataManager.addTransaction(expenseData);
-            alert('লেনদেনে যুক্ত হয়েছে!');
-            toggleItem(item.id); // Check it off
-        }
-    };
-
     return (
-        <div className="card max-w-md mx-auto">
-            <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <div className="icon-shopping-cart text-emerald-500"></div> শপিং লিস্ট
-            </h3>
-            <form onSubmit={addItem} className="flex gap-2 mb-4">
-                <input 
-                    type="text" 
-                    className="input-field" 
-                    placeholder="কি কিনতে চান..." 
-                    value={newItem}
-                    onChange={e => setNewItem(e.target.value)}
-                />
-                <button type="submit" className="btn btn-primary"><div className="icon-plus"></div></button>
-            </form>
-            <div className="space-y-2 max-h-[60vh] overflow-y-auto">
-                {items.map(item => (
-                    <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
-                        <div className="flex items-center gap-3 cursor-pointer flex-1" onClick={() => toggleItem(item.id)}>
-                            <div className={`w-5 h-5 rounded border flex items-center justify-center ${item.checked ? 'bg-emerald-500 border-emerald-500' : 'border-gray-400 bg-white'}`}>
-                                {item.checked && <div className="icon-check text-white text-xs"></div>}
+        <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
+            <div className="bg-gradient-to-br from-emerald-900 to-emerald-700 rounded-3xl p-8 text-white shadow-2xl border border-emerald-700">
+                <h3 className="text-3xl font-black mb-3 flex items-center gap-3">
+                    <div className="icon-shopping-cart text-4xl"></div> শপিং লিস্ট
+                </h3>
+                <p className="text-base opacity-90">{items.length} টি আইটেম আপনার লিস্টে</p>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
+                <form onSubmit={addItem} className="flex gap-3 mb-6">
+                    <input 
+                        type="text" 
+                        className="input-field flex-1 py-4 px-5 text-base font-bold rounded-2xl border border-gray-300"
+                        placeholder="কি কিনতে চান..." 
+                        value={newItem}
+                        onChange={e => setNewItem(e.target.value)}
+                        autoFocus
+                    />
+                    <button type="submit" className="btn btn-primary px-6 rounded-2xl font-black text-lg">
+                        <div className="icon-plus"></div>
+                    </button>
+                </form>
+
+                <div className="space-y-3 max-h-[60vh] overflow-y-auto">
+                    {items.length === 0 ? (
+                        <div className="text-center py-12">
+                            <div className="text-5xl mb-4">🛒</div>
+                            <p className="text-gray-500 font-bold text-lg">লিস্ট খালি</p>
+                        </div>
+                    ) : (
+                        items.map(item => (
+                            <div key={item.id} className="flex items-center justify-between p-5 bg-gray-50 rounded-2xl border border-gray-200 hover:border-emerald-200 transition-all">
+                                <div className="flex items-center gap-3 flex-1 cursor-pointer" onClick={() => toggleItem(item.id)}>
+                                    <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
+                                        item.checked 
+                                            ? 'bg-emerald-500 border-emerald-500' 
+                                            : 'border-gray-300 bg-white'
+                                    }`}>
+                                        {item.checked && <div className="icon-check text-white text-sm font-bold"></div>}
+                                    </div>
+                                    <span className={`text-lg font-bold transition-all ${item.checked ? 'line-through text-gray-400' : 'text-gray-900'}`}>
+                                        {item.text}
+                                    </span>
+                                </div>
+                                <button 
+                                    onClick={() => deleteItem(item.id)}
+                                    className="p-3 bg-red-50 rounded-xl hover:bg-red-100 transition-colors active:scale-90"
+                                >
+                                    <div className="icon-trash-2 text-red-600 text-lg"></div>
+                                </button>
                             </div>
-                            <span className={item.checked ? 'line-through text-gray-400' : 'text-gray-800'}>{item.text}</span>
-                        </div>
-                        <div className="flex gap-2">
-                            <button 
-                                onClick={() => convertToExpense(item)}
-                                className="text-gray-400 hover:text-emerald-600 p-1"
-                                title="খরচ হিসেবে যুক্ত করুন"
-                            >
-                                <div className="icon-banknote text-sm"></div>
-                            </button>
-                            <button onClick={() => deleteItem(item.id)} className="text-gray-400 hover:text-red-500 p-1">
-                                <div className="icon-x text-sm"></div>
-                            </button>
-                        </div>
-                    </div>
-                ))}
-                {items.length === 0 && <p className="text-center text-gray-400 py-4">লিস্ট খালি</p>}
+                        ))
+                    )}
+                </div>
             </div>
         </div>
     );
 }
 
 function SavingsChallenge() {
+    const challenge = Array.from({ length: 52 }, (_, i) => {
+        const week = i + 1;
+        const amount = week * 10;
+        const totalSaved = (week * (week + 1) / 2) * 10;
+        return { week, amount, totalSaved };
+    });
+
+    const totalAmount = challenge[51].totalSaved;
+
     return (
-        <div className="card max-w-md mx-auto">
-            <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <div className="icon-trophy text-purple-500"></div> ৫২ সপ্তাহের সঞ্চয়
-            </h3>
-            <div className="bg-purple-50 p-4 rounded-lg mb-4 text-purple-900 text-sm">
-                প্রতি সপ্তাহে ১০ টাকা করে বাড়িয়ে জমালে ১ বছরে আপনার সঞ্চয় হবে <strong>১৩,৭৮০ টাকা!</strong>
+        <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
+            <div className="bg-gradient-to-br from-purple-900 to-purple-700 rounded-3xl p-8 text-white shadow-2xl border border-purple-700">
+                <h3 className="text-3xl font-black mb-4 flex items-center gap-3">
+                    <div className="icon-trophy text-4xl"></div> ৫২ সপ্তাহের সঞ্চয়
+                </h3>
+                <div className="bg-purple-800/50 rounded-2xl p-6 backdrop-blur-sm">
+                    <p className="text-lg opacity-90 mb-4 font-bold">প্রতি সপ্তাহে ১০ টাকা করে বৃদ্ধি পেলে আপনি পাবেন</p>
+                    <p className="text-5xl font-black text-yellow-300">৳{totalAmount.toLocaleString('bn-BD')}</p>
+                    <p className="text-sm opacity-75 mt-2">১ বছরের শেষে</p>
+                </div>
             </div>
-            <div className="space-y-2 max-h-[60vh] overflow-y-auto">
-                {Array.from({ length: 52 }, (_, i) => {
-                    const week = i + 1;
-                    const amount = week * 10;
-                    return (
-                        <div key={week} className="flex justify-between items-center p-3 border-b border-gray-100 last:border-0">
-                            <span className="text-gray-600">সপ্তাহ {week}</span>
-                            <span className="font-bold text-purple-600">{amount} টাকা</span>
-                            <input type="checkbox" className="w-5 h-5 accent-purple-600" />
+
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto">
+                    {challenge.map(({ week, amount, totalSaved }) => (
+                        <div key={week} className="p-5 bg-purple-50 rounded-2xl border border-purple-200 hover:border-purple-300 transition-all">
+                            <div className="flex justify-between items-start mb-2">
+                                <span className="font-black text-gray-900 text-lg">সপ্তাহ {week}</span>
+                                <div className="text-2xl">📅</div>
+                            </div>
+                            <div className="space-y-1">
+                                <p className="text-sm text-gray-600 font-bold">এই সপ্তাহের সঞ্চয়</p>
+                                <p className="text-2xl font-black text-purple-600">৳{amount}</p>
+                            </div>
+                            <div className="border-t border-purple-200 mt-3 pt-3">
+                                <p className="text-xs text-gray-500 font-bold mb-1">মোট সঞ্চিত</p>
+                                <p className="font-black text-gray-900">৳{totalSaved.toLocaleString('bn-BD')}</p>
+                            </div>
                         </div>
-                    );
-                })}
+                    ))}
+                </div>
             </div>
         </div>
     );
