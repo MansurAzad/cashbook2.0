@@ -194,9 +194,8 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
     });
 
     const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT' })
-            .format(amount)
-            .replace('৳', currencySymbol); 
+        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT', maximumFractionDigits: 0 })
+            .format(Math.floor(amount))
     };
 
     // Calculate summary stats

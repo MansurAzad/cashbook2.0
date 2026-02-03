@@ -12,8 +12,8 @@ function Budget({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '�
     );
 
     const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT' })
-            .format(amount)
+        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT', maximumFractionDigits: 0 })
+            .format(Math.floor(amount))
             .replace('৳', currencySymbol);
     };
 
@@ -87,23 +87,23 @@ function Budget({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '�
             </div>
 
             {/* মোট সারাংশ - প্রিমিয়াম কার্ড */}
-            <div className="bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 rounded-3xl p-8 text-white shadow-2xl border border-purple-700">
-                <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-lg font-black opacity-90 uppercase tracking-wider">মাসিক মোট বাজেট</h3>
-                    <div className="icon-chart-pie text-purple-300 text-3xl"></div>
+            <div className="bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-purple-700">
+                <div className="flex items-center justify-between mb-6 sm:mb-8">
+                    <h3 className="text-base sm:text-lg font-black opacity-90 uppercase tracking-wider">মাসিক মোট বাজেট</h3>
+                    <div className="icon-chart-pie text-purple-300 text-2xl sm:text-3xl"></div>
                 </div>
-                <div className="grid grid-cols-3 gap-6 mb-8">
-                    <div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                    <div className="bg-purple-800/40 rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
                         <p className="text-xs text-purple-200 font-bold uppercase tracking-wider mb-2">মোট বরাদ্দ</p>
-                        <p className="text-4xl font-black">{formatCurrency(budgetStatus.total.amount)}</p>
+                        <p className="text-2xl sm:text-4xl font-black break-words line-clamp-2">{formatCurrency(budgetStatus.total.amount)}</p>
                     </div>
-                    <div>
+                    <div className="bg-purple-800/40 rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
                         <p className="text-xs text-purple-200 font-bold uppercase tracking-wider mb-2">মোট ব্যয়</p>
-                        <p className="text-4xl font-black text-red-300">{formatCurrency(budgetStatus.total.spent)}</p>
+                        <p className="text-2xl sm:text-4xl font-black text-red-300 break-words line-clamp-2">{formatCurrency(budgetStatus.total.spent)}</p>
                     </div>
-                    <div>
+                    <div className="bg-purple-800/40 rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
                         <p className="text-xs text-purple-200 font-bold uppercase tracking-wider mb-2">অবশিষ্ট</p>
-                        <p className={`text-4xl font-black ${budgetStatus.total.remaining < 0 ? 'text-red-400' : 'text-emerald-300'}`}>
+                        <p className={`text-2xl sm:text-4xl font-black break-words line-clamp-2 ${budgetStatus.total.remaining < 0 ? 'text-red-400' : 'text-emerald-300'}`}>
                             {formatCurrency(budgetStatus.total.remaining)}
                         </p>
                     </div>

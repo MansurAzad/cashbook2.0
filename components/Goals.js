@@ -14,8 +14,8 @@ function Goals({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '৳
     );
 
     const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT' })
-            .format(amount)
+        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT', maximumFractionDigits: 0 })
+            .format(Math.floor(amount))
             .replace('৳', currencySymbol);
     };
 
@@ -72,27 +72,27 @@ function Goals({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '৳
     return (
         <div className="space-y-6 animate-fade-in pb-10" data-name="goals">
             {/* সামগ্রিক লক্ষ্য সারাংশ - সবুজ গ্রেডিয়েন্ট */}
-            <div className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 rounded-3xl p-8 text-white shadow-2xl border border-emerald-700">
-                <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-lg font-black opacity-90 uppercase tracking-wider">সঞ্চয়ের লক্ষ্য</h3>
-                    <div className="icon-target text-emerald-300 text-3xl"></div>
+            <div className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-emerald-700">
+                <div className="flex items-center justify-between mb-6 sm:mb-8">
+                    <h3 className="text-base sm:text-lg font-black opacity-90 uppercase tracking-wider">সঞ্চয়ের লক্ষ্য</h3>
+                    <div className="icon-target text-emerald-300 text-2xl sm:text-3xl"></div>
                 </div>
-                <div className="grid grid-cols-3 gap-6 mb-8">
-                    <div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                    <div className="bg-emerald-800/40 rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
                         <p className="text-xs text-emerald-200 font-bold uppercase tracking-wider mb-2">মোট লক্ষ্য</p>
-                        <p className="text-4xl font-black">{formatCurrency(totalTarget)}</p>
+                        <p className="text-2xl sm:text-4xl font-black break-words line-clamp-2">{formatCurrency(totalTarget)}</p>
                     </div>
-                    <div>
+                    <div className="bg-emerald-800/40 rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
                         <p className="text-xs text-emerald-200 font-bold uppercase tracking-wider mb-2">সংরক্ষিত</p>
-                        <p className="text-4xl font-black text-emerald-200">{formatCurrency(totalSaved)}</p>
+                        <p className="text-2xl sm:text-4xl font-black text-emerald-200 break-words line-clamp-2">{formatCurrency(totalSaved)}</p>
                     </div>
-                    <div>
+                    <div className="bg-emerald-800/40 rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
                         <p className="text-xs text-emerald-200 font-bold uppercase tracking-wider mb-2">অবশিষ্ট</p>
-                        <p className="text-4xl font-black text-orange-300">{formatCurrency(totalRemaining)}</p>
+                        <p className="text-2xl sm:text-4xl font-black text-orange-300 break-words line-clamp-2">{formatCurrency(totalRemaining)}</p>
                     </div>
                 </div>
                 <div>
-                    <div className="flex justify-between text-sm mb-3 font-bold">
+                    <div className="flex justify-between text-xs sm:text-sm mb-3 font-bold flex-wrap gap-1">
                         <span>সামগ্রিক অগ্রগতি {Math.round(overallProgress)}%</span>
                         <span className="text-emerald-200">{Math.round(100 - overallProgress)}% অবশিষ্ট</span>
                     </div>

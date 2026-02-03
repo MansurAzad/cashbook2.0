@@ -2,8 +2,8 @@ function Reports({ data, currencySymbol = '৳' }) {
     const [currentMonth, setCurrentMonth] = React.useState(new Date().toISOString().slice(0, 7));
 
     const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT' })
-            .format(amount)
+        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT', maximumFractionDigits: 0 })
+            .format(Math.floor(amount))
             .replace('৳', currencySymbol);
     };
 
@@ -106,23 +106,23 @@ function Reports({ data, currencySymbol = '৳' }) {
             </div>
 
             {/* মোট সারাংশ কার্ড - স্লেট গ্রেডিয়েন্ট */}
-            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-gray-900 rounded-3xl p-8 text-white shadow-2xl border border-slate-700">
-                <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-lg font-black opacity-90 uppercase tracking-wider">এই মাসের সারাংশ</h3>
-                    <div className="icon-bar-chart-2 text-slate-300 text-3xl"></div>
+            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-gray-900 rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-slate-700">
+                <div className="flex items-center justify-between mb-6 sm:mb-8">
+                    <h3 className="text-base sm:text-lg font-black opacity-90 uppercase tracking-wider">এই মাসের সারাংশ</h3>
+                    <div className="icon-bar-chart-2 text-slate-300 text-2xl sm:text-3xl"></div>
                 </div>
-                <div className="grid grid-cols-3 gap-6">
-                    <div>
-                        <p className="text-xs text-slate-200 font-bold uppercase tracking-wider mb-2">মোট আয়</p>
-                        <p className="text-3xl font-black text-emerald-300">{formatCurrency(totalIncome)}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                    <div className="bg-slate-800/50 rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
+                        <p className="text-xs sm:text-xs text-slate-200 font-bold uppercase tracking-wider mb-2">মোট আয়</p>
+                        <p className="text-2xl sm:text-3xl font-black text-emerald-300 break-words line-clamp-2">{formatCurrency(totalIncome)}</p>
                     </div>
-                    <div>
-                        <p className="text-xs text-slate-200 font-bold uppercase tracking-wider mb-2">মোট ব্যয়</p>
-                        <p className="text-3xl font-black text-red-300">{formatCurrency(totalExpense)}</p>
+                    <div className="bg-slate-800/50 rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
+                        <p className="text-xs sm:text-xs text-slate-200 font-bold uppercase tracking-wider mb-2">মোট ব্যয়</p>
+                        <p className="text-2xl sm:text-3xl font-black text-red-300 break-words line-clamp-2">{formatCurrency(totalExpense)}</p>
                     </div>
-                    <div>
-                        <p className="text-xs text-slate-200 font-bold uppercase tracking-wider mb-2">নেট রাশি</p>
-                        <p className={`text-3xl font-black ${netAmount >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    <div className="bg-slate-800/50 rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
+                        <p className="text-xs sm:text-xs text-slate-200 font-bold uppercase tracking-wider mb-2">নেট রাশি</p>
+                        <p className={`text-2xl sm:text-3xl font-black break-words line-clamp-2 ${netAmount >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                             {formatCurrency(netAmount)}
                         </p>
                     </div>

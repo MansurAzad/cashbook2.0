@@ -19,8 +19,8 @@ function Bills({ data, onAdd, onUpdate, onDelete, loading, confirmAction, curren
     });
 
     const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT' })
-            .format(amount)
+        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT', maximumFractionDigits: 0 })
+            .format(Math.floor(amount))
             .replace('৳', currencySymbol);
     };
 

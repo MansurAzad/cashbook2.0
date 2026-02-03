@@ -21,8 +21,8 @@ function Loans({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '৳
     });
 
     const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT' })
-            .format(amount)
+        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT', maximumFractionDigits: 0 })
+            .format(Math.floor(amount))
             .replace('৳', currencySymbol);
     };
 

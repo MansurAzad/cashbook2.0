@@ -5,7 +5,7 @@ function Dashboard({ data, onNavigate, onRefresh }) {
     const [chartType, setChartType] = React.useState('doughnut'); // doughnut or bar
 
     const formatCurrency = (amount) => {
-        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT' }).format(amount);
+        return new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT', maximumFractionDigits: 0 }).format(Math.floor(amount));
     };
 
     React.useEffect(() => {
@@ -59,23 +59,23 @@ function Dashboard({ data, onNavigate, onRefresh }) {
             <div className="space-y-6 animate-fade-in pb-10" data-name="dashboard">
                 {/* Financial Health Widget - Premium iOS Style */}
                 <div 
-                    className="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 text-white shadow-2xl active:scale-[0.98] transition-transform duration-200 transform-gpu cursor-pointer border border-gray-800"
+                    className="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-6 sm:p-8 text-white shadow-2xl active:scale-[0.98] transition-transform duration-200 transform-gpu cursor-pointer border border-gray-800"
                     {...GestureHooks.useLongPress(() => alert('সম্পূর্ণ স্বাস্থ্য প্রতিবেদন: \nনেট ওয়ার্থ: ' + formatCurrency(financialHealth.netWorth)))}
                 >
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                        <div>
+                    <div className="flex flex-col gap-6">
+                        <div className="w-full">
                             <p className="text-gray-400 text-xs font-bold mb-2 tracking-widest uppercase">নেট ওয়ার্থ</p>
-                            <h2 className="text-5xl md:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500 mb-6">
+                            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500 mb-4 break-words">
                                 {formatCurrency(financialHealth.netWorth)}
                             </h2>
-                            <div className="flex flex-wrap gap-3">
-                                <div className="bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 hover:bg-white/15 transition-colors">
-                                    <span className="text-xs text-gray-300 mr-2 font-semibold">সেভিংস রেট</span>
-                                    <span className="font-bold text-emerald-400 text-base">{financialHealth.savingsRate.toFixed(1)}%</span>
+                            <div className="flex flex-wrap gap-2 sm:gap-3 w-full">
+                                <div className="bg-white/10 px-3 sm:px-4 py-2 rounded-full backdrop-blur-md border border-white/20 hover:bg-white/15 transition-colors flex-shrink-0">
+                                    <span className="text-xs text-gray-300 mr-1 sm:mr-2 font-semibold">সেভিংস রেট</span>
+                                    <span className="font-bold text-emerald-400 text-sm sm:text-base">{financialHealth.savingsRate.toFixed(1)}%</span>
                                 </div>
-                                <div className="bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 hover:bg-white/15 transition-colors">
-                                    <span className="text-xs text-gray-300 mr-2 font-semibold">হেলথ স্কোর</span>
-                                    <span className={`font-bold text-base ${financialHealth.score > 70 ? 'text-emerald-400' : 'text-yellow-400'}`}>
+                                <div className="bg-white/10 px-3 sm:px-4 py-2 rounded-full backdrop-blur-md border border-white/20 hover:bg-white/15 transition-colors flex-shrink-0">
+                                    <span className="text-xs text-gray-300 mr-1 sm:mr-2 font-semibold">হেলথ স্কোর</span>
+                                    <span className={`font-bold text-sm sm:text-base ${financialHealth.score > 70 ? 'text-emerald-400' : 'text-yellow-400'}`}>
                                         {Math.round(financialHealth.score)}/100
                                     </span>
                                 </div>
@@ -85,41 +85,41 @@ function Dashboard({ data, onNavigate, onRefresh }) {
                 </div>
 
                 {/* Main Stats with iOS style cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                     <div 
-                        className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 active:scale-95 transition-all duration-200 cursor-pointer hover:shadow-xl"
+                        className="bg-white rounded-3xl p-5 sm:p-8 shadow-lg border border-gray-200 active:scale-95 transition-all duration-200 cursor-pointer hover:shadow-xl"
                         onClick={() => onNavigate('transactions', { type: 'income' })}
                     >
-                        <div className="flex items-center justify-between mb-6">
-                            <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center shadow-md">
-                                <div className="icon-trending-up text-emerald-600 text-2xl"></div>
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+                            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-50 flex items-center justify-center shadow-md flex-shrink-0">
+                                <div className="icon-trending-up text-emerald-600 text-xl sm:text-2xl"></div>
                             </div>
                             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">মোট আয়</span>
                         </div>
-                        <h3 className="text-3xl font-black text-gray-900">{formatCurrency(income)}</h3>
+                        <h3 className="text-2xl sm:text-3xl font-black text-gray-900 break-words line-clamp-2">{formatCurrency(income)}</h3>
                     </div>
 
                     <div 
-                        className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 active:scale-95 transition-all duration-200 cursor-pointer hover:shadow-xl"
+                        className="bg-white rounded-3xl p-5 sm:p-8 shadow-lg border border-gray-200 active:scale-95 transition-all duration-200 cursor-pointer hover:shadow-xl"
                         onClick={() => onNavigate('transactions', { type: 'expense' })}
                     >
-                        <div className="flex items-center justify-between mb-6">
-                            <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center shadow-md">
-                                <div className="icon-trending-down text-red-600 text-2xl"></div>
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+                            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-red-50 flex items-center justify-center shadow-md flex-shrink-0">
+                                <div className="icon-trending-down text-red-600 text-xl sm:text-2xl"></div>
                             </div>
                             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">মোট ব্যয়</span>
                         </div>
-                        <h3 className="text-3xl font-black text-gray-900">{formatCurrency(expense)}</h3>
+                        <h3 className="text-2xl sm:text-3xl font-black text-gray-900 break-words line-clamp-2">{formatCurrency(expense)}</h3>
                     </div>
 
-                    <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-200">
-                        <div className="flex items-center justify-between mb-6">
-                            <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center shadow-md">
-                                <div className="icon-wallet text-blue-600 text-2xl"></div>
+                    <div className="bg-white rounded-3xl p-5 sm:p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-200">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+                            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-50 flex items-center justify-center shadow-md flex-shrink-0">
+                                <div className="icon-wallet text-blue-600 text-xl sm:text-2xl"></div>
                             </div>
                             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">বর্তমান ক্যাশ</span>
                         </div>
-                        <h3 className="text-3xl font-black text-gray-900">{formatCurrency(balance)}</h3>
+                        <h3 className="text-2xl sm:text-3xl font-black text-gray-900 break-words line-clamp-2">{formatCurrency(balance)}</h3>
                     </div>
                 </div>
 
