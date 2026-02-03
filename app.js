@@ -524,11 +524,11 @@ function App() {
                         {view === 'loans' && <Loans data={data} onAdd={(d)=>handleLoan('add',null,d)} onUpdate={(id,d)=>handleLoan('update',id,d)} onDelete={(id)=>confirmAction('ঋণ মুছুন', 'নিশ্চিত?', ()=>handleLoan('delete',id))} loading={isLoading} currencySymbol={getCurrencySymbol()} />}
                         {view === 'tools' && <Tools />}
                         {view === 'calendar' && <CalendarView data={data} />}
-                        {view === 'goals' && <Goals data={data} onAdd={(d)=>handleGoal('add',null,d)} onUpdate={(id,d)=>handleGoal('update',id,d)} onDelete={(id)=>confirmAction('গোল মুছুন', 'নিশ্চিত?', ()=>handleGoal('delete',id))} />}
+                        {view === 'goals' && <Goals data={data} onAdd={(d)=>handleGoal('add',null,d)} onUpdate={(id,d)=>handleGoal('update',id,d)} onDelete={(id)=>confirmAction('গোল মুছুন', 'নিশ্চিত?', ()=>handleGoal('delete',id))} loading={isLoading} currencySymbol={getCurrencySymbol()} />}
                         {view === 'bills' && <Bills data={data} onAdd={(d)=>handleBill('add',null,d)} onUpdate={(id,d)=>handleBill('update',id,d)} onDelete={(id)=>confirmAction('বিল মুছুন', 'নিশ্চিত?', ()=>handleBill('delete',id))} loading={isLoading} currencySymbol={getCurrencySymbol()} confirmAction={confirmAction} />}
                         {view === 'investments' && <Investments data={data} onAdd={(d)=>handleInvestment('add',null,d)} onUpdate={(id,d)=>handleInvestment('update',id,d)} onDelete={(id)=>confirmAction('ইনভেস্টমেন্ট মুছুন', 'নিশ্চিত?', ()=>handleInvestment('delete',id))} loading={isLoading} currencySymbol={getCurrencySymbol()} />}
                         {view === 'reports' && <Reports data={data} />}
-                        {view === 'budget' && <Budget data={data} onSave={(budget,id)=>handleBudget('save',{budget,id})} onDelete={(id)=>confirmAction('বাজেট মুছুন', 'নিশ্চিত?', ()=>handleBudget('delete',id))} />}
+                        {view === 'budget' && <Budget data={data} onAdd={(d)=>handleBudget('add',null,d)} onUpdate={(id,d)=>handleBudget('update',id,d)} onDelete={(id)=>confirmAction('বাজেট মুছুন', 'নিশ্চিত?', ()=>handleBudget('delete',id))} loading={isLoading} currencySymbol={getCurrencySymbol()} />}
                         {view === 'settings' && <Settings data={data} onAddCategory={(d)=>handleCategory('add',d)} onDeleteCategory={(id)=>confirmAction('ক্যাটাগরি মুছুন', 'নিশ্চিত?', ()=>handleCategory('delete',id))} settings={settings} updateSettings={handleUpdateSettings} notify={notify} />}
                     </div>
                 )}

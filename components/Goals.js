@@ -1,4 +1,4 @@
-function Goals({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
+function Goals({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '৳' }) {
     const [isAdding, setIsAdding] = React.useState(false);
     const [editingId, setEditingId] = React.useState(null);
     const [searchTerm, setSearchTerm] = React.useState('');
@@ -25,10 +25,40 @@ function Goals({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
     const overallProgress = totalTarget > 0 ? (totalSaved / totalTarget) * 100 : 0;
 
     const handleSave = async (id, goalData) => {
-        await onSave(goalData, id);
-        setIsAdding(false);
-        setEditingId(null);
-        setNewGoal({ name: '', targetAmount: '', savedAmount: '0', deadline: '' });
+        try {
+            if (!goalData.name || goalData.name.trim() === '') {
+                alert('দয়া করে লক্ষ্যের নাম দিন');
+                return;
+            }
+            if (!goalData.targetAmount || parseFloat(goalData.targetAmount) <= 0) {
+                alert('দয়া করে সঠিক লক্ষ্য পরিমাণ দিন');
+                return;
+            }
+            if (!goalData.deadline || goalData.deadline.trim() === '') {
+                alert('দয়া করে লক্ষ্যের তারিখ নির্ধারণ করুন');
+                return;
+            }
+
+            const payload = {
+                name: goalData.name,
+                targetAmount: parseFloat(goalData.targetAmount),
+                savedAmount: parseFloat(goalData.savedAmount) || 0,
+                deadline: goalData.deadline
+            };
+
+            if (editingId) {
+                await onUpdate(editingId, payload);
+            } else {
+                await onAdd(payload);
+            }
+
+            setIsAdding(false);
+            setEditingId(null);
+            setNewGoal({ name: '', targetAmount: '', savedAmount: '0', deadline: '' });
+        } catch (err) {
+            console.error('লক্ষ্য সংরক্ষণ ত্রুটি:', err);
+            alert('লক্ষ্য সংরক্ষণে ব্যর্থ হয়েছে');
+        }
     };
 
     const getDaysRemaining = (deadline) => {

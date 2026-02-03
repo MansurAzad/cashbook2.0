@@ -1,4 +1,4 @@
-function Budget({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
+function Budget({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '৳' }) {
     const [currentMonth, setCurrentMonth] = React.useState(new Date().toISOString().slice(0, 7));
     const [editingId, setEditingId] = React.useState(null);
     const [editAmount, setEditAmount] = React.useState('');
@@ -18,19 +18,45 @@ function Budget({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
     };
 
     const handleSave = async (id, category, amount) => {
-        await onSave({
-            category: category,
-            amount: parseFloat(amount),
-            month: currentMonth
-        }, id);
-        setEditingId(null);
-        setIsAdding(false);
-        setNewBudgetCategory('');
-        setNewBudgetAmount('');
+        try {
+            if (!category || category.trim() === '') {
+                alert('দয়া করে ক্যাটাগরি নির্বাচন করুন');
+                return;
+            }
+            if (!amount || parseFloat(amount) <= 0) {
+                alert('দয়া করে সঠিক বাজেট পরিমাণ দিন');
+                return;
+            }
+
+            const payload = {
+                category: category,
+                amount: parseFloat(amount),
+                month: currentMonth
+            };
+
+            if (editingId) {
+                await onUpdate(editingId, payload);
+            } else {
+                await onAdd(payload);
+            }
+
+            setEditingId(null);
+            setIsAdding(false);
+            setNewBudgetCategory('');
+            setNewBudgetAmount('');
+        } catch (err) {
+            console.error('বাজেট সংরক্ষণ ত্রুটি:', err);
+            alert('বাজেট সংরক্ষণে ব্যর্থ হয়েছে');
+        }
     };
 
     const handleDelete = async (id) => {
-        await onDelete(id);
+        try {
+            await onDelete(id);
+        } catch (err) {
+            console.error('বাজেট মোছার ত্রুটি:', err);
+            alert('বাজেট মোছায় ব্যর্থ হয়েছে');
+        }
     };
 
     return (
