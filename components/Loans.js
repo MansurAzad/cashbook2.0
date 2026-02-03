@@ -1,4 +1,4 @@
-function Loans({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
+function Loans({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '৳' }) {
     const [filterActive, setFilterActive] = React.useState('all');
     const [searchTerm, setSearchTerm] = React.useState('');
     const [isAdding, setIsAdding] = React.useState(false);
@@ -28,19 +28,42 @@ function Loans({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
 
     const givenTotal = data.loans
         .filter(l => l.type === 'given')
-        .reduce((sum, l) => sum + l.amount, 0);
+        .reduce((sum, l) => sum + (parseFloat(l.amount) || 0), 0);
     
     const takenTotal = data.loans
         .filter(l => l.type === 'taken')
-        .reduce((sum, l) => sum + l.amount, 0);
+        .reduce((sum, l) => sum + (parseFloat(l.amount) || 0), 0);
     
     const netAmount = givenTotal - takenTotal;
 
     const handleSave = async (id, loanData) => {
-        await onSave(loanData, id);
-        setIsAdding(false);
-        setEditingId(null);
-        setNewLoan({ name: '', amount: '', type: 'given', dueDate: '', status: 'unpaid', notes: '' });
+        try {
+            if (!loanData.name || loanData.name.trim() === '') {
+                alert('দয়া করে ঋণকারীর নাম দিন');
+                return;
+            }
+            if (!loanData.amount || parseFloat(loanData.amount) <= 0) {
+                alert('দয়া করে সঠিক পরিমাণ দিন');
+                return;
+            }
+            
+            const payload = {
+                ...loanData,
+                amount: parseFloat(loanData.amount) || 0
+            };
+            
+            if (editingId) {
+                await onUpdate(editingId, payload);
+            } else {
+                await onAdd(payload);
+            }
+            setIsAdding(false);
+            setEditingId(null);
+            setNewLoan({ name: '', amount: '', type: 'given', dueDate: '', status: 'unpaid', notes: '' });
+        } catch (err) {
+            console.error('ঋণ সংরক্ষণ ত্রুটি:', err);
+            alert('ঋণ সংরক্ষণে ব্যর্থ হয়েছে');
+        }
     };
 
     const getDaysRemaining = (deadline) => {

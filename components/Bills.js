@@ -1,4 +1,4 @@
-function Bills({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
+function Bills({ data, onAdd, onUpdate, onDelete, loading, confirmAction, currencySymbol = '৳' }) {
     const [filterActive, setFilterActive] = React.useState('all');
     const [searchTerm, setSearchTerm] = React.useState('');
     const [isAdding, setIsAdding] = React.useState(false);
@@ -24,14 +24,37 @@ function Bills({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
             .replace('৳', currencySymbol);
     };
 
-    const totalBills = data.bills.reduce((sum, bill) => sum + bill.amount, 0);
-    const paidBills = data.bills.filter(b => b.isPaid).reduce((sum, bill) => sum + bill.amount, 0);
-    const upcomingBills = data.bills.filter(b => !b.isPaid).reduce((sum, bill) => sum + bill.amount, 0);
+    const totalBills = data.bills.reduce((sum, bill) => sum + (parseFloat(bill.amount) || 0), 0);
+    const paidBills = data.bills.filter(b => b.isPaid).reduce((sum, bill) => sum + (parseFloat(bill.amount) || 0), 0);
+    const upcomingBills = data.bills.filter(b => !b.isPaid).reduce((sum, bill) => sum + (parseFloat(bill.amount) || 0), 0);
 
     const handleSave = async (id, billData) => {
-        await onSave(billData, id);
-        setIsAdding(false);
-        setNewBill({ name: '', amount: '', dueDate: '', frequency: 'monthly', isPaid: false });
+        try {
+            if (!billData.name || billData.name.trim() === '') {
+                alert('দয়া করে বিলের নাম দিন');
+                return;
+            }
+            if (!billData.amount || parseFloat(billData.amount) <= 0) {
+                alert('দয়া করে সঠিক পরিমাণ দিন');
+                return;
+            }
+            
+            const payload = {
+                ...billData,
+                amount: parseFloat(billData.amount) || 0
+            };
+            
+            if (id) {
+                await onUpdate(id, payload);
+            } else {
+                await onAdd(payload);
+            }
+            setIsAdding(false);
+            setNewBill({ name: '', amount: '', dueDate: '', frequency: 'monthly', isPaid: false });
+        } catch (err) {
+            console.error('বিল সংরক্ষণ ত্রুটি:', err);
+            alert('বিল সংরক্ষণে ব্যর্থ হয়েছে');
+        }
     };
 
     return (

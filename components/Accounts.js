@@ -1,4 +1,4 @@
-function Accounts({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
+function Accounts({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '৳' }) {
     const [isAdding, setIsAdding] = React.useState(false);
     const [editingId, setEditingId] = React.useState(null);
     const [searchTerm, setSearchTerm] = React.useState('');
@@ -25,14 +25,33 @@ function Accounts({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
         { id: 'card', label: 'ক্রেডিট কার্ড', icon: 'icon-credit-card', color: 'purple' },
     ];
 
-    const totalBalance = data.accounts.reduce((sum, a) => sum + a.balance, 0);
+    const totalBalance = data.accounts.reduce((sum, a) => sum + (parseFloat(a.balance) || 0), 0);
     const activeAccounts = data.accounts.length;
 
     const handleSave = async (id, accountData) => {
-        await onSave(accountData, id);
-        setIsAdding(false);
-        setEditingId(null);
-        setNewAccount({ name: '', type: 'cash', balance: '0' });
+        try {
+            if (!accountData.name || accountData.name.trim() === '') {
+                alert('দয়া করে অ্যাকাউন্টের নাম দিন');
+                return;
+            }
+            
+            const payload = {
+                ...accountData,
+                balance: parseFloat(accountData.balance) || 0
+            };
+            
+            if (editingId) {
+                await onUpdate(editingId, payload);
+            } else {
+                await onAdd(payload);
+            }
+            setIsAdding(false);
+            setEditingId(null);
+            setNewAccount({ name: '', type: 'cash', balance: '0' });
+        } catch (err) {
+            console.error('অ্যাকাউন্ট সংরক্ষণ ত্রুটি:', err);
+            alert('অ্যাকাউন্ট সংরক্ষণে ব্যর্থ হয়েছে');
+        }
     };
 
     const getAccountColor = (type) => {

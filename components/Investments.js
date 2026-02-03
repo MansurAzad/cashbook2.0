@@ -1,4 +1,4 @@
-function Investments({ data, onSave, onDelete, loading, currencySymbol = '৳' }) {
+function Investments({ data, onAdd, onUpdate, onDelete, loading, currencySymbol = '৳' }) {
     const [isAdding, setIsAdding] = React.useState(false);
     const [editingId, setEditingId] = React.useState(null);
     const [searchTerm, setSearchTerm] = React.useState('');
@@ -26,16 +26,40 @@ function Investments({ data, onSave, onDelete, loading, currencySymbol = '৳' }
             .replace('৳', currencySymbol);
     };
 
-    const totalInvested = data.investments.reduce((sum, i) => sum + i.investedAmount, 0);
-    const totalCurrent = data.investments.reduce((sum, i) => sum + i.currentValue, 0);
+    const totalInvested = data.investments.reduce((sum, i) => sum + (parseFloat(i.investedAmount) || 0), 0);
+    const totalCurrent = data.investments.reduce((sum, i) => sum + (parseFloat(i.currentValue) || 0), 0);
     const totalProfit = totalCurrent - totalInvested;
     const profitPercentage = totalInvested > 0 ? (totalProfit / totalInvested) * 100 : 0;
 
     const handleSave = async (id, investmentData) => {
-        await onSave(investmentData, id);
-        setIsAdding(false);
-        setEditingId(null);
-        setNewInvestment({ name: '', type: 'stock', investedAmount: '', currentValue: '' });
+        try {
+            if (!investmentData.name || investmentData.name.trim() === '') {
+                alert('দয়া করে বিনিয়োগের নাম দিন');
+                return;
+            }
+            if (!investmentData.investedAmount || parseFloat(investmentData.investedAmount) <= 0) {
+                alert('দয়া করে বিনিয়োগের পরিমাণ দিন');
+                return;
+            }
+            
+            const payload = {
+                ...investmentData,
+                investedAmount: parseFloat(investmentData.investedAmount) || 0,
+                currentValue: parseFloat(investmentData.currentValue) || parseFloat(investmentData.investedAmount) || 0
+            };
+            
+            if (editingId) {
+                await onUpdate(editingId, payload);
+            } else {
+                await onAdd(payload);
+            }
+            setIsAdding(false);
+            setEditingId(null);
+            setNewInvestment({ name: '', type: 'stock', investedAmount: '', currentValue: '' });
+        } catch (err) {
+            console.error('বিনিয়োগ সংরক্ষণ ত্রুটি:', err);
+            alert('বিনিয়োগ সংরক্ষণে ব্যর্থ হয়েছে');
+        }
     };
 
     const getTypeColor = (type) => {
