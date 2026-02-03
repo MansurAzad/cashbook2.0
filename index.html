@@ -334,14 +334,14 @@
         }
         /* ==================== CONSISTENT INPUT FIELDS ==================== */
         .input-field {
-            @apply w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-base font-medium bg-white;
+            @apply w-full px-4 py-3 rounded-2xl border-2 border-gray-300 focus:border-emerald-500 focus:outline-none outline-none transition-all text-base font-medium bg-white;
             -webkit-appearance: none;
-            -webkit-border-radius: 11px;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+            -webkit-border-radius: 16px;
+            box-shadow: none;
         }
         .input-field:focus {
             border-color: #10B981;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 3px rgba(16, 185, 129, 0.1);
+            box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.1);
         }
         .input-field::placeholder {
             color: #9CA3AF;

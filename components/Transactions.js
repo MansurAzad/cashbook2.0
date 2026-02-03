@@ -74,18 +74,37 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(!formData.amount || !formData.category) return;
         
-        const account = data.accounts.find(a => a.id === formData.account_id);
-        const payload = { ...formData, account_name: account ? account.name : '' };
-
-        if (editingId) {
-            await onUpdate(editingId, payload);
-        } else {
-            await onAdd(payload);
+        // ভ্যালিডেশন
+        if(!formData.amount || !formData.category || parseFloat(formData.amount) <= 0) {
+            alert('দয়া করে সব তথ্য সঠিকভাবে পূরণ করুন');
+            return;
         }
         
-        resetForm();
+        const account = data.accounts.find(a => a.id === formData.account_id);
+        const payload = { 
+            ...formData, 
+            amount: parseFloat(formData.amount),
+            account_name: account ? account.name : ''
+        };
+        
+        // ইডি যোগ করবেন না যদি নতুন লেনদেন হয়
+        if (!editingId) {
+            delete payload.id;
+        }
+
+        try {
+            if (editingId) {
+                payload.id = editingId;
+                await onUpdate(editingId, payload);
+            } else {
+                await onAdd(payload);
+            }
+            resetForm();
+        } catch (err) {
+            console.error('ফর্ম সাবমিট ত্রুটি:', err);
+            alert('ফর্ম সাবমিট করতে সমস্যা হয়েছে');
+        }
     };
 
     const resetForm = () => {
@@ -255,7 +274,7 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                     <input 
                         type="text" 
                         placeholder="ক্যাটাগরি বা নোট খুঁজুন..." 
-                        className="input-field pl-12 text-base font-medium w-full py-3 rounded-2xl" 
+                        className="pl-12 text-base font-medium w-full py-3 rounded-2xl border-2 border-gray-300 focus:border-emerald-500 focus:outline-none transition-all bg-white" 
                         value={searchTerm} 
                         onChange={(e) => setSearchTerm(e.target.value)} 
                     />
@@ -265,7 +284,7 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                         <label className="text-xs font-bold text-gray-600 uppercase tracking-wider block mb-2">শুরু করুন</label>
                         <input 
                             type="date" 
-                            className="input-field text-base font-medium w-full py-3 rounded-2xl" 
+                            className="text-base font-medium w-full py-3 rounded-2xl border-2 border-gray-300 focus:border-emerald-500 focus:outline-none transition-all bg-white" 
                             value={dateRange.start} 
                             onChange={(e) => setDateRange({...dateRange, start: e.target.value})} 
                         />
@@ -274,7 +293,7 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                         <label className="text-xs font-bold text-gray-600 uppercase tracking-wider block mb-2">শেষ করুন</label>
                         <input 
                             type="date" 
-                            className="input-field text-base font-medium w-full py-3 rounded-2xl" 
+                            className="text-base font-medium w-full py-3 rounded-2xl border-2 border-gray-300 focus:border-emerald-500 focus:outline-none transition-all bg-white" 
                             value={dateRange.end} 
                             onChange={(e) => setDateRange({...dateRange, end: e.target.value})} 
                         />
@@ -329,7 +348,9 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                                         type="number" 
                                         required 
                                         autoFocus
-                                        className="input-field text-4xl font-black py-5 pl-12 rounded-2xl w-full" 
+                                        step="0.01"
+                                        min="0"
+                                        className="text-4xl font-black py-5 pl-12 rounded-2xl w-full border-2 border-gray-300 focus:border-emerald-500 focus:outline-none transition-all bg-white" 
                                         placeholder="0" 
                                         value={formData.amount} 
                                         onChange={e => setFormData({...formData, amount: e.target.value})} 
@@ -341,13 +362,13 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                             <div>
                                 <label className="block text-base font-black text-gray-900 mb-3 uppercase tracking-wider">ক্যাটাগরি</label>
                                 <select 
-                                    className="input-field text-base font-bold py-4 px-5 rounded-2xl w-full border border-gray-300 bg-white" 
+                                    className="text-base font-bold py-4 px-5 rounded-2xl w-full border-2 border-gray-300 focus:border-emerald-500 focus:outline-none transition-all bg-white" 
                                     required 
                                     value={formData.category} 
                                     onChange={e => setFormData({...formData, category: e.target.value})}
                                 >
                                     <option value="">— নির্বাচন করুন —</option>
-                                    {(formData.type === 'income' ? data.categories.income : data.categories.expense).map(cat => (
+                                    {(activeCategories || []).map(cat => (
                                         <option key={cat.id} value={cat.name}>{cat.name}</option>
                                     ))}
                                 </select>
@@ -357,12 +378,12 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                             <div>
                                 <label className="block text-base font-black text-gray-900 mb-3 uppercase tracking-wider">অ্যাকাউন্ট</label>
                                 <select 
-                                    className="input-field text-base font-bold py-4 px-5 rounded-2xl w-full border border-gray-300 bg-white" 
+                                    className="text-base font-bold py-4 px-5 rounded-2xl w-full border-2 border-gray-300 focus:border-emerald-500 focus:outline-none transition-all bg-white" 
                                     value={formData.account_id} 
                                     onChange={e => setFormData({...formData, account_id: e.target.value})}
                                 >
                                     <option value="">— কোনোটি না (শুধু রেকর্ড) —</option>
-                                    {data.accounts.map(acc => (
+                                    {(data.accounts || []).map(acc => (
                                         <option key={acc.id} value={acc.id}>{acc.name} ({acc.type})</option>
                                     ))}
                                 </select>
@@ -376,7 +397,7 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                                 <label className="block text-base font-black text-gray-900 mb-3 uppercase tracking-wider">তারিখ</label>
                                 <input 
                                     type="date" 
-                                    className="input-field text-base font-bold py-4 px-5 rounded-2xl w-full border border-gray-300" 
+                                    className="text-base font-bold py-4 px-5 rounded-2xl w-full border-2 border-gray-300 focus:border-emerald-500 focus:outline-none transition-all bg-white" 
                                     value={formData.date} 
                                     onChange={e => setFormData({...formData, date: e.target.value})} 
                                 />
@@ -395,7 +416,7 @@ function Transactions({ data, onAdd, onUpdate, onDelete, loading, currencySymbol
                                     </button>
                                 </div>
                                 <textarea 
-                                    className="input-field text-base font-medium py-4 px-5 rounded-2xl w-full border border-gray-300" 
+                                    className="text-base font-medium py-4 px-5 rounded-2xl w-full border-2 border-gray-300 focus:border-emerald-500 focus:outline-none transition-all resize-none" 
                                     rows="4" 
                                     placeholder="আরও বিবরণ যুক্ত করুন..." 
                                     value={formData.note} 
